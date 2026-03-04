@@ -1,0 +1,650 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		02880071C839C507AC00C5A5 /* TimerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0181BD8B8FF7B854E483B2E3 /* TimerState.swift */; };
+		080F74EF6A206EF7ADD9ED7C /* ProUpgradeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47695A2E2472E3D87A14C25A /* ProUpgradeView.swift */; };
+		0DC08140C04FEB05ABCA2E0A /* PurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B43E0B69B136BD9E3AC3F13 /* PurchaseManager.swift */; };
+		132DA893BC4800DE8098D10B /* Nunito-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A1A2D1938BFF6FAA8D1B74FE /* Nunito-SemiBold.ttf */; };
+		14E0E0B756030882030031BF /* RiverWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD085631F6F2E9408B680304 /* RiverWidgetBundle.swift */; };
+		19A0B6D1451BC321CEEC60E7 /* ThemePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9FCA9BAE94661677DBCF01 /* ThemePickerView.swift */; };
+		1FD05A9382BD95A3FF48162C /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9205B7443CF31E3C20A81DD1 /* HistoryView.swift */; };
+		3627CE7BE339B29ECC09E6A1 /* Nunito-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CDE3F450AE856636633F7B4E /* Nunito-Regular.ttf */; };
+		3E534B0A714AF55955F77FCD /* DurationPickerSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD52D357167B6A5F06FA7F2 /* DurationPickerSheet.swift */; };
+		45D404DBD90717A5DB0D315F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A035FEBB78ED3BC67F03735 /* SettingsView.swift */; };
+		45F5B1D49938D556E41D36D3 /* SessionHistoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654E93C785AEEDF75EA72F28 /* SessionHistoryService.swift */; };
+		46BE7AC26C13BF86A1815ACC /* FocusTimerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38529EEC58C1AA33A98F5D2 /* FocusTimerService.swift */; };
+		4F0C0A37684908747537C0F2 /* CormorantGaramond-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 92A4B40435378210F1543BAC /* CormorantGaramond-Light.ttf */; };
+		5306072B2D033C8332800FD6 /* SoundService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806773B4513FBF9E2DA06BE4 /* SoundService.swift */; };
+		66613A31E331F4EDAA50F84E /* TimerPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B83F0235B0ADA68596377 /* TimerPhase.swift */; };
+		68A53EFA7ABEF1C767BD1326 /* FocusTimerIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17C456C2E1F9CA81531EB3B /* FocusTimerIntent.swift */; };
+		6BF9117638DD01F9E213823C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 31D74602C26B8D48237BCD77 /* Assets.xcassets */; };
+		6CCE7F63234F31F9C59CF451 /* TimerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0181BD8B8FF7B854E483B2E3 /* TimerState.swift */; };
+		7862AE43C100276D39EC1E46 /* Configuration.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 290F5B3F07E5962834BF13E7 /* Configuration.storekit */; };
+		7B8CC8C4F6B20E3C38F8265D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0910AB972AAB3195E0301F0 /* ContentView.swift */; };
+		8661654F6C57543699ADF034 /* LiveActivityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A894ABE15E9B311833F380E5 /* LiveActivityService.swift */; };
+		9113C221988B39166C44EEA2 /* FocusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB252DACB7002300D70A5028 /* FocusView.swift */; };
+		96DDE9CD2AAD4DD9151CB139 /* AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7211A0F751D58A962322E6 /* AppGroup.swift */; };
+		98A9DCF0CAA59A1F9CEDC88D /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D6B4EFD072381EC78EFF43 /* Theme.swift */; };
+		A7C6C025D1C9114A0C368CB4 /* FocusActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0004C8BE17F68BDBDF02E60 /* FocusActivityAttributes.swift */; };
+		ABEDD91C2118FC838A744E3F /* FocusTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9685BE9D14BA7D8972C26A8 /* FocusTask.swift */; };
+		ACCCD444E2AADA4A48E12085 /* FocusTimerIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17C456C2E1F9CA81531EB3B /* FocusTimerIntent.swift */; };
+		B523C32A6AC95FD270ED3A2D /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD671BF3657A8A4A95A7BFE /* TaskListView.swift */; };
+		C49F4A14956ED1C20B95A91C /* FocusLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E0680CF3D06D0F3A6B9F72 /* FocusLiveActivity.swift */; };
+		C8A832EA230BF5837FFA33B5 /* SessionRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC37079CAB17B78A2A50A72 /* SessionRecord.swift */; };
+		C997DCFE6412CC3823634F92 /* RiverWidget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = BC50CB71FD275B085EEFE6AF /* RiverWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		C9A918F3F50CD42F0141750A /* TimerPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B83F0235B0ADA68596377 /* TimerPhase.swift */; };
+		CE0BF4FBED15B6604A1B7A36 /* AddTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5C4D10974F95D9F1D7C98A /* AddTaskView.swift */; };
+		D7DBEDAD480669C2BCE90C49 /* AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7211A0F751D58A962322E6 /* AppGroup.swift */; };
+		DB95CD42C241523A9A07A3CB /* DeletedTasksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647706303FB55B8E22E3928D /* DeletedTasksView.swift */; };
+		DD5453E4BF87CD93283103E1 /* Nunito-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C7527D9DCA99DAB76026119F /* Nunito-Medium.ttf */; };
+		E486A2284363D0A8D4640B8B /* TaskRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88907FB8F6CB47279FBCB45 /* TaskRowView.swift */; };
+		E6710666732DF352731A174E /* SoundSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934611B0EE93485FFB9210AE /* SoundSettingsView.swift */; };
+		ED1809CC48A4CAD9588FAE49 /* RiverApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B62F2C1884D660F37423A0 /* RiverApp.swift */; };
+		F29E60B27B617AD3B21410D1 /* DeletedTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8813BF6CF86EDA8CF366D1AD /* DeletedTask.swift */; };
+		F46F207846D12BCA15798150 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F7C091E155D9C20813F828 /* AppTheme.swift */; };
+		FD41DA83BE593DCB574613BD /* FocusActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0004C8BE17F68BDBDF02E60 /* FocusActivityAttributes.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		49EAFE4D590C80F767853923 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1111CDE7BEEF717E1E0BB5C9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 13AFB3968B1208E363E543BE;
+			remoteInfo = RiverWidget;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8114F85E8EB1DEDB4C6CF1DC /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				C997DCFE6412CC3823634F92 /* RiverWidget.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		0181BD8B8FF7B854E483B2E3 /* TimerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerState.swift; sourceTree = "<group>"; };
+		1C9B83F0235B0ADA68596377 /* TimerPhase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerPhase.swift; sourceTree = "<group>"; };
+		290F5B3F07E5962834BF13E7 /* Configuration.storekit */ = {isa = PBXFileReference; path = Configuration.storekit; sourceTree = "<group>"; };
+		2FD671BF3657A8A4A95A7BFE /* TaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
+		30861353134FF039E6227447 /* River.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = River.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		31D74602C26B8D48237BCD77 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3A035FEBB78ED3BC67F03735 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		47695A2E2472E3D87A14C25A /* ProUpgradeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProUpgradeView.swift; sourceTree = "<group>"; };
+		4F5C4D10974F95D9F1D7C98A /* AddTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskView.swift; sourceTree = "<group>"; };
+		557AAA4A0EB26C2F554601CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		56E0680CF3D06D0F3A6B9F72 /* FocusLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusLiveActivity.swift; sourceTree = "<group>"; };
+		647689191A4F319C2B628D52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		647706303FB55B8E22E3928D /* DeletedTasksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletedTasksView.swift; sourceTree = "<group>"; };
+		654E93C785AEEDF75EA72F28 /* SessionHistoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionHistoryService.swift; sourceTree = "<group>"; };
+		69D6B4EFD072381EC78EFF43 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		6FDE95CF0E9068054C4AA59B /* RiverWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RiverWidget.entitlements; sourceTree = "<group>"; };
+		806773B4513FBF9E2DA06BE4 /* SoundService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundService.swift; sourceTree = "<group>"; };
+		87F7C091E155D9C20813F828 /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
+		8813BF6CF86EDA8CF366D1AD /* DeletedTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletedTask.swift; sourceTree = "<group>"; };
+		8B43E0B69B136BD9E3AC3F13 /* PurchaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseManager.swift; sourceTree = "<group>"; };
+		9205B7443CF31E3C20A81DD1 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
+		92A4B40435378210F1543BAC /* CormorantGaramond-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CormorantGaramond-Light.ttf"; sourceTree = "<group>"; };
+		934611B0EE93485FFB9210AE /* SoundSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundSettingsView.swift; sourceTree = "<group>"; };
+		9D9FCA9BAE94661677DBCF01 /* ThemePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemePickerView.swift; sourceTree = "<group>"; };
+		A1A2D1938BFF6FAA8D1B74FE /* Nunito-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-SemiBold.ttf"; sourceTree = "<group>"; };
+		A88907FB8F6CB47279FBCB45 /* TaskRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRowView.swift; sourceTree = "<group>"; };
+		A894ABE15E9B311833F380E5 /* LiveActivityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivityService.swift; sourceTree = "<group>"; };
+		A9685BE9D14BA7D8972C26A8 /* FocusTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTask.swift; sourceTree = "<group>"; };
+		AD085631F6F2E9408B680304 /* RiverWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiverWidgetBundle.swift; sourceTree = "<group>"; };
+		B0910AB972AAB3195E0301F0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B17C456C2E1F9CA81531EB3B /* FocusTimerIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTimerIntent.swift; sourceTree = "<group>"; };
+		B29D3BE9732FE7B39A824F86 /* River.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = River.entitlements; sourceTree = "<group>"; };
+		B38529EEC58C1AA33A98F5D2 /* FocusTimerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTimerService.swift; sourceTree = "<group>"; };
+		B3B62F2C1884D660F37423A0 /* RiverApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiverApp.swift; sourceTree = "<group>"; };
+		BB252DACB7002300D70A5028 /* FocusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusView.swift; sourceTree = "<group>"; };
+		BC50CB71FD275B085EEFE6AF /* RiverWidget.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = RiverWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		BEC37079CAB17B78A2A50A72 /* SessionRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionRecord.swift; sourceTree = "<group>"; };
+		C7527D9DCA99DAB76026119F /* Nunito-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Medium.ttf"; sourceTree = "<group>"; };
+		CDE3F450AE856636633F7B4E /* Nunito-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Regular.ttf"; sourceTree = "<group>"; };
+		D0004C8BE17F68BDBDF02E60 /* FocusActivityAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusActivityAttributes.swift; sourceTree = "<group>"; };
+		EBD52D357167B6A5F06FA7F2 /* DurationPickerSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DurationPickerSheet.swift; sourceTree = "<group>"; };
+		EC7211A0F751D58A962322E6 /* AppGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppGroup.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		001E09E05728735DE04DD41A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				87F7C091E155D9C20813F828 /* AppTheme.swift */,
+				8813BF6CF86EDA8CF366D1AD /* DeletedTask.swift */,
+				A9685BE9D14BA7D8972C26A8 /* FocusTask.swift */,
+				BEC37079CAB17B78A2A50A72 /* SessionRecord.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		095C4A835F3345D8E096E08B /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				1F6ED561650B3F6D27A810D3 /* Shared */,
+			);
+			name = Shared;
+			sourceTree = "<group>";
+		};
+		12FE704C57F230F115B91FBF /* River */ = {
+			isa = PBXGroup;
+			children = (
+				31D74602C26B8D48237BCD77 /* Assets.xcassets */,
+				290F5B3F07E5962834BF13E7 /* Configuration.storekit */,
+				B0910AB972AAB3195E0301F0 /* ContentView.swift */,
+				647689191A4F319C2B628D52 /* Info.plist */,
+				B29D3BE9732FE7B39A824F86 /* River.entitlements */,
+				B3B62F2C1884D660F37423A0 /* RiverApp.swift */,
+				69D6B4EFD072381EC78EFF43 /* Theme.swift */,
+				001E09E05728735DE04DD41A /* Models */,
+				30F8F112E4A1997F01E65592 /* Resources */,
+				6A68EB41552DA67D8515D208 /* Services */,
+				1F6ED561650B3F6D27A810D3 /* Shared */,
+				8CD13258810C7038AFA58623 /* Views */,
+			);
+			path = River;
+			sourceTree = "<group>";
+		};
+		1F6ED561650B3F6D27A810D3 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				EC7211A0F751D58A962322E6 /* AppGroup.swift */,
+				D0004C8BE17F68BDBDF02E60 /* FocusActivityAttributes.swift */,
+				B17C456C2E1F9CA81531EB3B /* FocusTimerIntent.swift */,
+				1C9B83F0235B0ADA68596377 /* TimerPhase.swift */,
+				0181BD8B8FF7B854E483B2E3 /* TimerState.swift */,
+			);
+			name = Shared;
+			path = River/Shared;
+			sourceTree = "<group>";
+		};
+		2E1C2A72E27E69C185B6FABC /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				92A4B40435378210F1543BAC /* CormorantGaramond-Light.ttf */,
+				C7527D9DCA99DAB76026119F /* Nunito-Medium.ttf */,
+				CDE3F450AE856636633F7B4E /* Nunito-Regular.ttf */,
+				A1A2D1938BFF6FAA8D1B74FE /* Nunito-SemiBold.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		30F8F112E4A1997F01E65592 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				2E1C2A72E27E69C185B6FABC /* Fonts */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		6A68EB41552DA67D8515D208 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				B38529EEC58C1AA33A98F5D2 /* FocusTimerService.swift */,
+				A894ABE15E9B311833F380E5 /* LiveActivityService.swift */,
+				8B43E0B69B136BD9E3AC3F13 /* PurchaseManager.swift */,
+				654E93C785AEEDF75EA72F28 /* SessionHistoryService.swift */,
+				806773B4513FBF9E2DA06BE4 /* SoundService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		8CD13258810C7038AFA58623 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4F5C4D10974F95D9F1D7C98A /* AddTaskView.swift */,
+				647706303FB55B8E22E3928D /* DeletedTasksView.swift */,
+				EBD52D357167B6A5F06FA7F2 /* DurationPickerSheet.swift */,
+				BB252DACB7002300D70A5028 /* FocusView.swift */,
+				9205B7443CF31E3C20A81DD1 /* HistoryView.swift */,
+				47695A2E2472E3D87A14C25A /* ProUpgradeView.swift */,
+				3A035FEBB78ED3BC67F03735 /* SettingsView.swift */,
+				934611B0EE93485FFB9210AE /* SoundSettingsView.swift */,
+				2FD671BF3657A8A4A95A7BFE /* TaskListView.swift */,
+				A88907FB8F6CB47279FBCB45 /* TaskRowView.swift */,
+				9D9FCA9BAE94661677DBCF01 /* ThemePickerView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		B08359D185E9211107825A42 = {
+			isa = PBXGroup;
+			children = (
+				12FE704C57F230F115B91FBF /* River */,
+				F0303CB6C594B177A5CB9317 /* RiverWidget */,
+				095C4A835F3345D8E096E08B /* Shared */,
+				D8A528121E22538390D4F030 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D8A528121E22538390D4F030 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				30861353134FF039E6227447 /* River.app */,
+				BC50CB71FD275B085EEFE6AF /* RiverWidget.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F0303CB6C594B177A5CB9317 /* RiverWidget */ = {
+			isa = PBXGroup;
+			children = (
+				56E0680CF3D06D0F3A6B9F72 /* FocusLiveActivity.swift */,
+				557AAA4A0EB26C2F554601CB /* Info.plist */,
+				6FDE95CF0E9068054C4AA59B /* RiverWidget.entitlements */,
+				AD085631F6F2E9408B680304 /* RiverWidgetBundle.swift */,
+			);
+			path = RiverWidget;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		13AFB3968B1208E363E543BE /* RiverWidget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 119F3AF7E00A139D432A57DF /* Build configuration list for PBXNativeTarget "RiverWidget" */;
+			buildPhases = (
+				471AED782883BD53401E2256 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RiverWidget;
+			packageProductDependencies = (
+			);
+			productName = RiverWidget;
+			productReference = BC50CB71FD275B085EEFE6AF /* RiverWidget.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		2E5547EBF3C62BD425B1B3E0 /* River */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 61CEE7648F21B9C0BB6DB75F /* Build configuration list for PBXNativeTarget "River" */;
+			buildPhases = (
+				6A1DAC42A6D5112D135ECCB8 /* Sources */,
+				7C33328FE12B5EF9C01739A9 /* Resources */,
+				8114F85E8EB1DEDB4C6CF1DC /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				76FB949F7DE77E9FB9E3E7E6 /* PBXTargetDependency */,
+			);
+			name = River;
+			packageProductDependencies = (
+			);
+			productName = River;
+			productReference = 30861353134FF039E6227447 /* River.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1111CDE7BEEF717E1E0BB5C9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 2620;
+				TargetAttributes = {
+					13AFB3968B1208E363E543BE = {
+						DevelopmentTeam = U4JCMYQA4X;
+						ProvisioningStyle = Automatic;
+					};
+					2E5547EBF3C62BD425B1B3E0 = {
+						DevelopmentTeam = U4JCMYQA4X;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 0E8F356653DDD753CEA035C8 /* Build configuration list for PBXProject "River" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = B08359D185E9211107825A42;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2E5547EBF3C62BD425B1B3E0 /* River */,
+				13AFB3968B1208E363E543BE /* RiverWidget */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7C33328FE12B5EF9C01739A9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6BF9117638DD01F9E213823C /* Assets.xcassets in Resources */,
+				7862AE43C100276D39EC1E46 /* Configuration.storekit in Resources */,
+				4F0C0A37684908747537C0F2 /* CormorantGaramond-Light.ttf in Resources */,
+				DD5453E4BF87CD93283103E1 /* Nunito-Medium.ttf in Resources */,
+				3627CE7BE339B29ECC09E6A1 /* Nunito-Regular.ttf in Resources */,
+				132DA893BC4800DE8098D10B /* Nunito-SemiBold.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		471AED782883BD53401E2256 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D7DBEDAD480669C2BCE90C49 /* AppGroup.swift in Sources */,
+				FD41DA83BE593DCB574613BD /* FocusActivityAttributes.swift in Sources */,
+				C49F4A14956ED1C20B95A91C /* FocusLiveActivity.swift in Sources */,
+				68A53EFA7ABEF1C767BD1326 /* FocusTimerIntent.swift in Sources */,
+				14E0E0B756030882030031BF /* RiverWidgetBundle.swift in Sources */,
+				C9A918F3F50CD42F0141750A /* TimerPhase.swift in Sources */,
+				02880071C839C507AC00C5A5 /* TimerState.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6A1DAC42A6D5112D135ECCB8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE0BF4FBED15B6604A1B7A36 /* AddTaskView.swift in Sources */,
+				96DDE9CD2AAD4DD9151CB139 /* AppGroup.swift in Sources */,
+				F46F207846D12BCA15798150 /* AppTheme.swift in Sources */,
+				7B8CC8C4F6B20E3C38F8265D /* ContentView.swift in Sources */,
+				F29E60B27B617AD3B21410D1 /* DeletedTask.swift in Sources */,
+				DB95CD42C241523A9A07A3CB /* DeletedTasksView.swift in Sources */,
+				3E534B0A714AF55955F77FCD /* DurationPickerSheet.swift in Sources */,
+				A7C6C025D1C9114A0C368CB4 /* FocusActivityAttributes.swift in Sources */,
+				ABEDD91C2118FC838A744E3F /* FocusTask.swift in Sources */,
+				ACCCD444E2AADA4A48E12085 /* FocusTimerIntent.swift in Sources */,
+				46BE7AC26C13BF86A1815ACC /* FocusTimerService.swift in Sources */,
+				9113C221988B39166C44EEA2 /* FocusView.swift in Sources */,
+				1FD05A9382BD95A3FF48162C /* HistoryView.swift in Sources */,
+				8661654F6C57543699ADF034 /* LiveActivityService.swift in Sources */,
+				080F74EF6A206EF7ADD9ED7C /* ProUpgradeView.swift in Sources */,
+				0DC08140C04FEB05ABCA2E0A /* PurchaseManager.swift in Sources */,
+				ED1809CC48A4CAD9588FAE49 /* RiverApp.swift in Sources */,
+				45F5B1D49938D556E41D36D3 /* SessionHistoryService.swift in Sources */,
+				C8A832EA230BF5837FFA33B5 /* SessionRecord.swift in Sources */,
+				45D404DBD90717A5DB0D315F /* SettingsView.swift in Sources */,
+				5306072B2D033C8332800FD6 /* SoundService.swift in Sources */,
+				E6710666732DF352731A174E /* SoundSettingsView.swift in Sources */,
+				B523C32A6AC95FD270ED3A2D /* TaskListView.swift in Sources */,
+				E486A2284363D0A8D4640B8B /* TaskRowView.swift in Sources */,
+				98A9DCF0CAA59A1F9CEDC88D /* Theme.swift in Sources */,
+				19A0B6D1451BC321CEEC60E7 /* ThemePickerView.swift in Sources */,
+				66613A31E331F4EDAA50F84E /* TimerPhase.swift in Sources */,
+				6CCE7F63234F31F9C59CF451 /* TimerState.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		76FB949F7DE77E9FB9E3E7E6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 13AFB3968B1208E363E543BE /* RiverWidget */;
+			targetProxy = 49EAFE4D590C80F767853923 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		2582BFAE8E7DB674BF2B4B4A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = RiverWidget/RiverWidget.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = U4JCMYQA4X;
+				INFOPLIST_FILE = RiverWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.george.river.RiverWidget;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		52409E7B192654B307C71088 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = River/River.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = U4JCMYQA4X;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = River/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.george.river;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		778B5E3D08343B579F01BE34 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		78F2ACC1F6952E935DFD337D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = River/River.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = U4JCMYQA4X;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = River/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.george.river;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		C16AD038AF5F092C2BC2C412 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		C24BE7BF7C8CF463D2674247 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = RiverWidget/RiverWidget.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = U4JCMYQA4X;
+				INFOPLIST_FILE = RiverWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.george.river.RiverWidget;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0E8F356653DDD753CEA035C8 /* Build configuration list for PBXProject "River" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				778B5E3D08343B579F01BE34 /* Debug */,
+				C16AD038AF5F092C2BC2C412 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		119F3AF7E00A139D432A57DF /* Build configuration list for PBXNativeTarget "RiverWidget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2582BFAE8E7DB674BF2B4B4A /* Debug */,
+				C24BE7BF7C8CF463D2674247 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		61CEE7648F21B9C0BB6DB75F /* Build configuration list for PBXNativeTarget "River" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				52409E7B192654B307C71088 /* Debug */,
+				78F2ACC1F6952E935DFD337D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1111CDE7BEEF717E1E0BB5C9 /* Project object */;
+}
