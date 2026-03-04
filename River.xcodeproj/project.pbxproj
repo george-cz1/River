@@ -14,6 +14,7 @@
 		14E0E0B756030882030031BF /* RiverWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD085631F6F2E9408B680304 /* RiverWidgetBundle.swift */; };
 		19A0B6D1451BC321CEEC60E7 /* ThemePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9FCA9BAE94661677DBCF01 /* ThemePickerView.swift */; };
 		1FD05A9382BD95A3FF48162C /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9205B7443CF31E3C20A81DD1 /* HistoryView.swift */; };
+		2600BE986EE63F906B45EBAA /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 7979CEA7B9B6BC933F0BF94A /* PrivacyInfo.xcprivacy */; };
 		3627CE7BE339B29ECC09E6A1 /* Nunito-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CDE3F450AE856636633F7B4E /* Nunito-Regular.ttf */; };
 		3E534B0A714AF55955F77FCD /* DurationPickerSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD52D357167B6A5F06FA7F2 /* DurationPickerSheet.swift */; };
 		45D404DBD90717A5DB0D315F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A035FEBB78ED3BC67F03735 /* SettingsView.swift */; };
@@ -92,6 +93,7 @@
 		654E93C785AEEDF75EA72F28 /* SessionHistoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionHistoryService.swift; sourceTree = "<group>"; };
 		69D6B4EFD072381EC78EFF43 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		6FDE95CF0E9068054C4AA59B /* RiverWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RiverWidget.entitlements; sourceTree = "<group>"; };
+		7979CEA7B9B6BC933F0BF94A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		806773B4513FBF9E2DA06BE4 /* SoundService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundService.swift; sourceTree = "<group>"; };
 		87F7C091E155D9C20813F828 /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
 		8813BF6CF86EDA8CF366D1AD /* DeletedTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletedTask.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 				290F5B3F07E5962834BF13E7 /* Configuration.storekit */,
 				B0910AB972AAB3195E0301F0 /* ContentView.swift */,
 				647689191A4F319C2B628D52 /* Info.plist */,
+				7979CEA7B9B6BC933F0BF94A /* PrivacyInfo.xcprivacy */,
 				B29D3BE9732FE7B39A824F86 /* River.entitlements */,
 				B3B62F2C1884D660F37423A0 /* RiverApp.swift */,
 				69D6B4EFD072381EC78EFF43 /* Theme.swift */,
@@ -341,6 +344,7 @@
 				DD5453E4BF87CD93283103E1 /* Nunito-Medium.ttf in Resources */,
 				3627CE7BE339B29ECC09E6A1 /* Nunito-Regular.ttf in Resources */,
 				132DA893BC4800DE8098D10B /* Nunito-SemiBold.ttf in Resources */,
+				2600BE986EE63F906B45EBAA /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
