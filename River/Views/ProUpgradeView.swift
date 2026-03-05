@@ -157,6 +157,9 @@ struct ProUpgradeView: View {
             ProFeature(icon: "speaker.wave.2.fill", color: AppColors.sand,
                        title: "Custom Sounds & Haptics",
                        description: "Personalize phase transition alerts"),
+            ProFeature(icon: "hand.raised.circle.fill", color: AppColors.workPhase,
+                       title: "Block Distracting Apps",
+                       description: "Stay focused by blocking apps during sessions"),
         ]
     }
 }

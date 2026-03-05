@@ -8,20 +8,26 @@
 
 /* Begin PBXBuildFile section */
 		02880071C839C507AC00C5A5 /* TimerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0181BD8B8FF7B854E483B2E3 /* TimerState.swift */; };
+		02B2F687D5AE06AB2DDB426A /* ShieldActionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FB5BC9FC5FB5B5195E6CDA /* ShieldActionExtension.swift */; };
 		080F74EF6A206EF7ADD9ED7C /* ProUpgradeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47695A2E2472E3D87A14C25A /* ProUpgradeView.swift */; };
+		0D8694F019DF51B533B07E69 /* RiverShieldAction.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 3AB03167EB1F4021FB289BD0 /* RiverShieldAction.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0DC08140C04FEB05ABCA2E0A /* PurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B43E0B69B136BD9E3AC3F13 /* PurchaseManager.swift */; };
 		132DA893BC4800DE8098D10B /* Nunito-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A1A2D1938BFF6FAA8D1B74FE /* Nunito-SemiBold.ttf */; };
 		14E0E0B756030882030031BF /* RiverWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD085631F6F2E9408B680304 /* RiverWidgetBundle.swift */; };
 		19A0B6D1451BC321CEEC60E7 /* ThemePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9FCA9BAE94661677DBCF01 /* ThemePickerView.swift */; };
 		1FD05A9382BD95A3FF48162C /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9205B7443CF31E3C20A81DD1 /* HistoryView.swift */; };
 		2600BE986EE63F906B45EBAA /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 7979CEA7B9B6BC933F0BF94A /* PrivacyInfo.xcprivacy */; };
+		2652AF6B34C927D477401901 /* AppBlockingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808A09A6CD44773C7C41DA78 /* AppBlockingService.swift */; };
+		27712EF93FC828F3368DB18D /* RiverShieldConfiguration.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AE0B557BF2FBFCA378939F41 /* RiverShieldConfiguration.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		3627CE7BE339B29ECC09E6A1 /* Nunito-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CDE3F450AE856636633F7B4E /* Nunito-Regular.ttf */; };
 		3E534B0A714AF55955F77FCD /* DurationPickerSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD52D357167B6A5F06FA7F2 /* DurationPickerSheet.swift */; };
 		45D404DBD90717A5DB0D315F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A035FEBB78ED3BC67F03735 /* SettingsView.swift */; };
 		45F5B1D49938D556E41D36D3 /* SessionHistoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654E93C785AEEDF75EA72F28 /* SessionHistoryService.swift */; };
 		46BE7AC26C13BF86A1815ACC /* FocusTimerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38529EEC58C1AA33A98F5D2 /* FocusTimerService.swift */; };
+		4A3C0E9E706067CA3BA55E05 /* AppBlockingSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B9B0B62C4311C7DC814770 /* AppBlockingSettingsView.swift */; };
 		4F0C0A37684908747537C0F2 /* CormorantGaramond-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 92A4B40435378210F1543BAC /* CormorantGaramond-Light.ttf */; };
 		5306072B2D033C8332800FD6 /* SoundService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806773B4513FBF9E2DA06BE4 /* SoundService.swift */; };
+		60EA2B1E05D5D08A01E06D04 /* gentle-chime.wav in Resources */ = {isa = PBXBuildFile; fileRef = D317EE00D23399037B6BF1B1 /* gentle-chime.wav */; };
 		66613A31E331F4EDAA50F84E /* TimerPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B83F0235B0ADA68596377 /* TimerPhase.swift */; };
 		68A53EFA7ABEF1C767BD1326 /* FocusTimerIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17C456C2E1F9CA81531EB3B /* FocusTimerIntent.swift */; };
 		6BF9117638DD01F9E213823C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 31D74602C26B8D48237BCD77 /* Assets.xcassets */; };
@@ -29,6 +35,8 @@
 		7862AE43C100276D39EC1E46 /* Configuration.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 290F5B3F07E5962834BF13E7 /* Configuration.storekit */; };
 		7B8CC8C4F6B20E3C38F8265D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0910AB972AAB3195E0301F0 /* ContentView.swift */; };
 		8661654F6C57543699ADF034 /* LiveActivityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A894ABE15E9B311833F380E5 /* LiveActivityService.swift */; };
+		901C160BAE060A4722FDAF4B /* temple-bell.wav in Resources */ = {isa = PBXBuildFile; fileRef = 36238522479BCEE50769FE93 /* temple-bell.wav */; };
+		9094C9A969FFB3CF25BE11CE /* ShieldConfigurationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A83FC674E5E513628CCAB5D /* ShieldConfigurationExtension.swift */; };
 		9113C221988B39166C44EEA2 /* FocusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB252DACB7002300D70A5028 /* FocusView.swift */; };
 		96DDE9CD2AAD4DD9151CB139 /* AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7211A0F751D58A962322E6 /* AppGroup.swift */; };
 		98A9DCF0CAA59A1F9CEDC88D /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D6B4EFD072381EC78EFF43 /* Theme.swift */; };
@@ -36,14 +44,18 @@
 		ABEDD91C2118FC838A744E3F /* FocusTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9685BE9D14BA7D8972C26A8 /* FocusTask.swift */; };
 		ACCCD444E2AADA4A48E12085 /* FocusTimerIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17C456C2E1F9CA81531EB3B /* FocusTimerIntent.swift */; };
 		B523C32A6AC95FD270ED3A2D /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD671BF3657A8A4A95A7BFE /* TaskListView.swift */; };
+		BDA6214DD29EB886A902208E /* DeviceActivityMonitorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A61708196DE1E512ED64F0 /* DeviceActivityMonitorExtension.swift */; };
+		C114AE1CECC70112637E2185 /* RiverDeviceActivityMonitor.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 40CCDC2ABB5C11937CBF91EE /* RiverDeviceActivityMonitor.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		C49F4A14956ED1C20B95A91C /* FocusLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E0680CF3D06D0F3A6B9F72 /* FocusLiveActivity.swift */; };
 		C8A832EA230BF5837FFA33B5 /* SessionRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC37079CAB17B78A2A50A72 /* SessionRecord.swift */; };
 		C997DCFE6412CC3823634F92 /* RiverWidget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = BC50CB71FD275B085EEFE6AF /* RiverWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		C9A918F3F50CD42F0141750A /* TimerPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B83F0235B0ADA68596377 /* TimerPhase.swift */; };
+		CA0C8CCE01536704842D42E0 /* singing-bowl.wav in Resources */ = {isa = PBXBuildFile; fileRef = 735A8A607381D3D222E5148A /* singing-bowl.wav */; };
 		CE0BF4FBED15B6604A1B7A36 /* AddTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5C4D10974F95D9F1D7C98A /* AddTaskView.swift */; };
 		D7DBEDAD480669C2BCE90C49 /* AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7211A0F751D58A962322E6 /* AppGroup.swift */; };
 		DB95CD42C241523A9A07A3CB /* DeletedTasksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647706303FB55B8E22E3928D /* DeletedTasksView.swift */; };
 		DD5453E4BF87CD93283103E1 /* Nunito-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C7527D9DCA99DAB76026119F /* Nunito-Medium.ttf */; };
+		E29C90FAEBBAE7F723770C23 /* AppBlockingAuthorizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE3FE9183099D3584F60E7F /* AppBlockingAuthorizationService.swift */; };
 		E486A2284363D0A8D4640B8B /* TaskRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88907FB8F6CB47279FBCB45 /* TaskRowView.swift */; };
 		E6710666732DF352731A174E /* SoundSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934611B0EE93485FFB9210AE /* SoundSettingsView.swift */; };
 		ED1809CC48A4CAD9588FAE49 /* RiverApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B62F2C1884D660F37423A0 /* RiverApp.swift */; };
@@ -60,6 +72,27 @@
 			remoteGlobalIDString = 13AFB3968B1208E363E543BE;
 			remoteInfo = RiverWidget;
 		};
+		52935DA396CAF6A4DEA7228E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1111CDE7BEEF717E1E0BB5C9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 664D18CD6BCD63878CB27E85;
+			remoteInfo = RiverShieldAction;
+		};
+		9ABD9AD0DDCE6AB320982034 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1111CDE7BEEF717E1E0BB5C9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D3EB886905C346BAA0B605C2;
+			remoteInfo = RiverShieldConfiguration;
+		};
+		E02FBC77B953FDB2EAD7FEEE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1111CDE7BEEF717E1E0BB5C9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 373C826AE4B2ABC050B38632;
+			remoteInfo = RiverDeviceActivityMonitor;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -70,6 +103,9 @@
 			dstSubfolderSpec = 13;
 			files = (
 				C997DCFE6412CC3823634F92 /* RiverWidget.appex in Embed Foundation Extensions */,
+				C114AE1CECC70112637E2185 /* RiverDeviceActivityMonitor.appex in Embed Foundation Extensions */,
+				27712EF93FC828F3368DB18D /* RiverShieldConfiguration.appex in Embed Foundation Extensions */,
+				0D8694F019DF51B533B07E69 /* RiverShieldAction.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -77,24 +113,37 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		005D4C05952D42AC6D0CF74C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		0181BD8B8FF7B854E483B2E3 /* TimerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerState.swift; sourceTree = "<group>"; };
+		0A83FC674E5E513628CCAB5D /* ShieldConfigurationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShieldConfigurationExtension.swift; sourceTree = "<group>"; };
+		0CF6A5CAAF09049553F2F5A9 /* RiverShieldAction.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RiverShieldAction.entitlements; sourceTree = "<group>"; };
 		1C9B83F0235B0ADA68596377 /* TimerPhase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerPhase.swift; sourceTree = "<group>"; };
+		25FB5BC9FC5FB5B5195E6CDA /* ShieldActionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShieldActionExtension.swift; sourceTree = "<group>"; };
 		290F5B3F07E5962834BF13E7 /* Configuration.storekit */ = {isa = PBXFileReference; path = Configuration.storekit; sourceTree = "<group>"; };
 		2FD671BF3657A8A4A95A7BFE /* TaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
 		30861353134FF039E6227447 /* River.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = River.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		31D74602C26B8D48237BCD77 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		36238522479BCEE50769FE93 /* temple-bell.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "temple-bell.wav"; sourceTree = "<group>"; };
 		3A035FEBB78ED3BC67F03735 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		3AB03167EB1F4021FB289BD0 /* RiverShieldAction.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = RiverShieldAction.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		40CCDC2ABB5C11937CBF91EE /* RiverDeviceActivityMonitor.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = RiverDeviceActivityMonitor.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		47695A2E2472E3D87A14C25A /* ProUpgradeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProUpgradeView.swift; sourceTree = "<group>"; };
 		4F5C4D10974F95D9F1D7C98A /* AddTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskView.swift; sourceTree = "<group>"; };
+		55314C5062FD93E657D9F889 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		557AAA4A0EB26C2F554601CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		56E0680CF3D06D0F3A6B9F72 /* FocusLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusLiveActivity.swift; sourceTree = "<group>"; };
+		60C53E34E633B8ED493C5DE9 /* RiverShieldConfiguration.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RiverShieldConfiguration.entitlements; sourceTree = "<group>"; };
 		647689191A4F319C2B628D52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		647706303FB55B8E22E3928D /* DeletedTasksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletedTasksView.swift; sourceTree = "<group>"; };
 		654E93C785AEEDF75EA72F28 /* SessionHistoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionHistoryService.swift; sourceTree = "<group>"; };
 		69D6B4EFD072381EC78EFF43 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		6FDE95CF0E9068054C4AA59B /* RiverWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RiverWidget.entitlements; sourceTree = "<group>"; };
+		735A8A607381D3D222E5148A /* singing-bowl.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "singing-bowl.wav"; sourceTree = "<group>"; };
+		76B9B0B62C4311C7DC814770 /* AppBlockingSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppBlockingSettingsView.swift; sourceTree = "<group>"; };
 		7979CEA7B9B6BC933F0BF94A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		806773B4513FBF9E2DA06BE4 /* SoundService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundService.swift; sourceTree = "<group>"; };
+		808A09A6CD44773C7C41DA78 /* AppBlockingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppBlockingService.swift; sourceTree = "<group>"; };
+		835F3FD08D46BE1314A595AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		87F7C091E155D9C20813F828 /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
 		8813BF6CF86EDA8CF366D1AD /* DeletedTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletedTask.swift; sourceTree = "<group>"; };
 		8B43E0B69B136BD9E3AC3F13 /* PurchaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseManager.swift; sourceTree = "<group>"; };
@@ -107,6 +156,7 @@
 		A894ABE15E9B311833F380E5 /* LiveActivityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivityService.swift; sourceTree = "<group>"; };
 		A9685BE9D14BA7D8972C26A8 /* FocusTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTask.swift; sourceTree = "<group>"; };
 		AD085631F6F2E9408B680304 /* RiverWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiverWidgetBundle.swift; sourceTree = "<group>"; };
+		AE0B557BF2FBFCA378939F41 /* RiverShieldConfiguration.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = RiverShieldConfiguration.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0910AB972AAB3195E0301F0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		B17C456C2E1F9CA81531EB3B /* FocusTimerIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTimerIntent.swift; sourceTree = "<group>"; };
 		B29D3BE9732FE7B39A824F86 /* River.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = River.entitlements; sourceTree = "<group>"; };
@@ -115,11 +165,15 @@
 		BB252DACB7002300D70A5028 /* FocusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusView.swift; sourceTree = "<group>"; };
 		BC50CB71FD275B085EEFE6AF /* RiverWidget.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = RiverWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEC37079CAB17B78A2A50A72 /* SessionRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionRecord.swift; sourceTree = "<group>"; };
+		C0A61708196DE1E512ED64F0 /* DeviceActivityMonitorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceActivityMonitorExtension.swift; sourceTree = "<group>"; };
 		C7527D9DCA99DAB76026119F /* Nunito-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Medium.ttf"; sourceTree = "<group>"; };
 		CDE3F450AE856636633F7B4E /* Nunito-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Regular.ttf"; sourceTree = "<group>"; };
 		D0004C8BE17F68BDBDF02E60 /* FocusActivityAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusActivityAttributes.swift; sourceTree = "<group>"; };
+		D317EE00D23399037B6BF1B1 /* gentle-chime.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "gentle-chime.wav"; sourceTree = "<group>"; };
+		D8F3BA9DE45BE042244FA620 /* RiverDeviceActivityMonitor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RiverDeviceActivityMonitor.entitlements; sourceTree = "<group>"; };
 		EBD52D357167B6A5F06FA7F2 /* DurationPickerSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DurationPickerSheet.swift; sourceTree = "<group>"; };
 		EC7211A0F751D58A962322E6 /* AppGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppGroup.swift; sourceTree = "<group>"; };
+		FEE3FE9183099D3584F60E7F /* AppBlockingAuthorizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppBlockingAuthorizationService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -190,6 +244,7 @@
 			isa = PBXGroup;
 			children = (
 				2E1C2A72E27E69C185B6FABC /* Fonts */,
+				E469359EB30C0E885D477D85 /* Sounds */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -197,6 +252,8 @@
 		6A68EB41552DA67D8515D208 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				FEE3FE9183099D3584F60E7F /* AppBlockingAuthorizationService.swift */,
+				808A09A6CD44773C7C41DA78 /* AppBlockingService.swift */,
 				B38529EEC58C1AA33A98F5D2 /* FocusTimerService.swift */,
 				A894ABE15E9B311833F380E5 /* LiveActivityService.swift */,
 				8B43E0B69B136BD9E3AC3F13 /* PurchaseManager.swift */,
@@ -206,10 +263,21 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		8680B07A0AF6B4FD1C19A2B1 /* RiverShieldConfiguration */ = {
+			isa = PBXGroup;
+			children = (
+				005D4C05952D42AC6D0CF74C /* Info.plist */,
+				60C53E34E633B8ED493C5DE9 /* RiverShieldConfiguration.entitlements */,
+				0A83FC674E5E513628CCAB5D /* ShieldConfigurationExtension.swift */,
+			);
+			path = RiverShieldConfiguration;
+			sourceTree = "<group>";
+		};
 		8CD13258810C7038AFA58623 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				4F5C4D10974F95D9F1D7C98A /* AddTaskView.swift */,
+				76B9B0B62C4311C7DC814770 /* AppBlockingSettingsView.swift */,
 				647706303FB55B8E22E3928D /* DeletedTasksView.swift */,
 				EBD52D357167B6A5F06FA7F2 /* DurationPickerSheet.swift */,
 				BB252DACB7002300D70A5028 /* FocusView.swift */,
@@ -224,10 +292,23 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		ACD52A5A66FCC87E69CBFE79 /* RiverShieldAction */ = {
+			isa = PBXGroup;
+			children = (
+				55314C5062FD93E657D9F889 /* Info.plist */,
+				0CF6A5CAAF09049553F2F5A9 /* RiverShieldAction.entitlements */,
+				25FB5BC9FC5FB5B5195E6CDA /* ShieldActionExtension.swift */,
+			);
+			path = RiverShieldAction;
+			sourceTree = "<group>";
+		};
 		B08359D185E9211107825A42 = {
 			isa = PBXGroup;
 			children = (
 				12FE704C57F230F115B91FBF /* River */,
+				EFA24F70E24C6EE046490E59 /* RiverDeviceActivityMonitor */,
+				ACD52A5A66FCC87E69CBFE79 /* RiverShieldAction */,
+				8680B07A0AF6B4FD1C19A2B1 /* RiverShieldConfiguration */,
 				F0303CB6C594B177A5CB9317 /* RiverWidget */,
 				095C4A835F3345D8E096E08B /* Shared */,
 				D8A528121E22538390D4F030 /* Products */,
@@ -238,9 +319,32 @@
 			isa = PBXGroup;
 			children = (
 				30861353134FF039E6227447 /* River.app */,
+				40CCDC2ABB5C11937CBF91EE /* RiverDeviceActivityMonitor.appex */,
+				3AB03167EB1F4021FB289BD0 /* RiverShieldAction.appex */,
+				AE0B557BF2FBFCA378939F41 /* RiverShieldConfiguration.appex */,
 				BC50CB71FD275B085EEFE6AF /* RiverWidget.appex */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		E469359EB30C0E885D477D85 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				D317EE00D23399037B6BF1B1 /* gentle-chime.wav */,
+				735A8A607381D3D222E5148A /* singing-bowl.wav */,
+				36238522479BCEE50769FE93 /* temple-bell.wav */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
+		EFA24F70E24C6EE046490E59 /* RiverDeviceActivityMonitor */ = {
+			isa = PBXGroup;
+			children = (
+				C0A61708196DE1E512ED64F0 /* DeviceActivityMonitorExtension.swift */,
+				835F3FD08D46BE1314A595AF /* Info.plist */,
+				D8F3BA9DE45BE042244FA620 /* RiverDeviceActivityMonitor.entitlements */,
+			);
+			path = RiverDeviceActivityMonitor;
 			sourceTree = "<group>";
 		};
 		F0303CB6C594B177A5CB9317 /* RiverWidget */ = {
@@ -286,6 +390,9 @@
 			);
 			dependencies = (
 				76FB949F7DE77E9FB9E3E7E6 /* PBXTargetDependency */,
+				49EA5E649522A54CC9EF4CDE /* PBXTargetDependency */,
+				15336713CD43A0117244A470 /* PBXTargetDependency */,
+				F1385919258C748E22730A3C /* PBXTargetDependency */,
 			);
 			name = River;
 			packageProductDependencies = (
@@ -293,6 +400,57 @@
 			productName = River;
 			productReference = 30861353134FF039E6227447 /* River.app */;
 			productType = "com.apple.product-type.application";
+		};
+		373C826AE4B2ABC050B38632 /* RiverDeviceActivityMonitor */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 56BBE6AEDA7EFD4EE2BF73BB /* Build configuration list for PBXNativeTarget "RiverDeviceActivityMonitor" */;
+			buildPhases = (
+				7358AED51F976F8C4011051D /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RiverDeviceActivityMonitor;
+			packageProductDependencies = (
+			);
+			productName = RiverDeviceActivityMonitor;
+			productReference = 40CCDC2ABB5C11937CBF91EE /* RiverDeviceActivityMonitor.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		664D18CD6BCD63878CB27E85 /* RiverShieldAction */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8A0AD8265C433D15EAACF7CD /* Build configuration list for PBXNativeTarget "RiverShieldAction" */;
+			buildPhases = (
+				FB1AE4238F6CEBDF0DA6CA9E /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RiverShieldAction;
+			packageProductDependencies = (
+			);
+			productName = RiverShieldAction;
+			productReference = 3AB03167EB1F4021FB289BD0 /* RiverShieldAction.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		D3EB886905C346BAA0B605C2 /* RiverShieldConfiguration */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FEAE0B14FC4F949CF48C03C6 /* Build configuration list for PBXNativeTarget "RiverShieldConfiguration" */;
+			buildPhases = (
+				8350D4E78E819C4600B07C4F /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RiverShieldConfiguration;
+			packageProductDependencies = (
+			);
+			productName = RiverShieldConfiguration;
+			productReference = AE0B557BF2FBFCA378939F41 /* RiverShieldConfiguration.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -308,6 +466,18 @@
 						ProvisioningStyle = Automatic;
 					};
 					2E5547EBF3C62BD425B1B3E0 = {
+						DevelopmentTeam = U4JCMYQA4X;
+						ProvisioningStyle = Automatic;
+					};
+					373C826AE4B2ABC050B38632 = {
+						DevelopmentTeam = U4JCMYQA4X;
+						ProvisioningStyle = Automatic;
+					};
+					664D18CD6BCD63878CB27E85 = {
+						DevelopmentTeam = U4JCMYQA4X;
+						ProvisioningStyle = Automatic;
+					};
+					D3EB886905C346BAA0B605C2 = {
 						DevelopmentTeam = U4JCMYQA4X;
 						ProvisioningStyle = Automatic;
 					};
@@ -328,6 +498,9 @@
 			projectRoot = "";
 			targets = (
 				2E5547EBF3C62BD425B1B3E0 /* River */,
+				373C826AE4B2ABC050B38632 /* RiverDeviceActivityMonitor */,
+				664D18CD6BCD63878CB27E85 /* RiverShieldAction */,
+				D3EB886905C346BAA0B605C2 /* RiverShieldConfiguration */,
 				13AFB3968B1208E363E543BE /* RiverWidget */,
 			);
 		};
@@ -345,6 +518,9 @@
 				3627CE7BE339B29ECC09E6A1 /* Nunito-Regular.ttf in Resources */,
 				132DA893BC4800DE8098D10B /* Nunito-SemiBold.ttf in Resources */,
 				2600BE986EE63F906B45EBAA /* PrivacyInfo.xcprivacy in Resources */,
+				60EA2B1E05D5D08A01E06D04 /* gentle-chime.wav in Resources */,
+				CA0C8CCE01536704842D42E0 /* singing-bowl.wav in Resources */,
+				901C160BAE060A4722FDAF4B /* temple-bell.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -370,6 +546,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE0BF4FBED15B6604A1B7A36 /* AddTaskView.swift in Sources */,
+				E29C90FAEBBAE7F723770C23 /* AppBlockingAuthorizationService.swift in Sources */,
+				2652AF6B34C927D477401901 /* AppBlockingService.swift in Sources */,
+				4A3C0E9E706067CA3BA55E05 /* AppBlockingSettingsView.swift in Sources */,
 				96DDE9CD2AAD4DD9151CB139 /* AppGroup.swift in Sources */,
 				F46F207846D12BCA15798150 /* AppTheme.swift in Sources */,
 				7B8CC8C4F6B20E3C38F8265D /* ContentView.swift in Sources */,
@@ -400,17 +579,73 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7358AED51F976F8C4011051D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BDA6214DD29EB886A902208E /* DeviceActivityMonitorExtension.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8350D4E78E819C4600B07C4F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9094C9A969FFB3CF25BE11CE /* ShieldConfigurationExtension.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FB1AE4238F6CEBDF0DA6CA9E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				02B2F687D5AE06AB2DDB426A /* ShieldActionExtension.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		15336713CD43A0117244A470 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D3EB886905C346BAA0B605C2 /* RiverShieldConfiguration */;
+			targetProxy = 9ABD9AD0DDCE6AB320982034 /* PBXContainerItemProxy */;
+		};
+		49EA5E649522A54CC9EF4CDE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 373C826AE4B2ABC050B38632 /* RiverDeviceActivityMonitor */;
+			targetProxy = E02FBC77B953FDB2EAD7FEEE /* PBXContainerItemProxy */;
+		};
 		76FB949F7DE77E9FB9E3E7E6 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 13AFB3968B1208E363E543BE /* RiverWidget */;
 			targetProxy = 49EAFE4D590C80F767853923 /* PBXContainerItemProxy */;
 		};
+		F1385919258C748E22730A3C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 664D18CD6BCD63878CB27E85 /* RiverShieldAction */;
+			targetProxy = 52935DA396CAF6A4DEA7228E /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		0CD9874D30B2B8876DD8F282 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = RiverDeviceActivityMonitor/RiverDeviceActivityMonitor.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = U4JCMYQA4X;
+				INFOPLIST_FILE = RiverDeviceActivityMonitor/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.george.river.RiverDeviceActivityMonitor;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
 		2582BFAE8E7DB674BF2B4B4A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -428,6 +663,23 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
+		};
+		47F03D588C40428016CADFC3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = RiverShieldConfiguration/RiverShieldConfiguration.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = U4JCMYQA4X;
+				INFOPLIST_FILE = RiverShieldConfiguration/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.george.river.RiverShieldConfiguration;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
 		};
 		52409E7B192654B307C71088 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -448,6 +700,40 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.george.river;
 				SDKROOT = iphoneos;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		5498648883F105034C731BAE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = RiverShieldConfiguration/RiverShieldConfiguration.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = U4JCMYQA4X;
+				INFOPLIST_FILE = RiverShieldConfiguration/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.george.river.RiverShieldConfiguration;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		6A612CCB18A112AECF828056 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = RiverShieldAction/RiverShieldAction.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = U4JCMYQA4X;
+				INFOPLIST_FILE = RiverShieldAction/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.george.river.RiverShieldAction;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -542,6 +828,23 @@
 			};
 			name = Release;
 		};
+		B1DFB49F11343A19A6988E65 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = RiverDeviceActivityMonitor/RiverDeviceActivityMonitor.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = U4JCMYQA4X;
+				INFOPLIST_FILE = RiverDeviceActivityMonitor/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.george.river.RiverDeviceActivityMonitor;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		C16AD038AF5F092C2BC2C412 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -618,6 +921,23 @@
 			};
 			name = Release;
 		};
+		D2CC3861B5085FDAF8941C65 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = RiverShieldAction/RiverShieldAction.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = U4JCMYQA4X;
+				INFOPLIST_FILE = RiverShieldAction/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.george.river.RiverShieldAction;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -639,11 +959,38 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
+		56BBE6AEDA7EFD4EE2BF73BB /* Build configuration list for PBXNativeTarget "RiverDeviceActivityMonitor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0CD9874D30B2B8876DD8F282 /* Debug */,
+				B1DFB49F11343A19A6988E65 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
 		61CEE7648F21B9C0BB6DB75F /* Build configuration list for PBXNativeTarget "River" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				52409E7B192654B307C71088 /* Debug */,
 				78F2ACC1F6952E935DFD337D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		8A0AD8265C433D15EAACF7CD /* Build configuration list for PBXNativeTarget "RiverShieldAction" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6A612CCB18A112AECF828056 /* Debug */,
+				D2CC3861B5085FDAF8941C65 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		FEAE0B14FC4F949CF48C03C6 /* Build configuration list for PBXNativeTarget "RiverShieldConfiguration" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5498648883F105034C731BAE /* Debug */,
+				47F03D588C40428016CADFC3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

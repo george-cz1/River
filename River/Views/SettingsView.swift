@@ -12,6 +12,7 @@ struct SettingsView: View {
     @State private var showingHistory = false
     @State private var showingThemePicker = false
     @State private var showingSoundSettings = false
+    @State private var showingAppBlocking = false
 
     var body: some View {
         NavigationStack {
@@ -41,6 +42,9 @@ struct SettingsView: View {
             }
             .sheet(isPresented: $showingSoundSettings) {
                 SoundSettingsView()
+            }
+            .sheet(isPresented: $showingAppBlocking) {
+                AppBlockingSettingsView()
             }
         }
     }
@@ -94,6 +98,21 @@ struct SettingsView: View {
                     }
                 }
                 .buttonStyle(.plain)
+
+                Button {
+                    showingAppBlocking = true
+                } label: {
+                    HStack {
+                        Label("Focus Blocking", systemImage: "hand.raised.circle.fill")
+                            .font(AppFonts.body)
+                            .foregroundStyle(AppColors.textPrimary)
+                        Spacer()
+                        Image(systemName: "chevron.right")
+                            .font(.caption)
+                            .foregroundStyle(AppColors.textSecondary)
+                    }
+                }
+                .buttonStyle(.plain)
             } else {
                 HStack {
                     Label("Session History", systemImage: "clock.arrow.circlepath")
@@ -117,6 +136,16 @@ struct SettingsView: View {
 
                 HStack {
                     Label("Sounds & Haptics", systemImage: "speaker.wave.2.fill")
+                        .font(AppFonts.body)
+                        .foregroundStyle(AppColors.textSecondary)
+                    Spacer()
+                    Image(systemName: "lock.fill")
+                        .font(.caption)
+                        .foregroundStyle(AppColors.sage)
+                }
+
+                HStack {
+                    Label("Focus Blocking", systemImage: "hand.raised.circle.fill")
                         .font(AppFonts.body)
                         .foregroundStyle(AppColors.textSecondary)
                     Spacer()

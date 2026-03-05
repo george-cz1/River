@@ -5,18 +5,18 @@ import UIKit
 /// Available transition sounds
 enum TransitionSound: String, CaseIterable, Codable {
     case chime = "gentle-chime"
-    case waterDrop = "water-drop"
-    case wind = "soft-wind"
+    case singingBowl = "singing-bowl"
+    case templeBell = "temple-bell"
     case none
 
     var displayName: String {
         switch self {
         case .chime:
             return "Gentle Chime"
-        case .waterDrop:
-            return "Water Drop"
-        case .wind:
-            return "Soft Wind"
+        case .singingBowl:
+            return "Singing Bowl"
+        case .templeBell:
+            return "Temple Bell"
         case .none:
             return "None"
         }
@@ -26,10 +26,10 @@ enum TransitionSound: String, CaseIterable, Codable {
         switch self {
         case .chime:
             return "bell.fill"
-        case .waterDrop:
-            return "drop.fill"
-        case .wind:
-            return "wind"
+        case .singingBowl:
+            return "circle.circle"
+        case .templeBell:
+            return "bell.and.waves.left.and.right"
         case .none:
             return "speaker.slash.fill"
         }

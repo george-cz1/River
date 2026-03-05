@@ -1,16 +1,21 @@
 # Sound Files
 
-Add the following sound files to this directory:
+This directory contains meditation and zen-inspired sound effects for the River Pomodoro timer.
 
-1. `gentle-chime.wav` - Work phase complete
-2. `water-drop.wav` - Break phase complete
-3. `soft-wind.wav` - Session complete
+## Sound Files
 
-These should be nature-inspired, gentle sounds suitable for a focus timer app.
+1. `gentle-chime.wav` - Gentle wind chime for work phase transitions
+2. `singing-bowl.wav` - Meditation singing bowl for break phase transitions
+3. `temple-bell.wav` - Temple bell for session complete
 
-You can find free sound effects from:
-- freesound.org
-- zapsplat.com
-- soundbible.com
+These sounds create a calming, meditation-focused experience suitable for a focus timer app.
 
-Make sure the files are in WAV or CAF format for iOS compatibility.
+## Attributions
+
+All sounds are sourced from freesound.org:
+
+- **gentle-chime.wav**: "Large Wind Chime 2 (D6/86)" by iainmccurdy - https://freesound.org/s/696635/ - License: Attribution 4.0
+
+- **singing-bowl.wav**: "Meditation Bowls" by Sandhwani - https://freesound.org/people/Sandhwani/sounds/473813/ - License: CC0 (Public Domain)
+
+- **temple-bell.wav**: "Keisu temple bell" by milivolt - https://freesound.org/people/milivolt/sounds/367128/ - License: Attribution 4.0

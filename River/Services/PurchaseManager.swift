@@ -14,7 +14,7 @@ final class PurchaseManager {
     private let proProductID = "com.george.river.pro"
 
     // DEBUG: Set to true to unlock Pro features for testing
-    private let debugUnlockPro = false
+    private let debugUnlockPro = true
 
     private init() {
         Task {

@@ -57,6 +57,9 @@ final class FocusTimerService {
         state = nil
         SharedDataManager.shared.saveTimerState(nil)
         LiveActivityService.shared.endActivity()
+
+        // Disable app blocking when focus ends
+        AppBlockingService.shared.disableBlocking()
     }
 
     // MARK: - Timer Control
@@ -73,6 +76,11 @@ final class FocusTimerService {
         schedulePhaseNotification()
         persistState()
         updateLiveActivity()
+
+        // Enable app blocking if Pro user
+        if PurchaseManager.shared.isPro {
+            AppBlockingService.shared.enableBlocking()
+        }
     }
 
     func pauseTimer() {
@@ -85,6 +93,9 @@ final class FocusTimerService {
         cancelNotifications()
         persistState()
         updateLiveActivity()
+
+        // Disable app blocking when paused
+        AppBlockingService.shared.disableBlocking()
     }
 
     func resumeTimer() {
@@ -97,6 +108,11 @@ final class FocusTimerService {
         schedulePhaseNotification()
         persistState()
         updateLiveActivity()
+
+        // Enable app blocking if Pro user
+        if PurchaseManager.shared.isPro {
+            AppBlockingService.shared.enableBlocking()
+        }
     }
 
     func toggleTimer() {

@@ -61,6 +61,7 @@ targets:
       properties:
         com.apple.security.application-groups:
           - group.com.george.evolve
+        com.apple.developer.family-controls: true
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.george.river
@@ -77,6 +78,12 @@ targets:
         ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
     dependencies:
       - target: RiverWidget
+        embed: true
+      - target: RiverDeviceActivityMonitor
+        embed: true
+      - target: RiverShieldConfiguration
+        embed: true
+      - target: RiverShieldAction
         embed: true
 
   RiverWidget:
@@ -114,6 +121,111 @@ targets:
         SWIFT_VERSION: "6.0"
         SKIP_INSTALL: true
         ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME: WidgetBackground
+
+  RiverDeviceActivityMonitor:
+    type: app-extension
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources:
+      - path: RiverDeviceActivityMonitor
+    info:
+      path: RiverDeviceActivityMonitor/Info.plist
+      properties:
+        CFBundleDisplayName: RiverDeviceActivityMonitor
+        CFBundleExecutable: $(EXECUTABLE_NAME)
+        CFBundleIdentifier: $(PRODUCT_BUNDLE_IDENTIFIER)
+        CFBundleInfoDictionaryVersion: "6.0"
+        CFBundleName: $(PRODUCT_NAME)
+        CFBundlePackageType: XPC!
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.deviceactivity.monitor-extension
+          NSExtensionPrincipalClass: $(PRODUCT_MODULE_NAME).DeviceActivityMonitorExtension
+    entitlements:
+      path: RiverDeviceActivityMonitor/RiverDeviceActivityMonitor.entitlements
+      properties:
+        com.apple.developer.family-controls: true
+        com.apple.security.application-groups:
+          - group.com.george.evolve
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.george.river.RiverDeviceActivityMonitor
+        DEVELOPMENT_TEAM: U4JCMYQA4X
+        CODE_SIGN_STYLE: Automatic
+        LD_RUNPATH_SEARCH_PATHS: "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks"
+        SWIFT_VERSION: "6.0"
+        SKIP_INSTALL: true
+
+  RiverShieldConfiguration:
+    type: app-extension
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources:
+      - path: RiverShieldConfiguration
+    info:
+      path: RiverShieldConfiguration/Info.plist
+      properties:
+        CFBundleDisplayName: RiverShieldConfiguration
+        CFBundleExecutable: $(EXECUTABLE_NAME)
+        CFBundleIdentifier: $(PRODUCT_BUNDLE_IDENTIFIER)
+        CFBundleInfoDictionaryVersion: "6.0"
+        CFBundleName: $(PRODUCT_NAME)
+        CFBundlePackageType: XPC!
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.ManagedSettingsUI.shield-configuration
+          NSExtensionPrincipalClass: $(PRODUCT_MODULE_NAME).ShieldConfigurationExtension
+    entitlements:
+      path: RiverShieldConfiguration/RiverShieldConfiguration.entitlements
+      properties:
+        com.apple.developer.family-controls: true
+        com.apple.security.application-groups:
+          - group.com.george.evolve
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.george.river.RiverShieldConfiguration
+        DEVELOPMENT_TEAM: U4JCMYQA4X
+        CODE_SIGN_STYLE: Automatic
+        LD_RUNPATH_SEARCH_PATHS: "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks"
+        SWIFT_VERSION: "6.0"
+        SKIP_INSTALL: true
+
+  RiverShieldAction:
+    type: app-extension
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources:
+      - path: RiverShieldAction
+    info:
+      path: RiverShieldAction/Info.plist
+      properties:
+        CFBundleDisplayName: RiverShieldAction
+        CFBundleExecutable: $(EXECUTABLE_NAME)
+        CFBundleIdentifier: $(PRODUCT_BUNDLE_IDENTIFIER)
+        CFBundleInfoDictionaryVersion: "6.0"
+        CFBundleName: $(PRODUCT_NAME)
+        CFBundlePackageType: XPC!
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.ManagedSettingsUI.shield-action
+          NSExtensionPrincipalClass: $(PRODUCT_MODULE_NAME).ShieldActionExtension
+    entitlements:
+      path: RiverShieldAction/RiverShieldAction.entitlements
+      properties:
+        com.apple.developer.family-controls: true
+        com.apple.security.application-groups:
+          - group.com.george.evolve
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.george.river.RiverShieldAction
+        DEVELOPMENT_TEAM: U4JCMYQA4X
+        CODE_SIGN_STYLE: Automatic
+        LD_RUNPATH_SEARCH_PATHS: "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks"
+        SWIFT_VERSION: "6.0"
+        SKIP_INSTALL: true
 
 schemes:
   River:

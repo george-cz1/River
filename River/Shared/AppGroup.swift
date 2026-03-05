@@ -12,6 +12,11 @@ enum AppGroup {
     static var userDefaults: UserDefaults? {
         UserDefaults(suiteName: identifier)
     }
+
+    /// Keys for storing data in App Group UserDefaults
+    enum Keys {
+        static let selectedAppsForBlocking = "selectedAppsForBlocking"
+    }
 }
 
 enum SharedDataKey {
