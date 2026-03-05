@@ -10,6 +10,7 @@ struct TaskListView: View {
     @State private var newTaskTitle = ""
     @State private var showingProUpgrade = false
     @FocusState private var isTextFieldFocused: Bool
+    @State private var isCompletedSectionExpanded: Bool = false
 
     @Environment(PurchaseManager.self) private var purchaseManager
     @State private var timerService = FocusTimerService.shared
@@ -27,6 +28,7 @@ struct TaskListView: View {
             timerService.focusedTaskTitle != task.title
         }
     }
+    var completedTasks: [FocusTask] { tasks.filter { $0.isCompleted } }
 
     var body: some View {
         NavigationStack {
@@ -52,6 +54,11 @@ struct TaskListView: View {
                         emptyTasksState
                     } else {
                         taskList
+                    }
+
+                    // Completed Tasks Section
+                    if !completedTasks.isEmpty {
+                        completedSection
                     }
                 }
                 .padding(.top, 20)
@@ -138,11 +145,12 @@ struct TaskListView: View {
             }
 
             ForEach(unfocusedTasks) { task in
-                SwipeableTaskRow(task: task, onFocus: {
-                    focusTask(task)
-                }, onDelete: {
-                    deleteTask(task)
-                })
+                SwipeableTaskRow(
+                    task: task,
+                    onComplete: { completeTask(task) },
+                    onFocus: { focusTask(task) },
+                    onDelete: { deleteTask(task) }
+                )
             }
         }
         .padding(.horizontal, 20)
@@ -164,6 +172,44 @@ struct TaskListView: View {
         }
         .frame(maxWidth: .infinity)
         .padding(.vertical, 40)
+    }
+
+    private var completedSection: some View {
+        VStack(spacing: 12) {
+            // Collapsible header
+            Button {
+                withAnimation(.spring(response: 0.3)) {
+                    isCompletedSectionExpanded.toggle()
+                }
+            } label: {
+                HStack {
+                    Image(systemName: "chevron.right")
+                        .font(.system(size: 12, weight: .semibold))
+                        .foregroundStyle(AppColors.textSecondary)
+                        .rotationEffect(.degrees(isCompletedSectionExpanded ? 90 : 0))
+
+                    Text("Completed (\(completedTasks.count))")
+                        .font(AppFonts.headline)
+                        .foregroundStyle(AppColors.textSecondary)
+
+                    Spacer()
+                }
+            }
+            .buttonStyle(.plain)
+
+            // Completed tasks list (when expanded)
+            if isCompletedSectionExpanded {
+                ForEach(completedTasks) { task in
+                    CompletedTaskRow(
+                        task: task,
+                        onUncomplete: { uncompleteTask(task) },
+                        onDelete: { deleteTask(task) }
+                    )
+                }
+            }
+        }
+        .padding(.horizontal, 20)
+        .padding(.top, 8)
     }
 
     private var addButton: some View {
@@ -235,6 +281,10 @@ struct TaskListView: View {
         }
     }
 
+    private func uncompleteTask(_ task: FocusTask) {
+        task.isCompleted = false
+    }
+
     private var phaseColor: Color {
         timerService.timerPhase.isBreak ? AppColors.breakPhase : AppColors.workPhase
     }
@@ -244,6 +294,7 @@ struct TaskListView: View {
 
 private struct SwipeableTaskRow: View {
     let task: FocusTask
+    let onComplete: () -> Void
     let onFocus: () -> Void
     let onDelete: () -> Void
 
@@ -314,9 +365,23 @@ private struct SwipeableTaskRow: View {
 
             // Task card (center, slides both directions)
             HStack(spacing: 12) {
-                Circle()
-                    .stroke(AppColors.sage, lineWidth: 2)
-                    .frame(width: 20, height: 20)
+                Button(action: onComplete) {
+                    Circle()
+                        .stroke(task.isCompleted ? AppColors.sage : AppColors.sage, lineWidth: 2)
+                        .background(
+                            Circle()
+                                .fill(task.isCompleted ? AppColors.sage : Color.clear)
+                        )
+                        .frame(width: 20, height: 20)
+                        .overlay(
+                            task.isCompleted ?
+                                Image(systemName: "checkmark")
+                                    .font(.system(size: 12, weight: .bold))
+                                    .foregroundStyle(.white)
+                                : nil
+                        )
+                }
+                .buttonStyle(.plain)
 
                 Text(task.title)
                     .font(AppFonts.body)
@@ -592,6 +657,97 @@ private struct SwipeableFocusCard: View {
                 .stroke(AppColors.border, lineWidth: 1)
         )
         .padding(.horizontal, 20)
+    }
+}
+
+// MARK: - Completed Task Row
+
+private struct CompletedTaskRow: View {
+    let task: FocusTask
+    let onUncomplete: () -> Void
+    let onDelete: () -> Void
+
+    @State private var offset: CGFloat = 0
+    private let deleteButtonWidth: CGFloat = 80
+
+    var body: some View {
+        ZStack {
+            // Delete action (swipe left)
+            if offset < 0 {
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        withAnimation(.spring(response: 0.3)) { offset = 0 }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                            onDelete()
+                        }
+                    }) {
+                        VStack(spacing: 4) {
+                            Image(systemName: "trash.fill")
+                                .font(.system(size: 20))
+                            Text("Delete")
+                                .font(.caption2)
+                        }
+                        .foregroundStyle(.white)
+                        .frame(width: deleteButtonWidth)
+                    }
+                }
+                .frame(height: 56)
+                .background(AppColors.destructive)
+                .clipShape(RoundedRectangle(cornerRadius: 16))
+            }
+
+            // Task card
+            HStack(spacing: 12) {
+                Button(action: onUncomplete) {
+                    Circle()
+                        .fill(AppColors.sage)
+                        .frame(width: 20, height: 20)
+                        .overlay(
+                            Image(systemName: "checkmark")
+                                .font(.system(size: 12, weight: .bold))
+                                .foregroundStyle(.white)
+                        )
+                }
+                .buttonStyle(.plain)
+
+                Text(task.title)
+                    .font(AppFonts.body)
+                    .foregroundStyle(AppColors.textSecondary)
+                    .strikethrough(color: AppColors.textSecondary)
+                    .lineLimit(2)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
+            .padding(16)
+            .background(AppColors.surface)
+            .clipShape(RoundedRectangle(cornerRadius: 16))
+            .overlay(
+                RoundedRectangle(cornerRadius: 16)
+                    .stroke(AppColors.border, lineWidth: 1)
+            )
+            .opacity(0.7)
+            .offset(x: offset)
+            .gesture(
+                DragGesture()
+                    .onChanged { gesture in
+                        let translation = gesture.translation.width
+                        if translation < 0 {
+                            offset = max(-deleteButtonWidth, translation)
+                        }
+                    }
+                    .onEnded { _ in
+                        withAnimation(.spring(response: 0.3)) {
+                            offset = offset < -deleteButtonWidth / 2 ? -deleteButtonWidth : 0
+                        }
+                    }
+            )
+            .onTapGesture {
+                if offset != 0 {
+                    withAnimation(.spring(response: 0.3)) { offset = 0 }
+                }
+            }
+        }
+        .clipped()
     }
 }
 
