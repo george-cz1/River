@@ -389,8 +389,13 @@ private struct SwipeableTaskRow: View {
             )
             .offset(x: offset)
             .gesture(
-                DragGesture()
+                DragGesture(minimumDistance: 20)
                     .onChanged { gesture in
+                        // Early exit if gesture is primarily vertical (scrolling)
+                        guard abs(gesture.translation.width) > abs(gesture.translation.height) else {
+                            return
+                        }
+
                         isSwiping = true
                         let translation = gesture.translation.width
 
@@ -505,6 +510,7 @@ private struct SwipeableFocusCard: View {
     let onComplete: () -> Void
 
     @State private var offset: CGFloat = 0
+    @State private var isHorizontalGesture: Bool? = nil
     private let unfocusButtonWidth: CGFloat = 80
 
     var body: some View {
@@ -563,8 +569,18 @@ private struct SwipeableFocusCard: View {
                 )
                 .offset(x: offset)
                 .gesture(
-                    DragGesture()
+                    DragGesture(minimumDistance: 20)
                         .onChanged { gesture in
+                            // Lock direction on first significant movement
+                            if isHorizontalGesture == nil {
+                                let w = abs(gesture.translation.width)
+                                let h = abs(gesture.translation.height)
+                                if w > 10 || h > 10 {
+                                    isHorizontalGesture = w > h
+                                }
+                            }
+                            guard isHorizontalGesture == true else { return }
+
                             let translation = gesture.translation.width
                             // Only allow right swipe (positive offset)
                             if translation > 0 {
@@ -583,6 +599,8 @@ private struct SwipeableFocusCard: View {
                                     offset = 0
                                 }
                             }
+                            // Reset direction tracking
+                            isHorizontalGesture = nil
                         }
                 )
                 .onTapGesture {
@@ -659,6 +677,7 @@ private struct CompletedTaskRow: View {
     let onDelete: () -> Void
 
     @State private var offset: CGFloat = 0
+    @State private var isHorizontalGesture: Bool? = nil
     private let deleteButtonWidth: CGFloat = 80
 
     var body: some View {
@@ -719,8 +738,18 @@ private struct CompletedTaskRow: View {
             .opacity(0.7)
             .offset(x: offset)
             .gesture(
-                DragGesture()
+                DragGesture(minimumDistance: 20)
                     .onChanged { gesture in
+                        // Lock direction on first significant movement
+                        if isHorizontalGesture == nil {
+                            let w = abs(gesture.translation.width)
+                            let h = abs(gesture.translation.height)
+                            if w > 10 || h > 10 {
+                                isHorizontalGesture = w > h
+                            }
+                        }
+                        guard isHorizontalGesture == true else { return }
+
                         let translation = gesture.translation.width
                         if translation < 0 {
                             offset = max(-deleteButtonWidth, translation)
@@ -730,6 +759,8 @@ private struct CompletedTaskRow: View {
                         withAnimation(.spring(response: 0.3)) {
                             offset = offset < -deleteButtonWidth / 2 ? -deleteButtonWidth : 0
                         }
+                        // Reset direction tracking
+                        isHorizontalGesture = nil
                     }
             )
             .onTapGesture {
