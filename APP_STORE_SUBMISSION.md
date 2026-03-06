@@ -74,8 +74,8 @@ Navigate to the version you're submitting and fill in:
 | **Promotional Text** | Stay focused with beautiful Pomodoro sessions and task management | 170 chars |
 | **Description** | See suggested description below | 4000 chars |
 | **Keywords** | pomodoro,focus,timer,productivity,tasks,work,study,break | 100 chars |
-| **Support URL** | Your website or GitHub repo | Required |
-| **Privacy Policy URL** | See section 3.3 below | **REQUIRED for IAP** |
+| **Support URL** | https://george-cz1.github.io/River/ | Required |
+| **Privacy Policy URL** | https://george-cz1.github.io/River/privacy.html | **REQUIRED for IAP** |
 
 #### Suggested App Description
 
@@ -174,7 +174,7 @@ You **must** provide a privacy policy URL for apps with IAP. Here are your optio
 #### Option 2: GitHub Pages (Free Hosting)
 1. Create a new file in your GitHub repo: `docs/privacy-policy.md`
 2. Enable GitHub Pages in repo settings (Settings → Pages → Source: main/docs)
-3. Your URL will be: `https://[username].github.io/[repo]/privacy-policy.html`
+3. Your URL will be: `https://george-cz1.github.io/River/privacy.html`
 
 #### Option 3: Simple Notion Page
 1. Create a Notion page with privacy policy

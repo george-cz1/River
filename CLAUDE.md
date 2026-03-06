@@ -58,13 +58,22 @@ xcodebuild -project River.xcodeproj -scheme River -destination 'platform=iOS Sim
    - `SessionHistoryService`: Tracks completed sessions, streaks, and stats
    - `SoundService`: Plays transition sounds with haptic feedback
    - `PurchaseManager`: Handles StoreKit purchases for Pro features
+   - `AppBlockingService`: Manages Screen Time app blocking using FamilyControls framework
+   - `AppBlockingAuthorizationService`: Handles Family Controls authorization requests
 
-### Widget Extension
+### Extensions
 
-- **Target**: `RiverWidget` (WidgetKit extension)
+**RiverWidget** (WidgetKit extension)
 - **Sources**: `RiverWidget/` + shared code from `River/Shared/`
 - **Capabilities**: App Groups (`group.com.george.evolve`)
 - Widget displays current timer state and provides interactive controls
+
+**Screen Time/Family Controls Extensions** (Pro Feature)
+- `RiverDeviceActivityMonitor`: Monitors device activity events for app blocking
+- `RiverShieldConfiguration`: Custom UI for blocked app shields
+- `RiverShieldAction`: Handles user actions when tapping blocked app shields
+- **Requirements**: Family Controls entitlement + user authorization
+- **Integration**: Uses `ManagedSettingsStore` to apply shields during focus sessions
 
 ### Theme System
 
@@ -120,3 +129,5 @@ RiverWidget/
 4. **StoreKit Configuration**: In-app purchases configured in `Configuration.storekit` for Pro features.
 
 5. **Sound Effects**: The app expects sound files in `River/Resources/Sounds/` (see README.md in that directory).
+
+6. **Pro Features & Debug Mode**: `PurchaseManager` has a `debugUnlockPro` flag (currently `true`) that bypasses StoreKit for testing Pro features locally. Set to `false` for production builds.
