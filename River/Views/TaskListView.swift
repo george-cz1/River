@@ -293,6 +293,7 @@ private struct SwipeableTaskRow: View {
     @State private var isSwiping = false
     @State private var swipeDirection: SwipeDirection? = nil
     @State private var dragStartOffset: CGFloat = 0
+    @State private var isHorizontalGesture: Bool? = nil
 
     private enum SwipeDirection { case left, right }
 
@@ -391,10 +392,29 @@ private struct SwipeableTaskRow: View {
             .gesture(
                 DragGesture(minimumDistance: 20)
                     .onChanged { gesture in
-                        // Early exit if gesture is primarily vertical (scrolling)
-                        guard abs(gesture.translation.width) > abs(gesture.translation.height) else {
-                            return
+                        // PERMANENT LOCK: Once determined not horizontal, stay locked out
+                        if isHorizontalGesture == false { return }
+
+                        // VELOCITY CHECK: Ignore if started with high velocity (scroll momentum)
+                        if isHorizontalGesture == nil {
+                            let speed = sqrt(pow(gesture.velocity.width, 2) + pow(gesture.velocity.height, 2))
+                            if speed > 800 {
+                                return
+                            }
                         }
+
+                        // DIRECTION DETECTION: Lock direction on first significant movement
+                        if isHorizontalGesture == nil {
+                            let w = abs(gesture.translation.width)
+                            let h = abs(gesture.translation.height)
+                            if w > 15 || h > 15 {
+                                // Require CLEAR horizontal dominance (1.3x ratio)
+                                isHorizontalGesture = w > h * 1.3
+                                if isHorizontalGesture == false { return }
+                            }
+                        }
+
+                        guard isHorizontalGesture == true else { return }
 
                         isSwiping = true
                         let translation = gesture.translation.width
@@ -477,6 +497,7 @@ private struct SwipeableTaskRow: View {
                         // Reset state
                         swipeDirection = nil
                         dragStartOffset = 0
+                        isHorizontalGesture = nil
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                             isSwiping = false
                         }
@@ -571,14 +592,28 @@ private struct SwipeableFocusCard: View {
                 .gesture(
                     DragGesture(minimumDistance: 20)
                         .onChanged { gesture in
-                            // Lock direction on first significant movement
+                            // PERMANENT LOCK: Once determined not horizontal, stay locked out
+                            if isHorizontalGesture == false { return }
+
+                            // VELOCITY CHECK: Ignore if started with high velocity (scroll momentum)
+                            if isHorizontalGesture == nil {
+                                let speed = sqrt(pow(gesture.velocity.width, 2) + pow(gesture.velocity.height, 2))
+                                if speed > 800 {
+                                    return
+                                }
+                            }
+
+                            // DIRECTION DETECTION: Lock direction on first significant movement
                             if isHorizontalGesture == nil {
                                 let w = abs(gesture.translation.width)
                                 let h = abs(gesture.translation.height)
-                                if w > 10 || h > 10 {
-                                    isHorizontalGesture = w > h
+                                if w > 15 || h > 15 {
+                                    // Require CLEAR horizontal dominance (1.3x ratio)
+                                    isHorizontalGesture = w > h * 1.3
+                                    if isHorizontalGesture == false { return }
                                 }
                             }
+
                             guard isHorizontalGesture == true else { return }
 
                             let translation = gesture.translation.width
@@ -740,14 +775,28 @@ private struct CompletedTaskRow: View {
             .gesture(
                 DragGesture(minimumDistance: 20)
                     .onChanged { gesture in
-                        // Lock direction on first significant movement
+                        // PERMANENT LOCK: Once determined not horizontal, stay locked out
+                        if isHorizontalGesture == false { return }
+
+                        // VELOCITY CHECK: Ignore if started with high velocity (scroll momentum)
+                        if isHorizontalGesture == nil {
+                            let speed = sqrt(pow(gesture.velocity.width, 2) + pow(gesture.velocity.height, 2))
+                            if speed > 800 {
+                                return
+                            }
+                        }
+
+                        // DIRECTION DETECTION: Lock direction on first significant movement
                         if isHorizontalGesture == nil {
                             let w = abs(gesture.translation.width)
                             let h = abs(gesture.translation.height)
-                            if w > 10 || h > 10 {
-                                isHorizontalGesture = w > h
+                            if w > 15 || h > 15 {
+                                // Require CLEAR horizontal dominance (1.3x ratio)
+                                isHorizontalGesture = w > h * 1.3
+                                if isHorizontalGesture == false { return }
                             }
                         }
+
                         guard isHorizontalGesture == true else { return }
 
                         let translation = gesture.translation.width
