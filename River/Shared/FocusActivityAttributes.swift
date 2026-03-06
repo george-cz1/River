@@ -11,6 +11,7 @@ struct FocusActivityAttributes: ActivityAttributes {
         let remainingSeconds: Int
         let totalSeconds: Int
         let completedPomodoros: Int
+        let pomodorosBeforeLongBreak: Int
         let isCompleted: Bool
         let phaseEndDate: Date?
 
@@ -21,6 +22,7 @@ struct FocusActivityAttributes: ActivityAttributes {
                 remainingSeconds: 0,
                 totalSeconds: 0,
                 completedPomodoros: 0,
+                pomodorosBeforeLongBreak: 4,
                 isCompleted: false,
                 phaseEndDate: nil
             )

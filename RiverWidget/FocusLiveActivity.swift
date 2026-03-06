@@ -37,14 +37,13 @@ struct FocusLiveActivity: Widget {
 private struct CompactLeadingView: View {
     let context: ActivityViewContext<FocusActivityAttributes>
 
-    private var theme: AppTheme { SharedTheme.current() }
-    private var accentColor: Color { theme.accentColor }
-
     var body: some View {
         HStack(spacing: 4) {
-            Image(systemName: "scope")
-                .font(.system(size: 12, weight: .semibold))
-                .foregroundStyle(accentColor)
+            Image("Logo")
+                .renderingMode(.original)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 16, height: 16)
 
             Text(context.attributes.taskTitle)
                 .font(.system(size: 12, weight: .medium))
@@ -119,7 +118,6 @@ private struct StableTimerText: View {
             // Actual timer content
             if let endDate = context.state.phaseEndDate, context.state.isTimerRunning {
                 Text(timerInterval: Date()...endDate, countsDown: true, showsHours: false)
-                    .contentTransition(.numericText())
                     .font(.custom("CormorantGaramond-Light", size: fontSize))
                     .monospacedDigit()
             } else {
@@ -131,47 +129,63 @@ private struct StableTimerText: View {
     }
 }
 
+// MARK: - Cycle Dots
+
+/// Cycle progress indicator for Live Activity
+private struct CycleDots: View {
+    let completed: Int
+    let total: Int
+    let isWorkPhase: Bool
+    let color: Color
+    let size: CGFloat
+
+    var body: some View {
+        HStack(spacing: 4) {
+            ForEach(0..<total, id: \.self) { index in
+                let cycleIndex = completed % total
+                ZStack {
+                    Circle()
+                        .fill(Color.white.opacity(0.3))
+
+                    // Half-fill for in-progress
+                    if index == cycleIndex && isWorkPhase {
+                        Circle()
+                            .fill(color)
+                            .mask(
+                                HStack(spacing: 0) {
+                                    Rectangle()
+                                    Color.clear
+                                }
+                            )
+                    }
+
+                    // Full fill for completed
+                    if index < cycleIndex {
+                        Circle()
+                            .fill(color)
+                    }
+                }
+                .frame(width: size, height: size)
+            }
+        }
+    }
+}
+
 // MARK: - Expanded Views
 
 private struct ExpandedLeadingView: View {
     let context: ActivityViewContext<FocusActivityAttributes>
 
-    private var theme: AppTheme { SharedTheme.current() }
-    private var accentColor: Color { theme.accentColor }
-
     var body: some View {
-        VStack(alignment: .leading, spacing: 2) {
-            Image(systemName: "scope")
-                .font(.system(size: 20, weight: .semibold))
-                .foregroundStyle(accentColor)
-
-            Text(context.state.timerPhase.displayName)
-                .font(.caption2)
-                .foregroundStyle(.secondary)
-        }
+        EmptyView()
     }
 }
 
 private struct ExpandedTrailingView: View {
     let context: ActivityViewContext<FocusActivityAttributes>
 
-    private var theme: AppTheme { SharedTheme.current() }
-    private var accentColor: Color { theme.accentColor }
-
     var body: some View {
-        VStack(alignment: .trailing, spacing: 2) {
-            HStack(spacing: 2) {
-                ForEach(0..<min(context.state.completedPomodoros, 4), id: \.self) { _ in
-                    Circle().fill(accentColor).frame(width: 6, height: 6)
-                }
-                ForEach(0..<max(0, 4 - context.state.completedPomodoros), id: \.self) { _ in
-                    Circle().stroke(accentColor.opacity(0.3), lineWidth: 1).frame(width: 6, height: 6)
-                }
-            }
-            Text("\(context.state.completedPomodoros)")
-                .font(.caption2)
-                .foregroundStyle(.secondary)
-        }
+        EmptyView()
     }
 }
 
@@ -179,10 +193,19 @@ private struct ExpandedCenterView: View {
     let context: ActivityViewContext<FocusActivityAttributes>
 
     var body: some View {
-        Text(context.attributes.taskTitle)
-            .font(.subheadline.weight(.semibold))
-            .lineLimit(1)
-            .foregroundStyle(.white)
+        HStack(spacing: 8) {
+            Image("Logo")
+                .renderingMode(.original)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 24, height: 24)
+
+            Text(context.attributes.taskTitle)
+                .font(.subheadline.weight(.semibold))
+                .lineLimit(1)
+                .foregroundStyle(.white)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 
@@ -193,27 +216,38 @@ private struct ExpandedBottomView: View {
     private var accentColor: Color { theme.accentColor }
 
     var body: some View {
-        HStack(alignment: .center) {
-            VStack(alignment: .leading, spacing: 4) {
-                StableTimerText(context: context, fontSize: 32)
-                    .foregroundStyle(.white)
+        VStack(spacing: 8) {
+            HStack(alignment: .center) {
+                VStack(alignment: .leading, spacing: 4) {
+                    StableTimerText(context: context, fontSize: 36)
+                        .foregroundStyle(.white)
 
-                Text(context.state.timerPhase.displayName.uppercased())
-                    .font(.system(.caption2, weight: .semibold))
-                    .foregroundStyle(accentColor)
-                    .tracking(1)
+                    Text(context.state.timerPhase.displayName.uppercased())
+                        .font(.system(.caption2, weight: .semibold))
+                        .foregroundStyle(accentColor)
+                        .tracking(1)
+                }
+
+                Spacer()
+
+                Button(intent: ToggleFocusTimerIntent()) {
+                    Image(systemName: context.state.isTimerRunning ? "pause.fill" : "play.fill")
+                        .font(.system(size: 24, weight: .semibold))
+                        .foregroundStyle(accentColor)
+                        .frame(width: 48, height: 48)
+                        .background(Circle().stroke(accentColor, lineWidth: 2))
+                }
+                .buttonStyle(.plain)
             }
 
-            Spacer()
-
-            Button(intent: ToggleFocusTimerIntent()) {
-                Image(systemName: context.state.isTimerRunning ? "pause.fill" : "play.fill")
-                    .font(.system(size: 18, weight: .semibold))
-                    .foregroundStyle(accentColor)
-                    .frame(width: 44, height: 44)
-                    .background(Circle().stroke(accentColor, lineWidth: 2))
-            }
-            .buttonStyle(.plain)
+            // Cycle dots below, centered
+            CycleDots(
+                completed: context.state.completedPomodoros,
+                total: context.state.pomodorosBeforeLongBreak,
+                isWorkPhase: context.state.timerPhase == .work,
+                color: accentColor,
+                size: 8
+            )
         }
         .padding(.horizontal, 16)
     }
@@ -230,35 +264,53 @@ private struct LockScreenView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            // Row 1: Task title only
-            Text(context.attributes.taskTitle)
-                .font(.subheadline.weight(.semibold))
-                .foregroundStyle(.primary)
-                .lineLimit(1)
-                .frame(maxWidth: .infinity, alignment: .leading)
+            // Row 1: App icon + Task title
+            HStack(spacing: 10) {
+                Image("Logo")
+                    .renderingMode(.original)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 24, height: 24)
 
-            // Row 2: Timer + Phase (left) and Button (right)
-            HStack(alignment: .center) {
-                VStack(alignment: .leading, spacing: 4) {
-                    StableTimerText(context: context, fontSize: 32)
-                        .foregroundStyle(accentColor)
+                Text(context.attributes.taskTitle)
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(.primary)
+                    .lineLimit(1)
+            }
 
-                    Text(context.state.timerPhase.displayName.uppercased())
-                        .font(.system(.caption2, weight: .semibold))
-                        .foregroundStyle(accentColor)
-                        .tracking(1)
+            // Row 2: Timer + Button
+            VStack(spacing: 8) {
+                HStack(alignment: .center) {
+                    VStack(alignment: .leading, spacing: 4) {
+                        StableTimerText(context: context, fontSize: 48)
+                            .foregroundStyle(accentColor)
+
+                        Text(context.state.timerPhase.displayName.uppercased())
+                            .font(.system(.caption2, weight: .semibold))
+                            .foregroundStyle(accentColor)
+                            .tracking(1)
+                    }
+
+                    Spacer()
+
+                    Button(intent: ToggleFocusTimerIntent()) {
+                        Image(systemName: context.state.isTimerRunning ? "pause.fill" : "play.fill")
+                            .font(.system(size: 24, weight: .semibold))
+                            .foregroundStyle(accentColor)
+                            .frame(width: 56, height: 56)
+                            .background(Circle().stroke(accentColor, lineWidth: 2))
+                    }
+                    .buttonStyle(.plain)
                 }
 
-                Spacer()
-
-                Button(intent: ToggleFocusTimerIntent()) {
-                    Image(systemName: context.state.isTimerRunning ? "pause.fill" : "play.fill")
-                        .font(.system(size: 18, weight: .semibold))
-                        .foregroundStyle(accentColor)
-                        .frame(width: 48, height: 48)
-                        .background(Circle().stroke(accentColor, lineWidth: 2))
-                }
-                .buttonStyle(.plain)
+                // Cycle dots below, centered
+                CycleDots(
+                    completed: context.state.completedPomodoros,
+                    total: context.state.pomodorosBeforeLongBreak,
+                    isWorkPhase: context.state.timerPhase == .work,
+                    color: accentColor,
+                    size: 8
+                )
             }
         }
         .padding(16)
@@ -279,6 +331,7 @@ private struct LockScreenView: View {
         remainingSeconds: 1245,
         totalSeconds: 1500,
         completedPomodoros: 2,
+        pomodorosBeforeLongBreak: 4,
         isCompleted: false,
         phaseEndDate: Date().addingTimeInterval(1245)
     )
@@ -295,6 +348,7 @@ private struct LockScreenView: View {
         remainingSeconds: 1245,
         totalSeconds: 1500,
         completedPomodoros: 2,
+        pomodorosBeforeLongBreak: 4,
         isCompleted: false,
         phaseEndDate: Date().addingTimeInterval(1245)
     )

@@ -55,6 +55,7 @@ struct TimerState: Codable, Equatable, Sendable {
             remainingSeconds: remainingSeconds,
             totalSeconds: totalSeconds,
             completedPomodoros: completedPomodoros,
+            pomodorosBeforeLongBreak: pomodorosBeforeLongBreak,
             isCompleted: false,
             phaseEndDate: phaseEndDate
         )

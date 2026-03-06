@@ -135,7 +135,7 @@ struct TaskListView: View {
                     onAdd: {
                         addTask()
                     },
-                    onCancel: {
+                    onDone: {
                         withAnimation {
                             isAddingTask = false
                             newTaskTitle = ""
@@ -234,9 +234,20 @@ struct TaskListView: View {
         let task = FocusTask(title: trimmed, sortOrder: sortOrder)
         modelContext.insert(task)
 
-        withAnimation {
-            newTaskTitle = ""
-            isAddingTask = false
+        // Clear title but keep card open
+        newTaskTitle = ""
+
+        // Check if at free tier limit after adding
+        let newCount = incompleteTasks.count + 1  // +1 because SwiftData may not have updated yet
+        let isAtLimit = !purchaseManager.isPro && newCount >= freeTaskLimit
+
+        if isAtLimit {
+            withAnimation {
+                isAddingTask = false
+            }
+        } else {
+            // Re-focus for next task
+            isTextFieldFocused = true
         }
     }
 
@@ -682,12 +693,18 @@ private struct SwipeableFocusCard: View {
                 }
 
                 // Cycle dots (centered at bottom)
+                let total = timerService.pomodorosBeforeLongBreak
+                let completed = timerService.completedPomodoros % total
+                let isWorkPhase = timerService.timerPhase == .work
+
                 HStack(spacing: 6) {
-                    ForEach(0..<4, id: \.self) { index in
-                        Circle()
-                            .fill(index < timerService.completedPomodoros % 4
-                                  ? AppColors.sage : AppColors.border)
-                            .frame(width: 8, height: 8)
+                    ForEach(0..<total, id: \.self) { index in
+                        CycleDot(
+                            isFilled: index < completed,
+                            isInProgress: index == completed && isWorkPhase,
+                            color: AppColors.sage,
+                            size: 8
+                        )
                     }
                 }
             }
@@ -828,7 +845,7 @@ private struct InlineAddTaskCard: View {
     @Binding var title: String
     @FocusState.Binding var isFocused: Bool
     let onAdd: () -> Void
-    let onCancel: () -> Void
+    let onDone: () -> Void
 
     var body: some View {
         HStack(spacing: 12) {
@@ -847,13 +864,13 @@ private struct InlineAddTaskCard: View {
                     }
                 }
 
-            if !title.isEmpty {
-                Button(action: onCancel) {
-                    Image(systemName: "xmark.circle.fill")
-                        .foregroundStyle(AppColors.textSecondary)
-                }
-                .buttonStyle(.plain)
+            // Always-visible checkmark to close
+            Button(action: onDone) {
+                Image(systemName: "checkmark.circle.fill")
+                    .font(.system(size: 22))
+                    .foregroundStyle(AppColors.sage)
             }
+            .buttonStyle(.plain)
         }
         .padding(16)
         .background(AppColors.surface)
@@ -862,5 +879,41 @@ private struct InlineAddTaskCard: View {
             RoundedRectangle(cornerRadius: 16)
                 .stroke(AppColors.border, lineWidth: 1)
         )
+    }
+}
+
+// MARK: - Cycle Dot Component
+
+private struct CycleDot: View {
+    let isFilled: Bool
+    let isInProgress: Bool
+    let color: Color
+    let size: CGFloat
+
+    var body: some View {
+        ZStack {
+            // Base empty circle
+            Circle()
+                .fill(AppColors.border)
+
+            // Half-fill for in-progress (left half)
+            if isInProgress && !isFilled {
+                Circle()
+                    .fill(color)
+                    .mask(
+                        HStack(spacing: 0) {
+                            Rectangle()
+                            Color.clear
+                        }
+                    )
+            }
+
+            // Full fill for completed
+            if isFilled {
+                Circle()
+                    .fill(color)
+            }
+        }
+        .frame(width: size, height: size)
     }
 }

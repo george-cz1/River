@@ -371,6 +371,7 @@ extension FocusTimerService {
     }
 
     var completedPomodoros: Int { state?.completedPomodoros ?? 0 }
+    var pomodorosBeforeLongBreak: Int { state?.pomodorosBeforeLongBreak ?? TimerDefaults.pomodorosBeforeLongBreak }
     var progress: Double { state?.contentState.progress ?? 0 }
     var focusedTaskTitle: String? { state?.taskTitle }
 }

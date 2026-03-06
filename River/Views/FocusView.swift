@@ -148,14 +148,19 @@ struct FocusView: View {
     // MARK: - Pomodoro Dots
 
     private var pomodoroProgressDots: some View {
-        HStack(spacing: 8) {
-            ForEach(0..<4, id: \.self) { index in
-                Circle()
-                    .fill(index < timerService.completedPomodoros % 4
-                          ? phaseColor
-                          : AppColors.border)
-                    .frame(width: 10, height: 10)
-                    .animation(.spring(duration: 0.3), value: timerService.completedPomodoros)
+        let total = timerService.pomodorosBeforeLongBreak
+        let completed = timerService.completedPomodoros % total
+        let isWorkPhase = timerService.timerPhase == .work
+
+        return HStack(spacing: 8) {
+            ForEach(0..<total, id: \.self) { index in
+                CycleDot(
+                    isFilled: index < completed,
+                    isInProgress: index == completed && isWorkPhase,
+                    color: phaseColor,
+                    size: 10
+                )
+                .animation(.spring(duration: 0.3), value: timerService.completedPomodoros)
             }
         }
     }
@@ -213,5 +218,41 @@ struct FocusView: View {
 
     private var phaseColor: Color {
         timerService.timerPhase.isBreak ? AppColors.breakPhase : AppColors.workPhase
+    }
+}
+
+// MARK: - Cycle Dot Component
+
+private struct CycleDot: View {
+    let isFilled: Bool
+    let isInProgress: Bool
+    let color: Color
+    let size: CGFloat
+
+    var body: some View {
+        ZStack {
+            // Base empty circle
+            Circle()
+                .fill(AppColors.border)
+
+            // Half-fill for in-progress (left half)
+            if isInProgress && !isFilled {
+                Circle()
+                    .fill(color)
+                    .mask(
+                        HStack(spacing: 0) {
+                            Rectangle()
+                            Color.clear
+                        }
+                    )
+            }
+
+            // Full fill for completed
+            if isFilled {
+                Circle()
+                    .fill(color)
+            }
+        }
+        .frame(width: size, height: size)
     }
 }

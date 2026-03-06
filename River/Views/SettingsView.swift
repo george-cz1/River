@@ -257,9 +257,13 @@ struct SettingsView: View {
 
                     Spacer()
 
-                    Stepper("\(pomodorosBeforeLongBreak)", value: $pomodorosBeforeLongBreak, in: 1...10)
-                        .labelsHidden()
+                    Text("\(pomodorosBeforeLongBreak)")
                         .font(AppFonts.body)
+                        .foregroundStyle(AppColors.textPrimary)
+                        .frame(minWidth: 20)
+
+                    Stepper("", value: $pomodorosBeforeLongBreak, in: 1...10)
+                        .labelsHidden()
                 }
             } else {
                 HStack {
