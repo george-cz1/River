@@ -30,18 +30,35 @@ final class SharedDataManager: Sendable {
     private init() {}
 
     func saveTimerState(_ state: TimerState?) {
-        if let state = state, let encoded = try? JSONEncoder().encode(state) {
-            AppGroup.userDefaults?.set(encoded, forKey: SharedDataKey.timerState)
-        } else {
+        guard let state = state else {
             AppGroup.userDefaults?.removeObject(forKey: SharedDataKey.timerState)
+            return
+        }
+
+        do {
+            let encoded = try JSONEncoder().encode(state)
+            AppGroup.userDefaults?.set(encoded, forKey: SharedDataKey.timerState)
+        } catch {
+            print("⚠️ SharedDataManager: Failed to encode timer state - \(error.localizedDescription)")
+            // Data loss risk: Widget may not sync properly
         }
     }
 
     func getTimerState() -> TimerState? {
-        guard let data = AppGroup.userDefaults?.data(forKey: SharedDataKey.timerState),
-              let state = try? JSONDecoder().decode(TimerState.self, from: data) else {
+        guard let data = AppGroup.userDefaults?.data(forKey: SharedDataKey.timerState) else {
             return nil
         }
-        return state
+
+        do {
+            let state = try JSONDecoder().decode(TimerState.self, from: data)
+            return state
+        } catch {
+            print("⚠️ SharedDataManager: Failed to decode timer state - \(error.localizedDescription)")
+            print("⚠️ Clearing corrupted timer state")
+
+            // Clear corrupted data to prevent repeated errors
+            AppGroup.userDefaults?.removeObject(forKey: SharedDataKey.timerState)
+            return nil
+        }
     }
 }

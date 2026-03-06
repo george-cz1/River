@@ -1,7 +1,7 @@
 import Foundation
 
 /// Represents a completed focus session for history tracking
-struct SessionRecord: Codable, Identifiable {
+struct SessionRecord: Codable, Identifiable, Sendable {
     let id: UUID
     let date: Date
     let taskName: String?
@@ -25,7 +25,7 @@ struct SessionRecord: Codable, Identifiable {
 
 // MARK: - Date Range Helper
 
-enum DateRange: Hashable {
+enum DateRange: Hashable, Sendable {
     case today
     case thisWeek
     case thisMonth

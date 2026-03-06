@@ -22,14 +22,7 @@ struct HistoryView: View {
             .navigationBarTitleDisplayMode(.large)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button {
-                        dismiss()
-                    } label: {
-                        Image(systemName: "xmark.circle.fill")
-                            .font(.title3)
-                            .foregroundStyle(AppColors.textSecondary)
-                            .symbolRenderingMode(.hierarchical)
-                    }
+                    DismissToolbarButton()
                 }
             }
         }
@@ -119,21 +112,12 @@ struct HistoryView: View {
     }
 
     private var emptyStateView: some View {
-        VStack(spacing: 12) {
-            Image(systemName: "clock.badge.questionmark")
-                .font(.system(size: 48))
-                .foregroundStyle(AppColors.textSecondary.opacity(0.5))
-
-            Text("No sessions yet")
-                .font(AppFonts.headline)
-                .foregroundStyle(AppColors.textSecondary)
-
-            Text("Complete your first focus session to see it here")
-                .font(AppFonts.caption)
-                .foregroundStyle(AppColors.textSecondary.opacity(0.7))
-                .multilineTextAlignment(.center)
-        }
-        .frame(maxWidth: .infinity)
+        EmptyStateView(
+            icon: "clock.badge.questionmark",
+            title: "No sessions yet",
+            subtitle: "Complete your first focus session to see it here",
+            iconSize: 48
+        )
         .padding(.vertical, 48)
     }
 

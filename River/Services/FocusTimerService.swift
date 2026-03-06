@@ -34,10 +34,10 @@ final class FocusTimerService {
     func startFocus(taskTitle: String) {
         endFocus()
 
-        let workDuration = UserDefaults.standard.integer(forKey: "workDuration").nonZero(default: 25 * 60)
-        let shortBreakDuration = UserDefaults.standard.integer(forKey: "shortBreakDuration").nonZero(default: 5 * 60)
-        let longBreakDuration = UserDefaults.standard.integer(forKey: "longBreakDuration").nonZero(default: 15 * 60)
-        let pomodorosBeforeLongBreak = UserDefaults.standard.integer(forKey: "pomodorosBeforeLongBreak").nonZero(default: 4)
+        let workDuration = UserDefaults.standard.integer(forKey: UserDefaultsKeys.workDuration).nonZero(default: TimerDefaults.workDuration)
+        let shortBreakDuration = UserDefaults.standard.integer(forKey: UserDefaultsKeys.shortBreakDuration).nonZero(default: TimerDefaults.shortBreakDuration)
+        let longBreakDuration = UserDefaults.standard.integer(forKey: UserDefaultsKeys.longBreakDuration).nonZero(default: TimerDefaults.longBreakDuration)
+        let pomodorosBeforeLongBreak = UserDefaults.standard.integer(forKey: UserDefaultsKeys.pomodorosBeforeLongBreak).nonZero(default: TimerDefaults.pomodorosBeforeLongBreak)
 
         state = TimerState(
             taskTitle: taskTitle,
@@ -243,6 +243,12 @@ final class FocusTimerService {
     private func schedulePhaseNotification() {
         guard let currentState = state, currentState.isTimerRunning else { return }
 
+        // Guard against invalid notification scheduling
+        guard currentState.remainingSeconds > 0 else {
+            print("⚠️ FocusTimerService: Cannot schedule notification with remainingSeconds <= 0")
+            return
+        }
+
         let content = UNMutableNotificationContent()
         content.sound = .default
         content.userInfo = ["type": "focus_phase"]
@@ -272,7 +278,11 @@ final class FocusTimerService {
             trigger: trigger
         )
 
-        UNUserNotificationCenter.current().add(request)
+        UNUserNotificationCenter.current().add(request) { error in
+            if let error = error {
+                print("⚠️ FocusTimerService: Failed to schedule notification - \(error.localizedDescription)")
+            }
+        }
     }
 
     private func cancelNotifications() {
@@ -297,7 +307,7 @@ final class FocusTimerService {
                     service.syncStateFromSharedStorage()
                 }
             },
-            "com.george.evolve.timerStateChanged" as CFString,
+            NotificationNames.timerStateChanged as CFString,
             nil,
             .deliverImmediately
         )
@@ -357,8 +367,7 @@ extension FocusTimerService {
     var remainingSeconds: Int { state?.remainingSeconds ?? 0 }
 
     var formattedTime: String {
-        let s = remainingSeconds
-        return String(format: "%02d:%02d", s / 60, s % 60)
+        TimeFormatter.format(seconds: remainingSeconds)
     }
 
     var completedPomodoros: Int { state?.completedPomodoros ?? 0 }

@@ -6,7 +6,7 @@ import Foundation
 final class SessionHistoryService {
     static let shared = SessionHistoryService()
 
-    private let storageKey = "sessionHistory"
+    private let storageKey = UserDefaultsKeys.sessionHistory
     private(set) var sessions: [SessionRecord] = []
 
     private init() {
@@ -126,15 +126,36 @@ final class SessionHistoryService {
     // MARK: - Persistence
 
     private func persistSessions() {
-        if let encoded = try? JSONEncoder().encode(sessions) {
+        do {
+            let encoded = try JSONEncoder().encode(sessions)
             UserDefaults.standard.set(encoded, forKey: storageKey)
+        } catch {
+            print("⚠️ SessionHistoryService: Failed to encode sessions - \(error.localizedDescription)")
+            // Data loss risk: Unable to save session history
         }
     }
 
     private func loadSessions() {
-        if let data = UserDefaults.standard.data(forKey: storageKey),
-           let decoded = try? JSONDecoder().decode([SessionRecord].self, from: data) {
+        guard let data = UserDefaults.standard.data(forKey: storageKey) else {
+            // No saved data, starting fresh
+            sessions = []
+            return
+        }
+
+        do {
+            let decoded = try JSONDecoder().decode([SessionRecord].self, from: data)
             sessions = decoded
+        } catch {
+            print("⚠️ SessionHistoryService: Failed to decode sessions - \(error.localizedDescription)")
+            print("⚠️ Attempting recovery by clearing corrupted data")
+
+            // Backup corrupted data for debugging
+            let backupKey = storageKey + "_corrupted_\(Date().timeIntervalSince1970)"
+            UserDefaults.standard.set(data, forKey: backupKey)
+
+            // Clear corrupted data and start fresh
+            UserDefaults.standard.removeObject(forKey: storageKey)
+            sessions = []
         }
     }
 }

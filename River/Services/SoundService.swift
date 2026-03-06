@@ -44,8 +44,8 @@ class SoundService {
     private var audioPlayer: AVAudioPlayer?
     private let hapticGenerator = UIImpactFeedbackGenerator(style: .medium)
 
-    private let soundStorageKey = "transitionSound"
-    private let hapticStorageKey = "hapticsEnabled"
+    private let soundStorageKey = UserDefaultsKeys.transitionSound
+    private let hapticStorageKey = UserDefaultsKeys.hapticsEnabled
 
     var selectedSound: TransitionSound {
         get {

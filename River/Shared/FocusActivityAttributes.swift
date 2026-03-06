@@ -32,9 +32,7 @@ struct FocusActivityAttributes: ActivityAttributes {
         }
 
         var formattedTime: String {
-            let minutes = remainingSeconds / 60
-            let seconds = remainingSeconds % 60
-            return String(format: "%02d:%02d", minutes, seconds)
+            TimeFormatter.format(seconds: remainingSeconds)
         }
     }
 }

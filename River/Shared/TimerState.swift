@@ -1,7 +1,7 @@
 import Foundation
 
 /// Persisted state for the Pomodoro timer, shared between app and widget via App Group
-struct TimerState: Codable, Equatable {
+struct TimerState: Codable, Equatable, Sendable {
 
     // MARK: - State Properties
 
@@ -22,10 +22,10 @@ struct TimerState: Codable, Equatable {
 
     init(
         taskTitle: String,
-        workDuration: Int = 25 * 60,
-        shortBreakDuration: Int = 5 * 60,
-        longBreakDuration: Int = 15 * 60,
-        pomodorosBeforeLongBreak: Int = 4
+        workDuration: Int = TimerDefaults.workDuration,
+        shortBreakDuration: Int = TimerDefaults.shortBreakDuration,
+        longBreakDuration: Int = TimerDefaults.longBreakDuration,
+        pomodorosBeforeLongBreak: Int = TimerDefaults.pomodorosBeforeLongBreak
     ) {
         self.taskTitle = taskTitle
         self.timerPhase = .idle

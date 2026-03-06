@@ -157,21 +157,12 @@ struct TaskListView: View {
     }
 
     private var emptyTasksState: some View {
-        VStack(spacing: 12) {
-            Image(systemName: "checkmark.circle")
-                .font(.system(size: 40))
-                .foregroundStyle(AppColors.border)
-
-            Text("All caught up!")
-                .font(AppFonts.headline)
-                .foregroundStyle(AppColors.textPrimary)
-
-            Text("Add a task to get started")
-                .font(AppFonts.caption)
-                .foregroundStyle(AppColors.textSecondary)
-        }
-        .frame(maxWidth: .infinity)
-        .padding(.vertical, 40)
+        EmptyStateView(
+            icon: "checkmark.circle",
+            title: "All caught up!",
+            subtitle: "Add a task to get started",
+            iconSize: 40
+        )
     }
 
     private var completedSection: some View {
@@ -791,27 +782,5 @@ private struct InlineAddTaskCard: View {
             RoundedRectangle(cornerRadius: 16)
                 .stroke(AppColors.border, lineWidth: 1)
         )
-    }
-}
-
-// MARK: - Control Button
-
-private struct ControlButton: View {
-    let systemName: String
-    let color: Color
-    let backgroundColor: Color
-    var size: CGFloat = 48
-    let action: () -> Void
-
-    var body: some View {
-        Button(action: action) {
-            Image(systemName: systemName)
-                .font(.system(size: size * 0.36, weight: .semibold))
-                .foregroundStyle(color)
-                .frame(width: size, height: size)
-                .background(backgroundColor)
-                .clipShape(Circle())
-        }
-        .buttonStyle(.plain)
     }
 }

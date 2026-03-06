@@ -1,7 +1,7 @@
 import Foundation
 
 /// Pomodoro timer phase
-enum TimerPhase: String, Codable, Hashable {
+enum TimerPhase: String, Codable, Hashable, Sendable {
     case idle
     case work
     case shortBreak

@@ -140,7 +140,7 @@ enum AppTheme: String, CaseIterable, Codable {
 final class ThemeManager {
     static let shared = ThemeManager()
 
-    private let storageKey = "selectedTheme"
+    private let storageKey = UserDefaultsKeys.selectedTheme
 
     var currentTheme: AppTheme {
         didSet {

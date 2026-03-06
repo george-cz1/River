@@ -199,21 +199,12 @@ struct FocusView: View {
     // MARK: - No Focus State
 
     private var noFocusState: some View {
-        VStack(spacing: 16) {
-            Image(systemName: "scope")
-                .font(.system(size: 56))
-                .foregroundStyle(AppColors.border)
-
-            Text("No active focus session")
-                .font(AppFonts.title)
-                .foregroundStyle(AppColors.textPrimary)
-
-            Text("Go to Tasks and tap the focus button on a task to begin")
-                .font(AppFonts.body)
-                .foregroundStyle(AppColors.textSecondary)
-                .multilineTextAlignment(.center)
-                .padding(.horizontal, 32)
-        }
+        EmptyStateView(
+            icon: "scope",
+            title: "No active focus session",
+            subtitle: "Go to Tasks and tap the focus button on a task to begin",
+            iconSize: 56
+        )
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(AppColors.background)
     }
@@ -222,27 +213,5 @@ struct FocusView: View {
 
     private var phaseColor: Color {
         timerService.timerPhase.isBreak ? AppColors.breakPhase : AppColors.workPhase
-    }
-}
-
-// MARK: - Circle Button
-
-struct CircleButton: View {
-    let systemName: String
-    let size: CGFloat
-    let color: Color
-    let backgroundColor: Color
-    let action: () -> Void
-
-    var body: some View {
-        Button(action: action) {
-            Image(systemName: systemName)
-                .font(.system(size: size * 0.36, weight: .semibold))
-                .foregroundStyle(color)
-                .frame(width: size, height: size)
-                .background(backgroundColor)
-                .clipShape(Circle())
-        }
-        .buttonStyle(.plain)
     }
 }

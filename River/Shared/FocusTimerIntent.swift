@@ -21,7 +21,7 @@ struct ToggleFocusTimerIntent: LiveActivityIntent {
         // Notify the main app to sync its state
         CFNotificationCenterPostNotification(
             CFNotificationCenterGetDarwinNotifyCenter(),
-            CFNotificationName("com.george.evolve.timerStateChanged" as CFString),
+            CFNotificationName(NotificationNames.timerStateChanged as CFString),
             nil,
             nil,
             true

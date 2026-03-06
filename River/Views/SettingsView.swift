@@ -1,10 +1,10 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @AppStorage("workDuration") private var workDuration: Int = 25 * 60
-    @AppStorage("shortBreakDuration") private var shortBreakDuration: Int = 5 * 60
-    @AppStorage("longBreakDuration") private var longBreakDuration: Int = 15 * 60
-    @AppStorage("pomodorosBeforeLongBreak") private var pomodorosBeforeLongBreak: Int = 4
+    @AppStorage(UserDefaultsKeys.workDuration) private var workDuration: Int = TimerDefaults.workDuration
+    @AppStorage(UserDefaultsKeys.shortBreakDuration) private var shortBreakDuration: Int = TimerDefaults.shortBreakDuration
+    @AppStorage(UserDefaultsKeys.longBreakDuration) private var longBreakDuration: Int = TimerDefaults.longBreakDuration
+    @AppStorage(UserDefaultsKeys.pomodorosBeforeLongBreak) private var pomodorosBeforeLongBreak: Int = TimerDefaults.pomodorosBeforeLongBreak
 
     @Environment(PurchaseManager.self) private var purchaseManager
     @State private var showingProUpgrade = false

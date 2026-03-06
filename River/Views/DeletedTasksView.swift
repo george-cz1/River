@@ -37,20 +37,12 @@ struct DeletedTasksView: View {
     }
 
     private var emptyState: some View {
-        VStack(spacing: 16) {
-            Image(systemName: "trash")
-                .font(.system(size: 56))
-                .foregroundStyle(AppColors.border)
-
-            Text("No deleted tasks")
-                .font(AppFonts.title)
-                .foregroundStyle(AppColors.textPrimary)
-
-            Text("Tasks you delete will appear here")
-                .font(AppFonts.body)
-                .foregroundStyle(AppColors.textSecondary)
-                .multilineTextAlignment(.center)
-        }
+        EmptyStateView(
+            icon: "trash",
+            title: "No deleted tasks",
+            subtitle: "Tasks you delete will appear here",
+            iconSize: 56
+        )
         .padding(32)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(AppColors.background)
