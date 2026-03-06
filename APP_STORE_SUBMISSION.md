@@ -22,7 +22,7 @@ All critical code changes have been implemented:
 2. Navigate to **My Apps** → Click **"+"** → **New App**
 3. Fill in the following:
    - **Platform:** iOS
-   - **Name:** River - Tasks & Focus Timer
+   - **Name:** River - Pomodoro Timer
    - **Primary Language:** English (U.S.)
    - **Bundle ID:** `com.george.river` (should appear in dropdown)
    - **SKU:** `river-focus-timer-001` (any unique identifier)
@@ -69,8 +69,8 @@ Navigate to the version you're submitting and fill in:
 
 | Field | Recommended Value | Max Length |
 |-------|-------------------|------------|
-| **App Name** | River - Tasks & Focus Timer | 30 chars |
-| **Subtitle** | Pomodoro Productivity | 30 chars |
+| **App Name** | River - Pomodoro Timer | 30 chars |
+| **Subtitle** | Stay Focused, Get Things Done | 30 chars |
 | **Promotional Text** | Stay focused with beautiful Pomodoro sessions and task management | 170 chars |
 | **Description** | See suggested description below | 4000 chars |
 | **Keywords** | pomodoro,focus,timer,productivity,tasks,work,study,break | 100 chars |
@@ -86,6 +86,7 @@ KEY FEATURES:
 • Classic Pomodoro Timer (25 min work, 5 min break)
 • Task Management - Track what you're working on
 • Live Activities - Monitor your focus time in Dynamic Island and Lock Screen
+• App Blocking - Block distracting apps during focus sessions (Pro)
 • Session History - Review your productivity stats (Pro)
 • Custom Durations - Adjust timer lengths to your workflow (Pro)
 • Beautiful Themes - River, Forest, Sunset, Ocean, Stone (Pro)
@@ -109,6 +110,7 @@ FREE FEATURES:
 • Session tracking
 
 PRO FEATURES ($4.99):
+• App blocking during focus sessions (Screen Time integration)
 • Custom timer durations
 • Complete session history with stats
 • Multiple color themes
@@ -139,10 +141,19 @@ In-App Purchase Testing:
 5. After purchase, verify Settings shows "Pro Features" expanded
 
 Pro Features to Verify:
+- Settings: App Blocking section - select apps to block during focus
+- Settings: Request Screen Time authorization when enabling app blocking
 - Settings: "Work Duration" and "Break Duration" pickers become editable
 - History tab shows session statistics and calendar
 - Settings: Theme options (River, Forest, Sunset, Ocean, Stone)
 - Settings: Sound effect options
+
+App Blocking Testing (Pro Feature):
+1. In Settings, tap "App Blocking" section
+2. Tap "Authorize Screen Time Access" and grant permission
+3. Select apps to block (e.g., Safari, Instagram, etc.)
+4. Start a focus session - selected apps should be blocked with shield overlay
+5. End focus session - apps become accessible again
 
 Restore Purchases:
 - Tap "Restore Purchases" button in Settings
@@ -190,17 +201,21 @@ The following data is stored locally on your device:
 - Task list and task completion status
 - Session history (when using Pro features)
 - Theme preferences
+- Selected apps for blocking (when using Pro app blocking feature)
 
 This data is stored using:
 - UserDefaults for settings
 - SwiftData for task management
-- App Group storage for widget synchronization
+- App Group storage for widget synchronization and app blocking settings
 
 ## In-App Purchases
 River offers a one-time Pro upgrade ($4.99) processed through Apple's App Store. We do not have access to your payment information. Purchase records are managed by Apple.
 
 ## Data Sharing
 River does NOT share any data with third parties. All data remains exclusively on your device.
+
+## Screen Time/Family Controls
+River uses Apple's Family Controls framework (Pro feature only) to block selected apps during focus sessions. This permission is requested explicitly from the user and only used to apply app shields during active focus sessions. River does not monitor, track, or report your app usage data.
 
 ## Analytics and Tracking
 River does NOT use analytics, tracking, or advertising services.
@@ -233,6 +248,9 @@ For questions, contact: [your email]
 - [ ] App doesn't crash on launch or during normal use
 - [ ] IAP purchase flow completes successfully in sandbox
 - [ ] Description doesn't promise features not in app
+- [ ] Family Controls entitlement is properly configured in all extension targets
+- [ ] App Group entitlement matches across all targets (`group.com.george.evolve`)
+- [ ] App blocking feature works correctly after granting Screen Time authorization
 
 ---
 
@@ -300,7 +318,7 @@ You need screenshots for multiple device sizes:
 
 4. **Settings Screen**
    - Show Pro features section
-   - Visible: timer durations, themes, sounds
+   - Visible: App Blocking, timer durations, themes, sounds
 
 5. **Session History (Pro)**
    - Calendar view with completed sessions
@@ -467,10 +485,17 @@ open River.xcodeproj
 - `River/PrivacyInfo.xcprivacy` - Privacy manifest
 - `project.yml` - Version numbers and project config
 - `River/Assets.xcassets/AppIcon.appiconset/` - App icon
+- `River/Services/AppBlockingService.swift` - Screen Time app blocking (Pro feature)
+- `RiverDeviceActivityMonitor/` - Device activity monitoring extension
+- `RiverShieldConfiguration/` - Custom shield UI extension
+- `RiverShieldAction/` - Shield action handling extension
 
 ### Important IDs
 - **Bundle ID:** `com.george.river`
 - **Widget Bundle ID:** `com.george.river.RiverWidget`
+- **Device Activity Monitor:** `com.george.river.RiverDeviceActivityMonitor`
+- **Shield Configuration:** `com.george.river.RiverShieldConfiguration`
+- **Shield Action:** `com.george.river.RiverShieldAction`
 - **App Group:** `group.com.george.evolve`
 - **IAP Product ID:** `com.george.river.pro`
 - **Development Team:** `U4JCMYQA4X`
@@ -512,6 +537,20 @@ rm -rf ~/Library/Developer/Xcode/DerivedData/*
 - Go to build in App Store Connect
 - Answer export compliance questions
 - River doesn't use encryption (use standard Apple APIs)
+
+### "Family Controls permission required" during review
+- Ensure all extension targets have Family Controls entitlement
+- Verify entitlement files exist:
+  - `River/River.entitlements`
+  - `RiverDeviceActivityMonitor/RiverDeviceActivityMonitor.entitlements`
+  - `RiverShieldConfiguration/RiverShieldConfiguration.entitlements`
+  - `RiverShieldAction/RiverShieldAction.entitlements`
+- Regenerate project if needed: `xcodegen generate`
+
+### "App blocking not working in TestFlight"
+- Screen Time features require explicit authorization
+- User must grant permission in Settings flow
+- Test on physical device (Screen Time may not work fully in Simulator)
 
 ### Build rejected for "Missing Privacy Manifest"
 - Verify PrivacyInfo.xcprivacy is in River/ directory ✅
