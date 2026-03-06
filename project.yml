@@ -94,6 +94,9 @@ targets:
       - path: RiverWidget
       - path: River/Shared
         group: Shared
+      - path: River/Resources/Fonts
+        type: folder
+        buildPhase: resources
     info:
       path: RiverWidget/Info.plist
       properties:
@@ -107,6 +110,8 @@ targets:
         CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         NSExtension:
           NSExtensionPointIdentifier: com.apple.widgetkit-extension
+        UIAppFonts:
+          - CormorantGaramond-Light.ttf
     entitlements:
       path: RiverWidget/RiverWidget.entitlements
       properties:

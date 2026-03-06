@@ -21,6 +21,7 @@ enum AppGroup {
 
 enum SharedDataKey {
     static let timerState = "timerState"
+    static let selectedTheme = "selectedTheme"
 }
 
 /// Manager for sharing data between app and widget

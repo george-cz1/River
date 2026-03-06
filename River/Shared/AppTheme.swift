@@ -1,4 +1,48 @@
 import SwiftUI
+import UIKit
+
+// MARK: - Color Hex Extension
+
+extension Color {
+    init(hex: String) {
+        let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
+        var int: UInt64 = 0
+        Scanner(string: hex).scanHexInt64(&int)
+        let a, r, g, b: UInt64
+        switch hex.count {
+        case 3:
+            (a, r, g, b) = (255, (int >> 8) * 17, (int >> 4 & 0xF) * 17, (int & 0xF) * 17)
+        case 6:
+            (a, r, g, b) = (255, int >> 16, int >> 8 & 0xFF, int & 0xFF)
+        case 8:
+            (a, r, g, b) = (int >> 24, int >> 16 & 0xFF, int >> 8 & 0xFF, int & 0xFF)
+        default:
+            (a, r, g, b) = (255, 0, 0, 0)
+        }
+        self.init(
+            .sRGB,
+            red: Double(r) / 255,
+            green: Double(g) / 255,
+            blue: Double(b) / 255,
+            opacity: Double(a) / 255
+        )
+    }
+}
+
+extension UIColor {
+    convenience init(hex: String) {
+        let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
+        var int: UInt64 = 0
+        Scanner(string: hex).scanHexInt64(&int)
+        let r, g, b: CGFloat
+        r = CGFloat((int >> 16) & 0xFF) / 255
+        g = CGFloat((int >> 8) & 0xFF) / 255
+        b = CGFloat(int & 0xFF) / 255
+        self.init(red: r, green: g, blue: b, alpha: 1)
+    }
+}
+
+// MARK: - App Theme
 
 /// Available color themes for the app
 enum AppTheme: String, CaseIterable, Codable {
@@ -105,8 +149,12 @@ final class ThemeManager {
     }
 
     private init() {
-        if let savedTheme = UserDefaults.standard.string(forKey: storageKey),
+        // Try App Group first, then local UserDefaults
+        if let savedTheme = AppGroup.userDefaults?.string(forKey: SharedDataKey.selectedTheme),
            let theme = AppTheme(rawValue: savedTheme) {
+            self.currentTheme = theme
+        } else if let savedTheme = UserDefaults.standard.string(forKey: storageKey),
+                  let theme = AppTheme(rawValue: savedTheme) {
             self.currentTheme = theme
         } else {
             self.currentTheme = .river
@@ -114,6 +162,21 @@ final class ThemeManager {
     }
 
     private func saveTheme() {
+        // Save to both local and App Group
         UserDefaults.standard.set(currentTheme.rawValue, forKey: storageKey)
+        AppGroup.userDefaults?.set(currentTheme.rawValue, forKey: SharedDataKey.selectedTheme)
+    }
+}
+
+// MARK: - Shared Theme Helper
+
+/// Helper for reading theme in widget (non-MainActor)
+enum SharedTheme {
+    static func current() -> AppTheme {
+        if let rawValue = AppGroup.userDefaults?.string(forKey: SharedDataKey.selectedTheme),
+           let theme = AppTheme(rawValue: rawValue) {
+            return theme
+        }
+        return .river // default
     }
 }

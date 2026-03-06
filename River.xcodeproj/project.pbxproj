@@ -20,6 +20,7 @@
 		2652AF6B34C927D477401901 /* AppBlockingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808A09A6CD44773C7C41DA78 /* AppBlockingService.swift */; };
 		27712EF93FC828F3368DB18D /* RiverShieldConfiguration.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AE0B557BF2FBFCA378939F41 /* RiverShieldConfiguration.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		3627CE7BE339B29ECC09E6A1 /* Nunito-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CDE3F450AE856636633F7B4E /* Nunito-Regular.ttf */; };
+		378F8949C1EC87D7CDADB277 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = 7E7DAB1D02A6F7343463EE1F /* Fonts */; };
 		3E534B0A714AF55955F77FCD /* DurationPickerSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD52D357167B6A5F06FA7F2 /* DurationPickerSheet.swift */; };
 		45D404DBD90717A5DB0D315F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A035FEBB78ED3BC67F03735 /* SettingsView.swift */; };
 		45F5B1D49938D556E41D36D3 /* SessionHistoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654E93C785AEEDF75EA72F28 /* SessionHistoryService.swift */; };
@@ -27,7 +28,9 @@
 		4A3C0E9E706067CA3BA55E05 /* AppBlockingSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B9B0B62C4311C7DC814770 /* AppBlockingSettingsView.swift */; };
 		4F0C0A37684908747537C0F2 /* CormorantGaramond-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 92A4B40435378210F1543BAC /* CormorantGaramond-Light.ttf */; };
 		5306072B2D033C8332800FD6 /* SoundService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806773B4513FBF9E2DA06BE4 /* SoundService.swift */; };
+		560C1AC55A914AF7C193B3E6 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3941700A98316065B0A4DBE8 /* AppTheme.swift */; };
 		60EA2B1E05D5D08A01E06D04 /* gentle-chime.wav in Resources */ = {isa = PBXBuildFile; fileRef = D317EE00D23399037B6BF1B1 /* gentle-chime.wav */; };
+		61C5B9E43D609445D7C2E577 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3941700A98316065B0A4DBE8 /* AppTheme.swift */; };
 		66613A31E331F4EDAA50F84E /* TimerPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B83F0235B0ADA68596377 /* TimerPhase.swift */; };
 		68A53EFA7ABEF1C767BD1326 /* FocusTimerIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17C456C2E1F9CA81531EB3B /* FocusTimerIntent.swift */; };
 		6BF9117638DD01F9E213823C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 31D74602C26B8D48237BCD77 /* Assets.xcassets */; };
@@ -60,7 +63,6 @@
 		E6710666732DF352731A174E /* SoundSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934611B0EE93485FFB9210AE /* SoundSettingsView.swift */; };
 		ED1809CC48A4CAD9588FAE49 /* RiverApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B62F2C1884D660F37423A0 /* RiverApp.swift */; };
 		F29E60B27B617AD3B21410D1 /* DeletedTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8813BF6CF86EDA8CF366D1AD /* DeletedTask.swift */; };
-		F46F207846D12BCA15798150 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F7C091E155D9C20813F828 /* AppTheme.swift */; };
 		FD41DA83BE593DCB574613BD /* FocusActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0004C8BE17F68BDBDF02E60 /* FocusActivityAttributes.swift */; };
 /* End PBXBuildFile section */
 
@@ -124,6 +126,7 @@
 		30861353134FF039E6227447 /* River.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = River.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		31D74602C26B8D48237BCD77 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		36238522479BCEE50769FE93 /* temple-bell.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "temple-bell.wav"; sourceTree = "<group>"; };
+		3941700A98316065B0A4DBE8 /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
 		3A035FEBB78ED3BC67F03735 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		3AB03167EB1F4021FB289BD0 /* RiverShieldAction.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = RiverShieldAction.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		40CCDC2ABB5C11937CBF91EE /* RiverDeviceActivityMonitor.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = RiverDeviceActivityMonitor.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -141,10 +144,10 @@
 		735A8A607381D3D222E5148A /* singing-bowl.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "singing-bowl.wav"; sourceTree = "<group>"; };
 		76B9B0B62C4311C7DC814770 /* AppBlockingSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppBlockingSettingsView.swift; sourceTree = "<group>"; };
 		7979CEA7B9B6BC933F0BF94A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		7E7DAB1D02A6F7343463EE1F /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Fonts; path = River/Resources/Fonts; sourceTree = SOURCE_ROOT; };
 		806773B4513FBF9E2DA06BE4 /* SoundService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundService.swift; sourceTree = "<group>"; };
 		808A09A6CD44773C7C41DA78 /* AppBlockingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppBlockingService.swift; sourceTree = "<group>"; };
 		835F3FD08D46BE1314A595AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		87F7C091E155D9C20813F828 /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
 		8813BF6CF86EDA8CF366D1AD /* DeletedTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletedTask.swift; sourceTree = "<group>"; };
 		8B43E0B69B136BD9E3AC3F13 /* PurchaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseManager.swift; sourceTree = "<group>"; };
 		9205B7443CF31E3C20A81DD1 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
@@ -180,7 +183,6 @@
 		001E09E05728735DE04DD41A /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				87F7C091E155D9C20813F828 /* AppTheme.swift */,
 				8813BF6CF86EDA8CF366D1AD /* DeletedTask.swift */,
 				A9685BE9D14BA7D8972C26A8 /* FocusTask.swift */,
 				BEC37079CAB17B78A2A50A72 /* SessionRecord.swift */,
@@ -220,6 +222,7 @@
 			isa = PBXGroup;
 			children = (
 				EC7211A0F751D58A962322E6 /* AppGroup.swift */,
+				3941700A98316065B0A4DBE8 /* AppTheme.swift */,
 				D0004C8BE17F68BDBDF02E60 /* FocusActivityAttributes.swift */,
 				B17C456C2E1F9CA81531EB3B /* FocusTimerIntent.swift */,
 				1C9B83F0235B0ADA68596377 /* TimerPhase.swift */,
@@ -305,6 +308,7 @@
 		B08359D185E9211107825A42 = {
 			isa = PBXGroup;
 			children = (
+				7E7DAB1D02A6F7343463EE1F /* Fonts */,
 				12FE704C57F230F115B91FBF /* River */,
 				EFA24F70E24C6EE046490E59 /* RiverDeviceActivityMonitor */,
 				ACD52A5A66FCC87E69CBFE79 /* RiverShieldAction */,
@@ -366,6 +370,7 @@
 			buildConfigurationList = 119F3AF7E00A139D432A57DF /* Build configuration list for PBXNativeTarget "RiverWidget" */;
 			buildPhases = (
 				471AED782883BD53401E2256 /* Sources */,
+				0543635880671533CB1D3E17 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -507,6 +512,14 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		0543635880671533CB1D3E17 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				378F8949C1EC87D7CDADB277 /* Fonts in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7C33328FE12B5EF9C01739A9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -532,6 +545,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D7DBEDAD480669C2BCE90C49 /* AppGroup.swift in Sources */,
+				61C5B9E43D609445D7C2E577 /* AppTheme.swift in Sources */,
 				FD41DA83BE593DCB574613BD /* FocusActivityAttributes.swift in Sources */,
 				C49F4A14956ED1C20B95A91C /* FocusLiveActivity.swift in Sources */,
 				68A53EFA7ABEF1C767BD1326 /* FocusTimerIntent.swift in Sources */,
@@ -550,7 +564,7 @@
 				2652AF6B34C927D477401901 /* AppBlockingService.swift in Sources */,
 				4A3C0E9E706067CA3BA55E05 /* AppBlockingSettingsView.swift in Sources */,
 				96DDE9CD2AAD4DD9151CB139 /* AppGroup.swift in Sources */,
-				F46F207846D12BCA15798150 /* AppTheme.swift in Sources */,
+				560C1AC55A914AF7C193B3E6 /* AppTheme.swift in Sources */,
 				7B8CC8C4F6B20E3C38F8265D /* ContentView.swift in Sources */,
 				F29E60B27B617AD3B21410D1 /* DeletedTask.swift in Sources */,
 				DB95CD42C241523A9A07A3CB /* DeletedTasksView.swift in Sources */,
