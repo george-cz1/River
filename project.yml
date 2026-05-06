@@ -247,8 +247,6 @@ targets:
     sources:
       - path: RiverMac
       - path: River/Shared
-        excludes:
-          - Components/**
       - path: River/Models
       - path: River/Services/SessionHistoryService.swift
       - path: River/Services/FocusTimerService.swift

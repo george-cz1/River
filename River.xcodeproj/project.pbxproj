@@ -12,12 +12,14 @@
 		02B2F687D5AE06AB2DDB426A /* ShieldActionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FB5BC9FC5FB5B5195E6CDA /* ShieldActionExtension.swift */; };
 		04A61B60EDB7FECA82920A5B /* FeedbackServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ADD97C4AD2EB2750BB8779 /* FeedbackServiceProtocol.swift */; };
 		05796F7CC153777FD8C002E6 /* CircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236E523097722123205AB7A0 /* CircleButton.swift */; };
+		061BEA81D94EFF9117A395FA /* StatCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C923BC32E8A70438F7C3A21 /* StatCard.swift */; };
 		080F74EF6A206EF7ADD9ED7C /* ProUpgradeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47695A2E2472E3D87A14C25A /* ProUpgradeView.swift */; };
 		0BFD7F63C0A37039B826F17B /* WatchTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B82160711D2AD1CBE1E4A3 /* WatchTimerView.swift */; };
 		0C88A01E68BE43DBF9EB4C56 /* FeedbackServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ADD97C4AD2EB2750BB8779 /* FeedbackServiceProtocol.swift */; };
 		0D8694F019DF51B533B07E69 /* RiverShieldAction.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 3AB03167EB1F4021FB289BD0 /* RiverShieldAction.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0DC08140C04FEB05ABCA2E0A /* PurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B43E0B69B136BD9E3AC3F13 /* PurchaseManager.swift */; };
 		0EF936CE2403A1847C840267 /* TimerPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B83F0235B0ADA68596377 /* TimerPhase.swift */; };
+		124E38E4E7AFBFF5ED8D14F3 /* CycleDot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ADA814EF8CBBF21BD404FD /* CycleDot.swift */; };
 		1284034502E7CB529ED97497 /* TimeFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FBC0817DB954337D31D5F1D /* TimeFormatter.swift */; };
 		132DA893BC4800DE8098D10B /* Nunito-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A1A2D1938BFF6FAA8D1B74FE /* Nunito-SemiBold.ttf */; };
 		14E0E0B756030882030031BF /* RiverWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD085631F6F2E9408B680304 /* RiverWidgetBundle.swift */; };
@@ -78,6 +80,7 @@
 		901C160BAE060A4722FDAF4B /* temple-bell.wav in Resources */ = {isa = PBXBuildFile; fileRef = 36238522479BCEE50769FE93 /* temple-bell.wav */; };
 		9094C9A969FFB3CF25BE11CE /* ShieldConfigurationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A83FC674E5E513628CCAB5D /* ShieldConfigurationExtension.swift */; };
 		9113C221988B39166C44EEA2 /* FocusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB252DACB7002300D70A5028 /* FocusView.swift */; };
+		93D4361D320A45CAADC9073B /* CircularTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68FDB35CF7F863A93938BF6 /* CircularTimerView.swift */; };
 		9406D09C5FD4CB8EFBCFD95D /* RiverMacApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78E50D5AFE0AF5EF8DC8D75 /* RiverMacApp.swift */; };
 		9431C37E36CB75778D5758ED /* MacSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D5BB308FBDC57E52CEC8E06 /* MacSettingsView.swift */; };
 		95E498D90FF6331FD7DFD509 /* MacFocusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51AC84DD47807F8F59B362D1 /* MacFocusView.swift */; };
@@ -85,6 +88,7 @@
 		981FB20ECA687030FDDFD381 /* TransitionSound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119205866C1E3D5409CE1E2E /* TransitionSound.swift */; };
 		98A9DCF0CAA59A1F9CEDC88D /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D6B4EFD072381EC78EFF43 /* Theme.swift */; };
 		9BFE4A7FFC221C48BF826F54 /* TransitionSound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119205866C1E3D5409CE1E2E /* TransitionSound.swift */; };
+		A280A15B3BD92CC5B83A6150 /* CircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236E523097722123205AB7A0 /* CircleButton.swift */; };
 		A60C77244D3F936F207FF263 /* CircularTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68FDB35CF7F863A93938BF6 /* CircularTimerView.swift */; };
 		A7C6C025D1C9114A0C368CB4 /* FocusActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0004C8BE17F68BDBDF02E60 /* FocusActivityAttributes.swift */; };
 		AB450E446345CCCEA5BFAA15 /* AppBlockingServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B85E15633C7F460F0123D9E /* AppBlockingServiceProtocol.swift */; };
@@ -100,6 +104,7 @@
 		C43BAEDB2364476810A82579 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3941700A98316065B0A4DBE8 /* AppTheme.swift */; };
 		C49F4A14956ED1C20B95A91C /* FocusLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E0680CF3D06D0F3A6B9F72 /* FocusLiveActivity.swift */; };
 		C84AA033E82772B863FFA1E4 /* FocusActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0004C8BE17F68BDBDF02E60 /* FocusActivityAttributes.swift */; };
+		C856FD4E3B365B8FB48DF41D /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31DFE9F6A1ECB9746C2D097 /* EmptyStateView.swift */; };
 		C8A832EA230BF5837FFA33B5 /* SessionRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC37079CAB17B78A2A50A72 /* SessionRecord.swift */; };
 		C997DCFE6412CC3823634F92 /* RiverWidget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = BC50CB71FD275B085EEFE6AF /* RiverWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		C9A918F3F50CD42F0141750A /* TimerPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B83F0235B0ADA68596377 /* TimerPhase.swift */; };
@@ -542,7 +547,7 @@
 			path = RiverWidget;
 			sourceTree = "<group>";
 		};
-		"TEMP_EBC77B78-5C3C-474C-9A5B-B49ED53D4206" /* Platform */ = {
+		"TEMP_D1954DA9-73F0-46BD-B515-30E065577C04" /* Platform */ = {
 			isa = PBXGroup;
 			children = (
 			);
@@ -900,9 +905,13 @@
 				59B440E43D4FBCFAD9202BC5 /* AppBlockingServiceProtocol.swift in Sources */,
 				68FF44AA5D836D397580D75F /* AppGroup.swift in Sources */,
 				DE00C6351993C4743BEFC116 /* AppTheme.swift in Sources */,
+				A280A15B3BD92CC5B83A6150 /* CircleButton.swift in Sources */,
+				93D4361D320A45CAADC9073B /* CircularTimerView.swift in Sources */,
 				EE0923C76A10ECB10CA0C1B1 /* CloudSettingsManager.swift in Sources */,
 				30B64BD3953F350B3988B5E4 /* Constants.swift in Sources */,
+				124E38E4E7AFBFF5ED8D14F3 /* CycleDot.swift in Sources */,
 				D6D198F0905FF76B78DBDE71 /* DeletedTask.swift in Sources */,
+				C856FD4E3B365B8FB48DF41D /* EmptyStateView.swift in Sources */,
 				0C88A01E68BE43DBF9EB4C56 /* FeedbackServiceProtocol.swift in Sources */,
 				C84AA033E82772B863FFA1E4 /* FocusActivityAttributes.swift in Sources */,
 				278ACDE9909F7ECA231B7560 /* FocusTask.swift in Sources */,
@@ -920,6 +929,7 @@
 				9406D09C5FD4CB8EFBCFD95D /* RiverMacApp.swift in Sources */,
 				41AB7F5171A857F92A4B5534 /* SessionHistoryService.swift in Sources */,
 				41E36ADFD589D4C674838C66 /* SessionRecord.swift in Sources */,
+				061BEA81D94EFF9117A395FA /* StatCard.swift in Sources */,
 				5688C42D1AB98DA92055E500 /* Theme.swift in Sources */,
 				1284034502E7CB529ED97497 /* TimeFormatter.swift in Sources */,
 				E30B5FDF73969709EEC721C7 /* TimerPhase.swift in Sources */,
