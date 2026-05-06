@@ -55,6 +55,7 @@
 		4D2C64357E014F1CB961F6DC /* TimerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0181BD8B8FF7B854E483B2E3 /* TimerState.swift */; };
 		4F0C0A37684908747537C0F2 /* CormorantGaramond-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 92A4B40435378210F1543BAC /* CormorantGaramond-Light.ttf */; };
 		5306072B2D033C8332800FD6 /* SoundService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806773B4513FBF9E2DA06BE4 /* SoundService.swift */; };
+		5547161B2FABCD940E4CE47C /* PurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B43E0B69B136BD9E3AC3F13 /* PurchaseManager.swift */; };
 		560C1AC55A914AF7C193B3E6 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3941700A98316065B0A4DBE8 /* AppTheme.swift */; };
 		5688C42D1AB98DA92055E500 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D6B4EFD072381EC78EFF43 /* Theme.swift */; };
 		59B440E43D4FBCFAD9202BC5 /* AppBlockingServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B85E15633C7F460F0123D9E /* AppBlockingServiceProtocol.swift */; };
@@ -541,7 +542,7 @@
 			path = RiverWidget;
 			sourceTree = "<group>";
 		};
-		"TEMP_15EBE7E8-8676-4916-A861-08FD243F637A" /* Platform */ = {
+		"TEMP_EBC77B78-5C3C-474C-9A5B-B49ED53D4206" /* Platform */ = {
 			isa = PBXGroup;
 			children = (
 			);
@@ -915,6 +916,7 @@
 				3DF751C382130DF0C4FFB134 /* MacTaskListView.swift in Sources */,
 				EA398DB5CFB4736122837FCA /* MenuBarView.swift in Sources */,
 				F46DACB71BD1B4BDCC9E4A11 /* PlatformCapabilities.swift in Sources */,
+				5547161B2FABCD940E4CE47C /* PurchaseManager.swift in Sources */,
 				9406D09C5FD4CB8EFBCFD95D /* RiverMacApp.swift in Sources */,
 				41AB7F5171A857F92A4B5534 /* SessionHistoryService.swift in Sources */,
 				41E36ADFD589D4C674838C66 /* SessionRecord.swift in Sources */,

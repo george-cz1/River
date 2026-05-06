@@ -1,31 +1,25 @@
-//
-//  RiverMacApp.swift
-//  RiverMac
-//
-//  macOS native entry point for River Pomodoro Timer
-//
-
 import SwiftUI
 import SwiftData
 
 @main
 struct RiverMacApp: App {
+    @State private var purchaseManager = PurchaseManager.shared
     @State private var cloudSettingsManager = CloudSettingsManager.shared
 
     var body: some Scene {
-        // Main window - this will open on launch
         WindowGroup("River") {
             MacMainView()
                 .frame(minWidth: 800, minHeight: 600)
+                .environment(purchaseManager)
         }
         .commands {
             RiverCommands()
         }
         .defaultSize(width: 900, height: 700)
 
-        // Settings window
         Settings {
             MacSettingsView()
+                .environment(purchaseManager)
         }
     }
 }
@@ -39,7 +33,6 @@ struct MenuBarLabel: View {
         HStack(spacing: 4) {
             Image(systemName: timerService.isTimerRunning ? "timer" : "timer.circle")
                 .font(.system(size: 14))
-
             if timerService.isFocusing {
                 Text(timerService.formattedTime)
                     .font(.system(size: 12, design: .monospaced))
@@ -58,7 +51,6 @@ struct RiverCommands: Commands {
             }
             .keyboardShortcut(",", modifiers: .command)
         }
-
         CommandGroup(replacing: .newItem) {
             Button("New Task...") {
                 // TODO: Implement new task action
