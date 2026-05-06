@@ -99,4 +99,5 @@ enum SidebarItem: String, CaseIterable, Identifiable {
 
 #Preview {
     MacMainView()
+        .environment(PurchaseManager.shared)
 }

@@ -1,3 +1,10 @@
+//
+//  MacProUpgradeView.swift
+//  RiverMac
+//
+//  Two-tier Pro upgrade sheet for macOS
+//
+
 import SwiftUI
 
 struct MacProUpgradeView: View {
@@ -80,6 +87,9 @@ struct MacProUpgradeView: View {
         }
         .frame(width: 560)
         .background(AppColors.background)
+        .onChange(of: purchaseManager.tier) { _, newTier in
+            if newTier != .none { dismiss() }
+        }
     }
 
     private func tierCard(
