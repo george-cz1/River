@@ -10,11 +10,11 @@ import SwiftUI
 struct MacMainView: View {
     @State private var selectedView: SidebarItem? = .focus
     @Bindable private var themeManager = ThemeManager.shared
+    @Environment(PurchaseManager.self) private var purchaseManager
 
     var body: some View {
         NavigationSplitView {
-            // Sidebar
-            List(SidebarItem.allCases, selection: $selectedView) { item in
+            List(visibleItems, selection: $selectedView) { item in
                 Label {
                     Text(item.title)
                         .font(AppFonts.body)
@@ -29,7 +29,6 @@ struct MacMainView: View {
             .scrollContentBackground(.hidden)
             .background(AppColors.background)
         } detail: {
-            // Detail view
             if let selectedView = selectedView {
                 selectedView.destination
             } else {
@@ -37,7 +36,6 @@ struct MacMainView: View {
                     Image(systemName: "sidebar.left")
                         .font(.system(size: 48))
                         .foregroundStyle(AppColors.border)
-
                     Text("Select an item")
                         .font(AppFonts.headline)
                         .foregroundStyle(AppColors.textSecondary)
@@ -45,6 +43,13 @@ struct MacMainView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(AppColors.background)
             }
+        }
+    }
+
+    private var visibleItems: [SidebarItem] {
+        SidebarItem.allCases.filter { item in
+            if item == .history { return purchaseManager.isPro }
+            return true
         }
     }
 }
