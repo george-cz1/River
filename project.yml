@@ -92,6 +92,7 @@ targets:
         embed: true
       - target: RiverShieldAction
         embed: true
+      - sdk: WatchConnectivity.framework
 
   RiverWidget:
     type: app-extension
@@ -305,6 +306,8 @@ targets:
       - path: River/Shared
         excludes:
           - Components/**
+    dependencies:
+      - sdk: WatchConnectivity.framework
     info:
       path: RiverWatch/Info.plist
       properties:

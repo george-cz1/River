@@ -92,8 +92,10 @@
 		A60C77244D3F936F207FF263 /* CircularTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68FDB35CF7F863A93938BF6 /* CircularTimerView.swift */; };
 		A7C6C025D1C9114A0C368CB4 /* FocusActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0004C8BE17F68BDBDF02E60 /* FocusActivityAttributes.swift */; };
 		AB450E446345CCCEA5BFAA15 /* AppBlockingServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B85E15633C7F460F0123D9E /* AppBlockingServiceProtocol.swift */; };
+		ABB2A59CA4AC238C0DC832F6 /* WatchConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58BE0C407EFFA4C28B648D9C /* WatchConnectivity.framework */; };
 		ABEDD91C2118FC838A744E3F /* FocusTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9685BE9D14BA7D8972C26A8 /* FocusTask.swift */; };
 		ACCCD444E2AADA4A48E12085 /* FocusTimerIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17C456C2E1F9CA81531EB3B /* FocusTimerIntent.swift */; };
+		B148263E3D90C526D18BC635 /* WatchConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58BE0C407EFFA4C28B648D9C /* WatchConnectivity.framework */; };
 		B523C32A6AC95FD270ED3A2D /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD671BF3657A8A4A95A7BFE /* TaskListView.swift */; };
 		B8CE9CDD2BF02922B86641C7 /* FocusTimerIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17C456C2E1F9CA81531EB3B /* FocusTimerIntent.swift */; };
 		BA8CE3BA04F8468797BB388C /* TimeFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FBC0817DB954337D31D5F1D /* TimeFormatter.swift */; };
@@ -124,6 +126,7 @@
 		E6710666732DF352731A174E /* SoundSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934611B0EE93485FFB9210AE /* SoundSettingsView.swift */; };
 		E6E642D75DFE24989418C2EE /* AppBlockingServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B85E15633C7F460F0123D9E /* AppBlockingServiceProtocol.swift */; };
 		EA398DB5CFB4736122837FCA /* MenuBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72388758C0B0C84DE8D013A9 /* MenuBarView.swift */; };
+		EA8C9DB699BCD3E496DDAF60 /* MacProUpgradeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE7CEF012A3A9F700376D5D /* MacProUpgradeView.swift */; };
 		EC3E467A6AFDF1E93285BB74 /* LiveActivityServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CFA0A48ECF614AB0BC27C6 /* LiveActivityServiceProtocol.swift */; };
 		EC7F462C716EFB47400E2BAD /* TimerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0181BD8B8FF7B854E483B2E3 /* TimerState.swift */; };
 		ED1809CC48A4CAD9588FAE49 /* RiverApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B62F2C1884D660F37423A0 /* RiverApp.swift */; };
@@ -209,6 +212,7 @@
 		3941700A98316065B0A4DBE8 /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
 		3A035FEBB78ED3BC67F03735 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		3AB03167EB1F4021FB289BD0 /* RiverShieldAction.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = RiverShieldAction.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		3FE7CEF012A3A9F700376D5D /* MacProUpgradeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacProUpgradeView.swift; sourceTree = "<group>"; };
 		40CCDC2ABB5C11937CBF91EE /* RiverDeviceActivityMonitor.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = RiverDeviceActivityMonitor.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		4556C4B327FE39C7111D38D1 /* RiverMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RiverMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		47695A2E2472E3D87A14C25A /* ProUpgradeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProUpgradeView.swift; sourceTree = "<group>"; };
@@ -218,6 +222,7 @@
 		55314C5062FD93E657D9F889 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		557AAA4A0EB26C2F554601CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		56E0680CF3D06D0F3A6B9F72 /* FocusLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusLiveActivity.swift; sourceTree = "<group>"; };
+		58BE0C407EFFA4C28B648D9C /* WatchConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchConnectivity.framework; path = System/Library/Frameworks/WatchConnectivity.framework; sourceTree = SDKROOT; };
 		60C53E34E633B8ED493C5DE9 /* RiverShieldConfiguration.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RiverShieldConfiguration.entitlements; sourceTree = "<group>"; };
 		647689191A4F319C2B628D52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		647706303FB55B8E22E3928D /* DeletedTasksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletedTasksView.swift; sourceTree = "<group>"; };
@@ -279,6 +284,25 @@
 		F1812292EC9E1A0892E91E81 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		FEE3FE9183099D3584F60E7F /* AppBlockingAuthorizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppBlockingAuthorizationService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DF30D951D13B06783751D9CF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B148263E3D90C526D18BC635 /* WatchConnectivity.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F367F205CF9DC3F2468D3BE8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ABB2A59CA4AC238C0DC832F6 /* WatchConnectivity.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		001E09E05728735DE04DD41A /* Models */ = {
@@ -393,6 +417,14 @@
 			path = RiverMac;
 			sourceTree = "<group>";
 		};
+		63ADBA19121158531AD4964D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				58BE0C407EFFA4C28B648D9C /* WatchConnectivity.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		6A68EB41552DA67D8515D208 /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -477,6 +509,7 @@
 				8680B07A0AF6B4FD1C19A2B1 /* RiverShieldConfiguration */,
 				45B7B51E2E35BD978207E52E /* RiverWatch */,
 				F0303CB6C594B177A5CB9317 /* RiverWidget */,
+				63ADBA19121158531AD4964D /* Frameworks */,
 				D8A528121E22538390D4F030 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -487,6 +520,7 @@
 				51AC84DD47807F8F59B362D1 /* MacFocusView.swift */,
 				1212663D2873C88E7ED0253C /* MacHistoryView.swift */,
 				849F171B346B7A0381D896A9 /* MacMainView.swift */,
+				3FE7CEF012A3A9F700376D5D /* MacProUpgradeView.swift */,
 				6D5BB308FBDC57E52CEC8E06 /* MacSettingsView.swift */,
 				ECB6C91C9C587EED3C589930 /* MacTaskListView.swift */,
 			);
@@ -547,7 +581,7 @@
 			path = RiverWidget;
 			sourceTree = "<group>";
 		};
-		"TEMP_D1954DA9-73F0-46BD-B515-30E065577C04" /* Platform */ = {
+		"TEMP_C3A6150F-D934-4C20-B1E7-B51916A5D4DF" /* Platform */ = {
 			isa = PBXGroup;
 			children = (
 			);
@@ -581,6 +615,7 @@
 			buildPhases = (
 				6A1DAC42A6D5112D135ECCB8 /* Sources */,
 				7C33328FE12B5EF9C01739A9 /* Resources */,
+				DF30D951D13B06783751D9CF /* Frameworks */,
 				8114F85E8EB1DEDB4C6CF1DC /* Embed Foundation Extensions */,
 			);
 			buildRules = (
@@ -620,6 +655,7 @@
 			buildConfigurationList = F7874407C09B6EA325D5060E /* Build configuration list for PBXNativeTarget "RiverWatch" */;
 			buildPhases = (
 				16E750E3376E37850D52C80E /* Sources */,
+				F367F205CF9DC3F2468D3BE8 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -921,6 +957,7 @@
 				95E498D90FF6331FD7DFD509 /* MacFocusView.swift in Sources */,
 				359E56FDE2FD37B04807C9B2 /* MacHistoryView.swift in Sources */,
 				7869D030148EFDFD62CF05C8 /* MacMainView.swift in Sources */,
+				EA8C9DB699BCD3E496DDAF60 /* MacProUpgradeView.swift in Sources */,
 				9431C37E36CB75778D5758ED /* MacSettingsView.swift in Sources */,
 				3DF751C382130DF0C4FFB134 /* MacTaskListView.swift in Sources */,
 				EA398DB5CFB4736122837FCA /* MenuBarView.swift in Sources */,
