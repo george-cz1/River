@@ -1,4 +1,4 @@
-import ActivityKit
+@preconcurrency import ActivityKit
 import Foundation
 
 /// Service for managing Focus Live Activities in Dynamic Island and Lock Screen
@@ -46,14 +46,14 @@ final class LiveActivityService: LiveActivityServiceProtocol {
     }
 
     func updateActivity(with state: TimerState) {
-        guard let activity = currentActivity else {
+        guard currentActivity != nil else {
             startActivity(for: state)
             return
         }
 
         let contentState = state.contentState
-        Task {
-            await activity.update(
+        Task { @MainActor [weak self] in
+            await self?.currentActivity?.update(
                 ActivityContent(
                     state: contentState,
                     staleDate: Calendar.current.date(byAdding: .minute, value: 30, to: Date())
@@ -64,12 +64,11 @@ final class LiveActivityService: LiveActivityServiceProtocol {
 
     func endActivity() {
         guard let activity = currentActivity else { return }
-
         currentActivity = nil
-
-        Task {
+        let finalState = activity.content.state
+        Task { @MainActor in
             await activity.end(
-                ActivityContent(state: activity.content.state, staleDate: Date()),
+                ActivityContent(state: finalState, staleDate: Date()),
                 dismissalPolicy: .immediate
             )
         }

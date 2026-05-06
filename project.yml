@@ -100,6 +100,8 @@ targets:
     sources:
       - path: RiverWidget
       - path: River/Shared
+        excludes:
+          - Components/**
       - path: River/Resources/Fonts
         type: folder
         buildPhase: resources
@@ -245,6 +247,8 @@ targets:
     sources:
       - path: RiverMac
       - path: River/Shared
+        excludes:
+          - Components/**
       - path: River/Models
       - path: River/Services/SessionHistoryService.swift
       - path: River/Services/FocusTimerService.swift
@@ -300,6 +304,8 @@ targets:
     sources:
       - path: RiverWatch
       - path: River/Shared
+        excludes:
+          - Components/**
     info:
       path: RiverWatch/Info.plist
       properties:
