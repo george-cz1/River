@@ -1,25 +1,30 @@
 import Foundation
+import SwiftData
 
 /// Represents a completed focus session for history tracking
-struct SessionRecord: Codable, Identifiable, Sendable {
-    let id: UUID
-    let date: Date
-    let taskName: String?
-    let workDuration: Int  // minutes
-    let completedFully: Bool
+@Model
+final class SessionRecord {
+    @Attribute(.unique) var id: UUID
+    var date: Date
+    var taskName: String?
+    var workDuration: Int  // minutes
+    var completedFully: Bool
+    var deviceIdentifier: String  // For tracking which device created the session
 
     init(
         id: UUID = UUID(),
         date: Date = Date(),
         taskName: String?,
         workDuration: Int,
-        completedFully: Bool
+        completedFully: Bool,
+        deviceIdentifier: String? = nil
     ) {
         self.id = id
         self.date = date
         self.taskName = taskName
         self.workDuration = workDuration
         self.completedFully = completedFully
+        self.deviceIdentifier = deviceIdentifier ?? PlatformCapabilities.deviceIdentifier
     }
 }
 

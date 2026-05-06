@@ -1,3 +1,4 @@
+#if os(iOS)
 import AppIntents
 import ActivityKit
 
@@ -40,3 +41,4 @@ struct ToggleFocusTimerIntent: LiveActivityIntent {
         return .result()
     }
 }
+#endif

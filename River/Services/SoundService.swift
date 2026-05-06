@@ -2,43 +2,9 @@ import Foundation
 import AVFoundation
 import UIKit
 
-/// Available transition sounds
-enum TransitionSound: String, CaseIterable, Codable {
-    case chime = "gentle-chime"
-    case singingBowl = "singing-bowl"
-    case templeBell = "temple-bell"
-    case none
-
-    var displayName: String {
-        switch self {
-        case .chime:
-            return "Gentle Chime"
-        case .singingBowl:
-            return "Singing Bowl"
-        case .templeBell:
-            return "Temple Bell"
-        case .none:
-            return "None"
-        }
-    }
-
-    var icon: String {
-        switch self {
-        case .chime:
-            return "bell.fill"
-        case .singingBowl:
-            return "circle.circle"
-        case .templeBell:
-            return "bell.and.waves.left.and.right"
-        case .none:
-            return "speaker.slash.fill"
-        }
-    }
-}
-
 /// Service for playing sounds and haptic feedback
 @MainActor
-class SoundService {
+class SoundService: FeedbackServiceProtocol {
     static let shared = SoundService()
 
     private var audioPlayer: AVAudioPlayer?
@@ -143,5 +109,34 @@ class SoundService {
     func playTransitionFeedback() {
         playSelectedSound()
         playSelectedHaptic()
+    }
+
+    // MARK: - FeedbackServiceProtocol
+
+    func playTransitionSound(_ soundName: String?) {
+        if let soundName = soundName, let sound = TransitionSound(rawValue: soundName) {
+            play(sound)
+        } else {
+            playSelectedSound()
+        }
+    }
+
+    func playHaptic(style: HapticStyle) {
+        let uiStyle: UIImpactFeedbackGenerator.FeedbackStyle
+        switch style {
+        case .light:
+            uiStyle = .light
+        case .medium:
+            uiStyle = .medium
+        case .heavy:
+            uiStyle = .heavy
+        case .success:
+            uiStyle = .medium
+        case .warning:
+            uiStyle = .medium
+        case .error:
+            uiStyle = .heavy
+        }
+        playHaptic(uiStyle)
     }
 }

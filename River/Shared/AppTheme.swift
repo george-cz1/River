@@ -1,5 +1,12 @@
 import SwiftUI
+
+#if os(iOS)
 import UIKit
+typealias PlatformColor = UIColor
+#elseif os(macOS)
+import AppKit
+typealias PlatformColor = NSColor
+#endif
 
 // MARK: - Color Hex Extension
 
@@ -29,7 +36,8 @@ extension Color {
     }
 }
 
-extension UIColor {
+#if os(iOS) || os(macOS)
+extension PlatformColor {
     convenience init(hex: String) {
         let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
         var int: UInt64 = 0
@@ -40,6 +48,29 @@ extension UIColor {
         b = CGFloat(int & 0xFF) / 255
         self.init(red: r, green: g, blue: b, alpha: 1)
     }
+}
+#endif
+
+// MARK: - Adaptive Color Helper
+
+/// Creates a color that adapts to light/dark mode across platforms
+func adaptiveColor(light lightHex: String, dark darkHex: String) -> Color {
+    #if os(iOS)
+    return Color(UIColor { traits in
+        traits.userInterfaceStyle == .dark
+            ? UIColor(hex: darkHex)
+            : UIColor(hex: lightHex)
+    })
+    #elseif os(macOS)
+    return Color(NSColor(name: nil) { appearance in
+        appearance.bestMatch(from: [.darkAqua, .aqua]) == .darkAqua
+            ? NSColor(hex: darkHex)
+            : NSColor(hex: lightHex)
+    })
+    #else
+    // Fallback for watchOS or other platforms - use light mode color
+    return Color(hex: lightHex)
+    #endif
 }
 
 // MARK: - App Theme
@@ -85,35 +116,15 @@ enum AppTheme: String, CaseIterable, Codable {
     var softColor: Color {
         switch self {
         case .river:
-            return Color(UIColor { traits in
-                traits.userInterfaceStyle == .dark
-                    ? UIColor(hex: "1A3A48")
-                    : UIColor(hex: "E8F4F7")
-            })
+            return adaptiveColor(light: "E8F4F7", dark: "1A3A48")
         case .forest:
-            return Color(UIColor { traits in
-                traits.userInterfaceStyle == .dark
-                    ? UIColor(hex: "2A3A2A")
-                    : UIColor(hex: "E8F4E8")
-            })
+            return adaptiveColor(light: "E8F4E8", dark: "2A3A2A")
         case .sunset:
-            return Color(UIColor { traits in
-                traits.userInterfaceStyle == .dark
-                    ? UIColor(hex: "3A2A1C")
-                    : UIColor(hex: "FFF4E8")
-            })
+            return adaptiveColor(light: "FFF4E8", dark: "3A2A1C")
         case .ocean:
-            return Color(UIColor { traits in
-                traits.userInterfaceStyle == .dark
-                    ? UIColor(hex: "1A2A3A")
-                    : UIColor(hex: "E8F0FF")
-            })
+            return adaptiveColor(light: "E8F0FF", dark: "1A2A3A")
         case .stone:
-            return Color(UIColor { traits in
-                traits.userInterfaceStyle == .dark
-                    ? UIColor(hex: "2A2A2A")
-                    : UIColor(hex: "F0F0F0")
-            })
+            return adaptiveColor(light: "F0F0F0", dark: "2A2A2A")
         }
     }
 

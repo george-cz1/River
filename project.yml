@@ -3,6 +3,8 @@ options:
   bundleIdPrefix: com.george
   deploymentTarget:
     iOS: "17.0"
+    macOS: "14.0"
+    watchOS: "10.0"
   xcodeVersion: "26.2"
 
 settings:
@@ -62,6 +64,11 @@ targets:
         com.apple.security.application-groups:
           - group.com.george.evolve
         com.apple.developer.family-controls: true
+        com.apple.developer.icloud-services:
+          - CloudKit
+        com.apple.developer.icloud-container-identifiers:
+          - iCloud.com.george.river
+        com.apple.developer.ubiquity-kvstore-identifier: $(TeamIdentifierPrefix)$(CFBundleIdentifier)
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.george.river
@@ -93,7 +100,6 @@ targets:
     sources:
       - path: RiverWidget
       - path: River/Shared
-        group: Shared
       - path: River/Resources/Fonts
         type: folder
         buildPhase: resources
@@ -232,11 +238,136 @@ targets:
         SWIFT_VERSION: "6.0"
         SKIP_INSTALL: true
 
+  RiverMac:
+    type: application
+    platform: macOS
+    deploymentTarget: "14.0"
+    sources:
+      - path: RiverMac
+      - path: River/Shared
+      - path: River/Models
+      - path: River/Services/SessionHistoryService.swift
+      - path: River/Services/FocusTimerService.swift
+      - path: River/Services/CloudSettingsManager.swift
+      - path: River/Theme.swift
+      - path: River/Resources/Fonts
+        type: folder
+        buildPhase: resources
+    info:
+      path: RiverMac/Info.plist
+      properties:
+        CFBundleDevelopmentRegion: en
+        CFBundleDisplayName: River
+        CFBundleExecutable: $(EXECUTABLE_NAME)
+        CFBundleIdentifier: $(PRODUCT_BUNDLE_IDENTIFIER)
+        CFBundleInfoDictionaryVersion: "6.0"
+        CFBundleName: $(PRODUCT_NAME)
+        CFBundlePackageType: APPL
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        LSMinimumSystemVersion: "14.0"
+        UIAppFonts:
+          - CormorantGaramond-Light.ttf
+          - Nunito-Regular.ttf
+          - Nunito-Medium.ttf
+          - Nunito-SemiBold.ttf
+    entitlements:
+      path: RiverMac/RiverMac.entitlements
+      properties:
+        com.apple.security.app-sandbox: true
+        com.apple.security.application-groups:
+          - group.com.george.evolve
+        com.apple.developer.icloud-services:
+          - CloudKit
+        com.apple.developer.icloud-container-identifiers:
+          - iCloud.com.george.river
+        com.apple.developer.ubiquity-kvstore-identifier: $(TeamIdentifierPrefix)$(CFBundleIdentifier)
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.george.river.mac
+        DEVELOPMENT_TEAM: U4JCMYQA4X
+        CODE_SIGN_STYLE: Automatic
+        LD_RUNPATH_SEARCH_PATHS: "$(inherited) @executable_path/../Frameworks"
+        SWIFT_VERSION: "6.0"
+        ENABLE_PREVIEWS: true
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        COMBINE_HIDPI_IMAGES: true
+
+  RiverWatch:
+    type: application
+    platform: watchOS
+    deploymentTarget: "10.0"
+    sources:
+      - path: RiverWatch
+      - path: River/Shared
+    info:
+      path: RiverWatch/Info.plist
+      properties:
+        CFBundleDevelopmentRegion: en
+        CFBundleDisplayName: River
+        CFBundleExecutable: $(EXECUTABLE_NAME)
+        CFBundleIdentifier: $(PRODUCT_BUNDLE_IDENTIFIER)
+        CFBundleInfoDictionaryVersion: "6.0"
+        CFBundleName: $(PRODUCT_NAME)
+        CFBundlePackageType: APPL
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        WKCompanionAppBundleIdentifier: com.george.river
+        WKApplication: true
+    entitlements:
+      path: RiverWatch/RiverWatch.entitlements
+      properties:
+        com.apple.security.application-groups:
+          - group.com.george.evolve
+        com.apple.developer.icloud-services:
+          - CloudKit
+        com.apple.developer.icloud-container-identifiers:
+          - iCloud.com.george.river
+        com.apple.developer.ubiquity-kvstore-identifier: $(TeamIdentifierPrefix)$(CFBundleIdentifier)
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.george.river.watchkitapp
+        DEVELOPMENT_TEAM: U4JCMYQA4X
+        CODE_SIGN_STYLE: Automatic
+        SWIFT_VERSION: "6.0"
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        TARGETED_DEVICE_FAMILY: "4"
+
 schemes:
   River:
     build:
       targets:
         River: all
+    run:
+      config: Debug
+    test:
+      config: Debug
+    profile:
+      config: Release
+    analyze:
+      config: Debug
+    archive:
+      config: Release
+
+  RiverMac:
+    build:
+      targets:
+        RiverMac: all
+    run:
+      config: Debug
+    test:
+      config: Debug
+    profile:
+      config: Release
+    analyze:
+      config: Debug
+    archive:
+      config: Release
+
+  RiverWatch:
+    build:
+      targets:
+        RiverWatch: all
     run:
       config: Debug
     test:

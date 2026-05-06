@@ -48,6 +48,7 @@ struct TimerState: Codable, Equatable, Sendable {
         return max(0, Int(endDate.timeIntervalSinceNow))
     }
 
+    #if os(iOS)
     var contentState: FocusActivityAttributes.ContentState {
         FocusActivityAttributes.ContentState(
             isTimerRunning: isTimerRunning,
@@ -60,6 +61,7 @@ struct TimerState: Codable, Equatable, Sendable {
             phaseEndDate: phaseEndDate
         )
     }
+    #endif
 
     // MARK: - Timer Control
 

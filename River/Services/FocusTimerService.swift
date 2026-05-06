@@ -17,16 +17,40 @@ final class FocusTimerService {
     private var persistCounter: Int = 0
     private let persistInterval: Int = 10
 
-    private init() {
+    // MARK: - Platform-specific services
+
+    private let feedbackService: FeedbackServiceProtocol
+    private let liveActivityService: LiveActivityServiceProtocol
+    private let appBlockingService: AppBlockingServiceProtocol
+
+    private init(
+        feedbackService: FeedbackServiceProtocol? = nil,
+        liveActivityService: LiveActivityServiceProtocol? = nil,
+        appBlockingService: AppBlockingServiceProtocol? = nil
+    ) {
+        #if os(iOS)
+        self.feedbackService = feedbackService ?? SoundService.shared
+        self.liveActivityService = liveActivityService ?? LiveActivityService.shared
+        self.appBlockingService = appBlockingService ?? AppBlockingService.shared
+        #else
+        self.feedbackService = feedbackService ?? NoOpFeedbackService()
+        self.liveActivityService = liveActivityService ?? NoOpLiveActivityService()
+        self.appBlockingService = appBlockingService ?? NoOpAppBlockingService()
+        #endif
+
         restoreState()
+        #if !os(watchOS)
         setupNotificationObserver()
+        #endif
     }
 
     deinit {
+        #if !os(watchOS)
         CFNotificationCenterRemoveEveryObserver(
             CFNotificationCenterGetDarwinNotifyCenter(),
             Unmanaged.passUnretained(self).toOpaque()
         )
+        #endif
     }
 
     // MARK: - Focus Session Control
@@ -56,10 +80,10 @@ final class FocusTimerService {
         cancelNotifications()
         state = nil
         SharedDataManager.shared.saveTimerState(nil)
-        LiveActivityService.shared.endActivity()
+        liveActivityService.endActivity()
 
         // Disable app blocking when focus ends
-        AppBlockingService.shared.disableBlocking()
+        appBlockingService.stopBlocking()
     }
 
     // MARK: - Timer Control
@@ -78,9 +102,11 @@ final class FocusTimerService {
         updateLiveActivity()
 
         // Enable app blocking if Pro user
+        #if os(iOS)
         if PurchaseManager.shared.isPro {
-            AppBlockingService.shared.enableBlocking()
+            appBlockingService.startBlocking()
         }
+        #endif
     }
 
     func pauseTimer() {
@@ -95,7 +121,7 @@ final class FocusTimerService {
         updateLiveActivity()
 
         // Disable app blocking when paused
-        AppBlockingService.shared.disableBlocking()
+        appBlockingService.stopBlocking()
     }
 
     func resumeTimer() {
@@ -110,9 +136,11 @@ final class FocusTimerService {
         updateLiveActivity()
 
         // Enable app blocking if Pro user
+        #if os(iOS)
         if PurchaseManager.shared.isPro {
-            AppBlockingService.shared.enableBlocking()
+            appBlockingService.startBlocking()
         }
+        #endif
     }
 
     func toggleTimer() {
@@ -195,7 +223,9 @@ final class FocusTimerService {
             }
 
             // Play sound and haptic feedback
-            SoundService.shared.playTransitionFeedback()
+            let soundName = UserDefaults.standard.string(forKey: UserDefaultsKeys.transitionSound)
+            feedbackService.playTransitionSound(soundName)
+            feedbackService.playHaptic(style: .medium)
 
             var mutated = currentState
             mutated.completeCurrentPhase()
@@ -227,7 +257,12 @@ final class FocusTimerService {
 
         if let currentState = state, currentState.isTimerRunning, currentState.remainingSeconds > 0 {
             startCountdownTimer()
-            LiveActivityService.shared.restoreActivityIfNeeded()
+            #if os(iOS)
+            // Only iOS has the restoreActivityIfNeeded method
+            if let liveActivityService = liveActivityService as? LiveActivityService {
+                liveActivityService.restoreActivityIfNeeded()
+            }
+            #endif
         }
     }
 
@@ -235,7 +270,26 @@ final class FocusTimerService {
 
     private func updateLiveActivity() {
         guard let state = state else { return }
-        LiveActivityService.shared.updateActivity(with: state)
+        #if os(iOS)
+        // Use the iOS-specific method if available
+        if let liveActivityService = liveActivityService as? LiveActivityService {
+            liveActivityService.updateActivity(with: state)
+        } else {
+            liveActivityService.startOrUpdateActivity(
+                phase: state.timerPhase,
+                remainingSeconds: state.remainingSeconds,
+                isRunning: state.isTimerRunning,
+                currentTaskTitle: state.taskTitle
+            )
+        }
+        #else
+        liveActivityService.startOrUpdateActivity(
+            phase: state.timerPhase,
+            remainingSeconds: state.remainingSeconds,
+            isRunning: state.isTimerRunning,
+            currentTaskTitle: state.taskTitle
+        )
+        #endif
     }
 
     // MARK: - Notifications
@@ -295,6 +349,7 @@ final class FocusTimerService {
 
     // MARK: - Notification Handling
 
+    #if !os(watchOS)
     private func setupNotificationObserver() {
         let observer = Unmanaged.passUnretained(self).toOpaque()
         CFNotificationCenterAddObserver(
@@ -312,6 +367,7 @@ final class FocusTimerService {
             .deliverImmediately
         )
     }
+    #endif
 
     private func syncStateFromSharedStorage() {
         guard let sharedState = SharedDataManager.shared.getTimerState() else { return }
@@ -372,7 +428,10 @@ extension FocusTimerService {
 
     var completedPomodoros: Int { state?.completedPomodoros ?? 0 }
     var pomodorosBeforeLongBreak: Int { state?.pomodorosBeforeLongBreak ?? TimerDefaults.pomodorosBeforeLongBreak }
-    var progress: Double { state?.contentState.progress ?? 0 }
+    var progress: Double {
+        guard let state = state, state.totalSeconds > 0 else { return 0 }
+        return 1.0 - (Double(state.remainingSeconds) / Double(state.totalSeconds))
+    }
     var focusedTaskTitle: String? { state?.taskTitle }
 }
 

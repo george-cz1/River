@@ -4,11 +4,13 @@ import Foundation
 
 @MainActor
 @Observable
-class AppBlockingService {
+class AppBlockingService: AppBlockingServiceProtocol {
     static let shared = AppBlockingService()
 
     private let store = ManagedSettingsStore(named: .focus)
     private let sharedDefaults: UserDefaults?
+
+    private(set) var isBlocking: Bool = false
 
     var selectedApps = FamilyActivitySelection() {
         didSet {
@@ -31,6 +33,7 @@ class AppBlockingService {
         store.shield.applications = selectedApps.applicationTokens
         store.shield.applicationCategories = .specific(selectedApps.categoryTokens)
 
+        isBlocking = true
         print("App blocking enabled for \(selectedApps.applicationTokens.count) apps and \(selectedApps.categoryTokens.count) categories")
     }
 
@@ -39,6 +42,7 @@ class AppBlockingService {
         store.shield.applications = nil
         store.shield.applicationCategories = nil
 
+        isBlocking = false
         print("App blocking disabled")
     }
 
@@ -72,6 +76,20 @@ class AppBlockingService {
 
     var selectedAppsCount: Int {
         selectedApps.applicationTokens.count + selectedApps.categoryTokens.count
+    }
+
+    // MARK: - AppBlockingServiceProtocol
+
+    func startBlocking() {
+        enableBlocking()
+    }
+
+    func stopBlocking() {
+        disableBlocking()
+    }
+
+    var hasAppsConfigured: Bool {
+        hasSelectedApps
     }
 }
 

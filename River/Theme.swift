@@ -1,5 +1,10 @@
 import SwiftUI
+
+#if os(iOS)
 import UIKit
+#elseif os(macOS)
+import AppKit
+#endif
 
 // MARK: - App Colors
 
@@ -16,35 +21,15 @@ enum AppColors {
         ThemeManager.shared.currentTheme.softColor
     }
 
-    static let background = Color(UIColor { traits in
-        traits.userInterfaceStyle == .dark
-            ? UIColor(hex: "0F1E24")
-            : UIColor(hex: "F4F8F9")
-    })
+    static let background = adaptiveColor(light: "F4F8F9", dark: "0F1E24")
 
-    static let surface = Color(UIColor { traits in
-        traits.userInterfaceStyle == .dark
-            ? UIColor(hex: "1A2F38")
-            : UIColor(hex: "FFFEFB")
-    })
+    static let surface = adaptiveColor(light: "FFFEFB", dark: "1A2F38")
 
-    static let textPrimary = Color(UIColor { traits in
-        traits.userInterfaceStyle == .dark
-            ? UIColor(hex: "E8F4F7")
-            : UIColor(hex: "1E3A4C")
-    })
+    static let textPrimary = adaptiveColor(light: "1E3A4C", dark: "E8F4F7")
 
-    static let textSecondary = Color(UIColor { traits in
-        traits.userInterfaceStyle == .dark
-            ? UIColor(hex: "8BA5B5")
-            : UIColor(hex: "5A7A8C")
-    })
+    static let textSecondary = adaptiveColor(light: "5A7A8C", dark: "8BA5B5")
 
-    static let border = Color(UIColor { traits in
-        traits.userInterfaceStyle == .dark
-            ? UIColor(hex: "2D4A55")
-            : UIColor(hex: "D8E4E8")
-    })
+    static let border = adaptiveColor(light: "D8E4E8", dark: "2D4A55")
 
     // States (same in both modes - accent colors)
     static let completed = Color(hex: "8E8E93")

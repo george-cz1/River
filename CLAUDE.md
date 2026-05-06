@@ -13,14 +13,20 @@ This project uses **XcodeGen** (`project.yml`) to generate the Xcode project fil
 ### Key Commands
 
 ```bash
-# Generate Xcode project from project.yml
+# Generate Xcode project from project.yml (required after any project.yml change)
 xcodegen generate
 
 # Open project in Xcode
 open River.xcodeproj
 
-# Build and run (use Xcode or xcodebuild)
+# Build iOS app
 xcodebuild -project River.xcodeproj -scheme River -destination 'platform=iOS Simulator,name=iPhone 15' build
+
+# Build macOS app
+xcodebuild -project River.xcodeproj -scheme RiverMac -destination 'platform=macOS' build
+
+# Build watchOS app
+xcodebuild -project River.xcodeproj -scheme RiverWatch -destination 'platform=watchOS Simulator,name=Apple Watch Series 9 (45mm)' build
 ```
 
 **Important**: The Xcode project file (`River.xcodeproj`) is generated from `project.yml`. If you need to modify project settings, targets, or build configurations, edit `project.yml` and regenerate with `xcodegen generate`.
@@ -53,27 +59,38 @@ xcodebuild -project River.xcodeproj -scheme River -destination 'platform=iOS Sim
    - **SessionHistoryService**: JSON-encoded session records in UserDefaults
 
 5. **Services Layer**
-   - `FocusTimerService`: Timer lifecycle and state management
-   - `LiveActivityService`: Live Activity integration
-   - `SessionHistoryService`: Tracks completed sessions, streaks, and stats
+   - `FocusTimerService`: Timer lifecycle and state management (shared with macOS)
+   - `LiveActivityService`: Live Activity integration (iOS only)
+   - `SessionHistoryService`: Tracks completed sessions, streaks, and stats (shared with macOS)
+   - `CloudSettingsManager`: Syncs settings across devices via `NSUbiquitousKeyValueStore` (shared with macOS)
    - `SoundService`: Plays transition sounds with haptic feedback
    - `PurchaseManager`: Handles StoreKit purchases for Pro features
    - `AppBlockingService`: Manages Screen Time app blocking using FamilyControls framework
    - `AppBlockingAuthorizationService`: Handles Family Controls authorization requests
 
-### Extensions
+6. **Cross-Platform Abstractions** (`River/Shared/Protocols/`)
+   - `LiveActivityServiceProtocol`, `AppBlockingServiceProtocol`, `FeedbackServiceProtocol`
+   - `PlatformCapabilities`: Compile-time and runtime feature detection; use this before calling platform-specific APIs (e.g., Darwin notifications are unsupported on watchOS)
 
-**RiverWidget** (WidgetKit extension)
-- **Sources**: `RiverWidget/` + shared code from `River/Shared/`
-- **Capabilities**: App Groups (`group.com.george.evolve`)
-- Widget displays current timer state and provides interactive controls
+### Targets / Extensions
 
-**Screen Time/Family Controls Extensions** (Pro Feature)
-- `RiverDeviceActivityMonitor`: Monitors device activity events for app blocking
-- `RiverShieldConfiguration`: Custom UI for blocked app shields
-- `RiverShieldAction`: Handles user actions when tapping blocked app shields
-- **Requirements**: Family Controls entitlement + user authorization
-- **Integration**: Uses `ManagedSettingsStore` to apply shields during focus sessions
+**RiverWidget** (WidgetKit, iOS)
+- Sources: `RiverWidget/` + `River/Shared/`
+
+**RiverMac** (macOS 14.0+, menu-bar app)
+- Sources: `RiverMac/` + `River/Shared/` + `River/Models/` + selected services (`FocusTimerService`, `SessionHistoryService`, `CloudSettingsManager`, `Theme.swift`)
+- Does **not** include iOS-only services: `LiveActivityService`, `AppBlockingService`, `SoundService`, `PurchaseManager`
+- Menu bar entry point in `RiverMac/MenuBar/MenuBarView.swift`
+
+**RiverWatch** (watchOS 10.0+)
+- Sources: `RiverWatch/` + `River/Shared/`
+- Companion app — `WKCompanionAppBundleIdentifier: com.george.river`
+- Darwin notifications (`CFNotificationCenter`) are **not** available; use App Group UserDefaults for state
+
+**Screen Time/Family Controls Extensions** (iOS Pro Feature)
+- `RiverDeviceActivityMonitor`, `RiverShieldConfiguration`, `RiverShieldAction`
+- Require Family Controls entitlement + user authorization
+- Use `ManagedSettingsStore` to apply shields during focus sessions
 
 ### Theme System
 
@@ -110,24 +127,66 @@ RiverWidget/
 
 ## Key Configuration
 
-- **Bundle ID**: `com.george.river`
-- **Widget Bundle ID**: `com.george.river.RiverWidget`
-- **App Group**: `group.com.george.evolve`
+| Target | Bundle ID | Platform |
+|--------|-----------|----------|
+| River (iOS) | `com.george.river` | iOS 17.0+ |
+| RiverWidget | `com.george.river.RiverWidget` | iOS 17.0+ |
+| RiverMac | `com.george.river.mac` | macOS 14.0+ |
+| RiverWatch | `com.george.river.watchkitapp` | watchOS 10.0+ |
+
+- **App Group**: `group.com.george.evolve` (all targets share this)
+- **iCloud Container**: `iCloud.com.george.river` (iOS, macOS, watchOS)
 - **Development Team**: `U4JCMYQA4X`
-- **Deployment Target**: iOS 17.0
-- **Swift Version**: 6.0
-- **Custom Fonts**: Cormorant Garamond (timer), Nunito (UI)
+- **Swift Version**: 6.0 (strict concurrency)
+- **Custom Fonts**: Cormorant Garamond (timer display), Nunito (UI)
 
 ## Important Implementation Details
 
-1. **Timer Persistence**: The timer continues running in the background by storing `phaseEndDate` and calculating `remainingSeconds` from the current time. This allows the timer to survive app backgrounding/termination.
+1. **Timer Persistence**: Timer survives backgrounding/termination by storing `phaseEndDate` and computing `remainingSeconds` from current time on resume.
 
-2. **Widget Sync**: Changes to timer state (start/pause/skip) are propagated to the widget via shared UserDefaults and Darwin notifications. Both app and widget read from the same `TimerState` persisted in App Group.
+2. **Widget/Cross-Process Sync**: State changes propagate via shared App Group UserDefaults + Darwin notifications (`CFNotificationCenter`). watchOS cannot use Darwin notifications — use App Group UserDefaults polling instead.
 
-3. **Session Tracking**: Work sessions are automatically saved to history when completed or skipped (see `FocusTimerService.swift:122-127` and `:172-178`).
+3. **iCloud Settings Sync**: `CloudSettingsManager` syncs timer durations, theme, and sound settings across devices via `NSUbiquitousKeyValueStore`. `syncFromCloud()` only overwrites local values when no local value exists; use `forceSyncFromCloud()` to override.
 
-4. **StoreKit Configuration**: In-app purchases configured in `Configuration.storekit` for Pro features.
+4. **Session Tracking**: Work sessions are automatically saved to history when completed or skipped (see `FocusTimerService.swift:122-127` and `:172-178`).
 
-5. **Sound Effects**: The app expects sound files in `River/Resources/Sounds/` (see README.md in that directory).
+5. **Swift 6.0 Strict Concurrency**: Services are `@Observable @MainActor`. Shared code compiled into multiple targets must compile cleanly for all target platforms — use `#if os(iOS)` guards for platform-specific APIs.
 
-6. **Pro Features & Debug Mode**: `PurchaseManager` has a `debugUnlockPro` flag (currently `true`) that bypasses StoreKit for testing Pro features locally. Set to `false` for production builds.
+6. **Pro Features & Debug Mode**: `PurchaseManager` has a `debugUnlockPro` flag (currently `true`) that bypasses StoreKit for local testing. **Set to `false` before App Store submission.**
+
+7. **Sound Effects**: Audio files expected in `River/Resources/Sounds/`. `TransitionSound.swift` (in `River/Shared/`) defines the sound enum used across targets.
+
+## gstack
+
+Use the `/browse` skill from gstack for all web browsing. Never use `mcp__claude-in-chrome__*` tools.
+
+Available gstack skills:
+- `/office-hours` — structured thinking and decision-making sessions
+- `/plan-ceo-review` — CEO-level plan review
+- `/plan-eng-review` — engineering plan review
+- `/plan-design-review` — design plan review
+- `/design-consultation` — design consultation
+- `/design-shotgun` — rapid design exploration
+- `/review` — code review
+- `/ship` — ship a feature end-to-end
+- `/land-and-deploy` — land and deploy changes
+- `/canary` — canary deployment
+- `/benchmark` — performance benchmarking
+- `/browse` — web browsing (use this for ALL web browsing)
+- `/connect-chrome` — connect to Chrome browser
+- `/qa` — QA testing
+- `/qa-only` — QA without implementation
+- `/design-review` — design review
+- `/setup-browser-cookies` — set up browser cookies
+- `/setup-deploy` — set up deployment
+- `/retro` — retrospective
+- `/investigate` — investigate issues
+- `/document-release` — document a release
+- `/codex` — Codex integration
+- `/cso` — CSO workflow
+- `/autoplan` — automatic planning
+- `/careful` — careful/cautious mode
+- `/freeze` — freeze changes
+- `/guard` — guard against regressions
+- `/unfreeze` — unfreeze changes
+- `/gstack-upgrade` — upgrade gstack to latest

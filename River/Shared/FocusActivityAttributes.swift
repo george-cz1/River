@@ -1,3 +1,4 @@
+#if os(iOS)
 import ActivityKit
 import Foundation
 
@@ -38,3 +39,4 @@ struct FocusActivityAttributes: ActivityAttributes {
         }
     }
 }
+#endif

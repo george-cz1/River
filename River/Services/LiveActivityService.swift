@@ -4,7 +4,7 @@ import Foundation
 /// Service for managing Focus Live Activities in Dynamic Island and Lock Screen
 @MainActor
 @Observable
-final class LiveActivityService {
+final class LiveActivityService: LiveActivityServiceProtocol {
     static let shared = LiveActivityService()
 
     private(set) var currentActivity: Activity<FocusActivityAttributes>?
@@ -87,4 +87,24 @@ final class LiveActivityService {
     }
 
     var hasActiveActivity: Bool { currentActivity != nil }
+
+    // MARK: - LiveActivityServiceProtocol
+
+    func startOrUpdateActivity(
+        phase: TimerPhase,
+        remainingSeconds: Int,
+        isRunning: Bool,
+        currentTaskTitle: String?
+    ) {
+        // Create a TimerState from the parameters and use existing updateActivity method
+        guard let taskTitle = currentTaskTitle else {
+            endActivity()
+            return
+        }
+
+        // If we have state in shared storage, use that; otherwise create a minimal one
+        if let existingState = SharedDataManager.shared.getTimerState() {
+            updateActivity(with: existingState)
+        }
+    }
 }

@@ -1,4 +1,5 @@
 import Foundation
+import SwiftData
 
 /// Service for tracking and managing completed focus sessions
 @MainActor
@@ -6,41 +7,90 @@ import Foundation
 final class SessionHistoryService {
     static let shared = SessionHistoryService()
 
-    private let storageKey = UserDefaultsKeys.sessionHistory
-    private(set) var sessions: [SessionRecord] = []
+    private var modelContext: ModelContext?
+    private let legacyStorageKey = UserDefaultsKeys.sessionHistory
+    private var hasAttemptedMigration = false
 
-    private init() {
-        loadSessions()
+    private init() {}
+
+    /// Initialize with a ModelContext for SwiftData operations
+    func configure(with modelContext: ModelContext) {
+        self.modelContext = modelContext
+
+        // Attempt migration from UserDefaults to SwiftData on first run
+        if !hasAttemptedMigration {
+            migrateFromUserDefaults()
+            hasAttemptedMigration = true
+        }
     }
 
     // MARK: - Save Session
 
     /// Save a completed focus session
     func saveSession(taskName: String?, workDuration: Int, completedFully: Bool) {
+        guard let modelContext = modelContext else {
+            print("⚠️ SessionHistoryService: ModelContext not configured")
+            return
+        }
+
         let session = SessionRecord(
             taskName: taskName,
             workDuration: workDuration,
             completedFully: completedFully
         )
 
-        sessions.append(session)
-        persistSessions()
+        modelContext.insert(session)
+
+        do {
+            try modelContext.save()
+        } catch {
+            print("⚠️ SessionHistoryService: Failed to save session - \(error.localizedDescription)")
+        }
     }
 
     // MARK: - Get Sessions
 
     /// Get sessions within a specific date range
     func getSessions(for dateRange: DateRange) -> [SessionRecord] {
+        guard let modelContext = modelContext else {
+            print("⚠️ SessionHistoryService: ModelContext not configured")
+            return []
+        }
+
         let (start, end) = dateRange.dates
 
-        return sessions.filter { session in
-            session.date >= start && session.date < end
-        }.sorted { $0.date > $1.date }
+        let descriptor = FetchDescriptor<SessionRecord>(
+            predicate: #Predicate { session in
+                session.date >= start && session.date < end
+            },
+            sortBy: [SortDescriptor(\.date, order: .reverse)]
+        )
+
+        do {
+            return try modelContext.fetch(descriptor)
+        } catch {
+            print("⚠️ SessionHistoryService: Failed to fetch sessions - \(error.localizedDescription)")
+            return []
+        }
     }
 
     /// Get all sessions sorted by date (newest first)
     func getAllSessions() -> [SessionRecord] {
-        return sessions.sorted { $0.date > $1.date }
+        guard let modelContext = modelContext else {
+            print("⚠️ SessionHistoryService: ModelContext not configured")
+            return []
+        }
+
+        let descriptor = FetchDescriptor<SessionRecord>(
+            sortBy: [SortDescriptor(\.date, order: .reverse)]
+        )
+
+        do {
+            return try modelContext.fetch(descriptor)
+        } catch {
+            print("⚠️ SessionHistoryService: Failed to fetch sessions - \(error.localizedDescription)")
+            return []
+        }
     }
 
     // MARK: - Statistics
@@ -62,10 +112,11 @@ final class SessionHistoryService {
 
     /// Get current streak (consecutive days with at least one session)
     func getCurrentStreak() -> Int {
-        guard !sessions.isEmpty else { return 0 }
+        let allSessions = getAllSessions()
+        guard !allSessions.isEmpty else { return 0 }
 
         let calendar = Calendar.current
-        let sortedSessions = sessions.sorted { $0.date > $1.date }
+        let sortedSessions = allSessions
 
         var streak = 0
         var currentDate = calendar.startOfDay(for: Date())
@@ -113,49 +164,83 @@ final class SessionHistoryService {
 
     /// Delete a specific session
     func deleteSession(_ session: SessionRecord) {
-        sessions.removeAll { $0.id == session.id }
-        persistSessions()
+        guard let modelContext = modelContext else {
+            print("⚠️ SessionHistoryService: ModelContext not configured")
+            return
+        }
+
+        modelContext.delete(session)
+
+        do {
+            try modelContext.save()
+        } catch {
+            print("⚠️ SessionHistoryService: Failed to delete session - \(error.localizedDescription)")
+        }
     }
 
     /// Delete all sessions
     func deleteAllSessions() {
-        sessions.removeAll()
-        persistSessions()
-    }
-
-    // MARK: - Persistence
-
-    private func persistSessions() {
-        do {
-            let encoded = try JSONEncoder().encode(sessions)
-            UserDefaults.standard.set(encoded, forKey: storageKey)
-        } catch {
-            print("⚠️ SessionHistoryService: Failed to encode sessions - \(error.localizedDescription)")
-            // Data loss risk: Unable to save session history
-        }
-    }
-
-    private func loadSessions() {
-        guard let data = UserDefaults.standard.data(forKey: storageKey) else {
-            // No saved data, starting fresh
-            sessions = []
+        guard let modelContext = modelContext else {
+            print("⚠️ SessionHistoryService: ModelContext not configured")
             return
         }
 
         do {
-            let decoded = try JSONDecoder().decode([SessionRecord].self, from: data)
-            sessions = decoded
+            try modelContext.delete(model: SessionRecord.self)
+            try modelContext.save()
         } catch {
-            print("⚠️ SessionHistoryService: Failed to decode sessions - \(error.localizedDescription)")
-            print("⚠️ Attempting recovery by clearing corrupted data")
+            print("⚠️ SessionHistoryService: Failed to delete all sessions - \(error.localizedDescription)")
+        }
+    }
 
-            // Backup corrupted data for debugging
-            let backupKey = storageKey + "_corrupted_\(Date().timeIntervalSince1970)"
+    // MARK: - Migration from UserDefaults
+
+    /// Migrate existing sessions from UserDefaults to SwiftData
+    private func migrateFromUserDefaults() {
+        guard let modelContext = modelContext else { return }
+
+        // Check if migration is needed
+        guard let data = UserDefaults.standard.data(forKey: legacyStorageKey) else {
+            print("ℹ️ SessionHistoryService: No legacy data to migrate")
+            return
+        }
+
+        do {
+            // Define a legacy struct for decoding old data
+            struct LegacySessionRecord: Codable {
+                let id: UUID
+                let date: Date
+                let taskName: String?
+                let workDuration: Int
+                let completedFully: Bool
+            }
+
+            let legacySessions = try JSONDecoder().decode([LegacySessionRecord].self, from: data)
+
+            print("ℹ️ SessionHistoryService: Migrating \(legacySessions.count) sessions from UserDefaults to SwiftData")
+
+            // Insert each legacy session into SwiftData
+            for legacy in legacySessions {
+                let session = SessionRecord(
+                    id: legacy.id,
+                    date: legacy.date,
+                    taskName: legacy.taskName,
+                    workDuration: legacy.workDuration,
+                    completedFully: legacy.completedFully
+                )
+                modelContext.insert(session)
+            }
+
+            try modelContext.save()
+
+            // Backup and remove legacy data
+            let backupKey = legacyStorageKey + "_migrated_backup"
             UserDefaults.standard.set(data, forKey: backupKey)
+            UserDefaults.standard.removeObject(forKey: legacyStorageKey)
 
-            // Clear corrupted data and start fresh
-            UserDefaults.standard.removeObject(forKey: storageKey)
-            sessions = []
+            print("✅ SessionHistoryService: Successfully migrated \(legacySessions.count) sessions")
+        } catch {
+            print("⚠️ SessionHistoryService: Failed to migrate sessions - \(error.localizedDescription)")
         }
     }
 }
