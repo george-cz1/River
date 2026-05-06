@@ -68,6 +68,7 @@
 		66613A31E331F4EDAA50F84E /* TimerPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B83F0235B0ADA68596377 /* TimerPhase.swift */; };
 		68A53EFA7ABEF1C767BD1326 /* FocusTimerIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17C456C2E1F9CA81531EB3B /* FocusTimerIntent.swift */; };
 		68FF44AA5D836D397580D75F /* AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7211A0F751D58A962322E6 /* AppGroup.swift */; };
+		690997F6BD5BE3D780E8C6D7 /* WatchConnectivityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8BBC8BB831EC018EFEB999 /* WatchConnectivityService.swift */; };
 		6BF9117638DD01F9E213823C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 31D74602C26B8D48237BCD77 /* Assets.xcassets */; };
 		6CCE7F63234F31F9C59CF451 /* TimerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0181BD8B8FF7B854E483B2E3 /* TimerState.swift */; };
 		72B35828BFEE72296286630D /* TransitionSound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119205866C1E3D5409CE1E2E /* TransitionSound.swift */; };
@@ -95,6 +96,7 @@
 		ABB2A59CA4AC238C0DC832F6 /* WatchConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58BE0C407EFFA4C28B648D9C /* WatchConnectivity.framework */; };
 		ABEDD91C2118FC838A744E3F /* FocusTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9685BE9D14BA7D8972C26A8 /* FocusTask.swift */; };
 		ACCCD444E2AADA4A48E12085 /* FocusTimerIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17C456C2E1F9CA81531EB3B /* FocusTimerIntent.swift */; };
+		AD6A452DCE9BBB1F1FA490EF /* WatchConnectivityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C56E0922FC8C621E95A759 /* WatchConnectivityService.swift */; };
 		B148263E3D90C526D18BC635 /* WatchConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58BE0C407EFFA4C28B648D9C /* WatchConnectivity.framework */; };
 		B523C32A6AC95FD270ED3A2D /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD671BF3657A8A4A95A7BFE /* TaskListView.swift */; };
 		B8CE9CDD2BF02922B86641C7 /* FocusTimerIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17C456C2E1F9CA81531EB3B /* FocusTimerIntent.swift */; };
@@ -204,6 +206,7 @@
 		25FB5BC9FC5FB5B5195E6CDA /* ShieldActionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShieldActionExtension.swift; sourceTree = "<group>"; };
 		264C468807D8DA4CC1272FB8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		290F5B3F07E5962834BF13E7 /* Configuration.storekit */ = {isa = PBXFileReference; path = Configuration.storekit; sourceTree = "<group>"; };
+		2C8BBC8BB831EC018EFEB999 /* WatchConnectivityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchConnectivityService.swift; sourceTree = "<group>"; };
 		2FD671BF3657A8A4A95A7BFE /* TaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
 		30861353134FF039E6227447 /* River.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = River.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		31D74602C26B8D48237BCD77 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -234,6 +237,7 @@
 		72388758C0B0C84DE8D013A9 /* MenuBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarView.swift; sourceTree = "<group>"; };
 		735A8A607381D3D222E5148A /* singing-bowl.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "singing-bowl.wav"; sourceTree = "<group>"; };
 		750EFCB5CD4D8C2DC83C0FA5 /* CloudSettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudSettingsManager.swift; sourceTree = "<group>"; };
+		75C56E0922FC8C621E95A759 /* WatchConnectivityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchConnectivityService.swift; sourceTree = "<group>"; };
 		766AF81132354FF1CA456910 /* RiverMac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RiverMac.entitlements; sourceTree = "<group>"; };
 		76B9B0B62C4311C7DC814770 /* AppBlockingSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppBlockingSettingsView.swift; sourceTree = "<group>"; };
 		7979CEA7B9B6BC933F0BF94A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
@@ -400,6 +404,7 @@
 				F1812292EC9E1A0892E91E81 /* Info.plist */,
 				CEEDFEB64D7E00DD2ACBE373 /* RiverWatch.entitlements */,
 				33EDB908290CF67D66BC6FFF /* RiverWatchApp.swift */,
+				DF1628396BC23D5FE11B9220 /* Services */,
 				CEF5DF6BED86F3C1B7CCCDF3 /* Views */,
 			);
 			path = RiverWatch;
@@ -436,6 +441,7 @@
 				8B43E0B69B136BD9E3AC3F13 /* PurchaseManager.swift */,
 				654E93C785AEEDF75EA72F28 /* SessionHistoryService.swift */,
 				806773B4513FBF9E2DA06BE4 /* SoundService.swift */,
+				75C56E0922FC8C621E95A759 /* WatchConnectivityService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -549,6 +555,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		DF1628396BC23D5FE11B9220 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				2C8BBC8BB831EC018EFEB999 /* WatchConnectivityService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		E469359EB30C0E885D477D85 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
@@ -581,7 +595,7 @@
 			path = RiverWidget;
 			sourceTree = "<group>";
 		};
-		"TEMP_C3A6150F-D934-4C20-B1E7-B51916A5D4DF" /* Platform */ = {
+		"TEMP_A99E7052-3361-4B8C-8C9B-8A79E5059ABE" /* Platform */ = {
 			isa = PBXGroup;
 			children = (
 			);
@@ -840,6 +854,7 @@
 				0EF936CE2403A1847C840267 /* TimerPhase.swift in Sources */,
 				EC7F462C716EFB47400E2BAD /* TimerState.swift in Sources */,
 				981FB20ECA687030FDDFD381 /* TransitionSound.swift in Sources */,
+				690997F6BD5BE3D780E8C6D7 /* WatchConnectivityService.swift in Sources */,
 				0BFD7F63C0A37039B826F17B /* WatchTimerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -915,6 +930,7 @@
 				66613A31E331F4EDAA50F84E /* TimerPhase.swift in Sources */,
 				6CCE7F63234F31F9C59CF451 /* TimerState.swift in Sources */,
 				3E167D48468F0103C144AC2F /* TransitionSound.swift in Sources */,
+				AD6A452DCE9BBB1F1FA490EF /* WatchConnectivityService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
