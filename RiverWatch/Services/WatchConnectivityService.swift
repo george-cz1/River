@@ -32,9 +32,7 @@ final class WatchConnectivityService: NSObject {
     private func applyState(from payload: [String: Any]) {
         guard let data = payload["timerState"] as? Data else { return }
         let state = try? JSONDecoder().decode(TimerState?.self, from: data)
-        Task { @MainActor in
-            FocusTimerService.shared.applyRemoteState(state)
-        }
+        FocusTimerService.shared.applyRemoteState(state)
     }
 }
 

@@ -79,10 +79,8 @@ final class FocusTimerService {
         stopCountdownTimer()
         cancelNotifications()
         state = nil
-        SharedDataManager.shared.saveTimerState(nil)
+        persistState()
         liveActivityService.endActivity()
-
-        // Disable app blocking when focus ends
         appBlockingService.stopBlocking()
     }
 

@@ -18,10 +18,15 @@ final class WatchConnectivityService: NSObject {
 
     /// Called by FocusTimerService.persistState() to push the latest state to the watch.
     func sendTimerState(_ state: TimerState?) {
-        guard WCSession.default.activationState == .activated else { return }
+        guard WCSession.default.activationState == .activated,
+              WCSession.default.isPaired,
+              WCSession.default.isWatchAppInstalled else { return }
         guard let data = try? JSONEncoder().encode(state) else { return }
         let payload: [String: Any] = ["timerState": data]
 
+        // applicationContext delivers only the latest value, which is correct for timer state —
+        // stale intermediate states have no value. transferUserInfo queues all payloads in order,
+        // which is unnecessary overhead here.
         if WCSession.default.isReachable {
             WCSession.default.sendMessage(payload, replyHandler: nil) { error in
                 // Fall back to applicationContext for delivery guarantee
