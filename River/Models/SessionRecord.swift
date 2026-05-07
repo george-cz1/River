@@ -4,12 +4,12 @@ import SwiftData
 /// Represents a completed focus session for history tracking
 @Model
 final class SessionRecord {
-    @Attribute(.unique) var id: UUID
-    var date: Date
+    @Attribute(.unique) var id: UUID = UUID()
+    var date: Date = Date()
     var taskName: String?
-    var workDuration: Int  // minutes
-    var completedFully: Bool
-    var deviceIdentifier: String  // For tracking which device created the session
+    var workDuration: Int = 0
+    var completedFully: Bool = false
+    var deviceIdentifier: String = ""  // For tracking which device created the session
 
     init(
         id: UUID = UUID(),

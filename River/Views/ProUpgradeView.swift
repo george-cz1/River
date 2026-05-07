@@ -97,7 +97,7 @@ struct ProUpgradeView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 12))
             } else {
                 Button {
-                    Task { await purchaseManager.purchasePro() }
+                    Task { await purchaseManager.purchaseDevicePro() }
                 } label: {
                     if purchaseManager.isLoading {
                         ProgressView()

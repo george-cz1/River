@@ -92,6 +92,7 @@ targets:
         embed: true
       - target: RiverShieldAction
         embed: true
+      - sdk: WatchConnectivity.framework
 
   RiverWidget:
     type: app-extension
@@ -100,6 +101,8 @@ targets:
     sources:
       - path: RiverWidget
       - path: River/Shared
+        excludes:
+          - Components/**
       - path: River/Resources/Fonts
         type: folder
         buildPhase: resources
@@ -249,6 +252,7 @@ targets:
       - path: River/Services/SessionHistoryService.swift
       - path: River/Services/FocusTimerService.swift
       - path: River/Services/CloudSettingsManager.swift
+      - path: River/Services/PurchaseManager.swift
       - path: River/Theme.swift
       - path: River/Resources/Fonts
         type: folder
@@ -300,6 +304,10 @@ targets:
     sources:
       - path: RiverWatch
       - path: River/Shared
+        excludes:
+          - Components/**
+    dependencies:
+      - sdk: WatchConnectivity.framework
     info:
       path: RiverWatch/Info.plist
       properties:

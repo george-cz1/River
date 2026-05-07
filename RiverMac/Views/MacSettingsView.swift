@@ -9,23 +9,38 @@ import SwiftUI
 
 struct MacSettingsView: View {
     @Bindable private var themeManager = ThemeManager.shared
+    @Environment(PurchaseManager.self) private var purchaseManager
 
     @State private var workDuration = UserDefaults.standard.integer(forKey: UserDefaultsKeys.workDuration).nonZero(default: TimerDefaults.workDuration)
     @State private var shortBreakDuration = UserDefaults.standard.integer(forKey: UserDefaultsKeys.shortBreakDuration).nonZero(default: TimerDefaults.shortBreakDuration)
     @State private var longBreakDuration = UserDefaults.standard.integer(forKey: UserDefaultsKeys.longBreakDuration).nonZero(default: TimerDefaults.longBreakDuration)
     @State private var pomodorosBeforeLongBreak = UserDefaults.standard.integer(forKey: UserDefaultsKeys.pomodorosBeforeLongBreak).nonZero(default: TimerDefaults.pomodorosBeforeLongBreak)
+    @State private var showingUpgrade = false
 
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 32) {
-                timerDurationsSection
+                if purchaseManager.isPro {
+                    timerDurationsSection
+                } else {
+                    lockedSection(title: "Timer Durations", description: "Custom work and break lengths")
+                }
                 cycleSection
-                appearanceSection
+                if purchaseManager.isPro {
+                    appearanceSection
+                } else {
+                    lockedSection(title: "Appearance", description: "Color themes for your focus sessions")
+                }
+                upgradeSection
             }
             .padding(24)
         }
         .background(AppColors.background)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .sheet(isPresented: $showingUpgrade) {
+            MacProUpgradeView()
+                .environment(purchaseManager)
+        }
     }
 
     // MARK: - Timer Durations Section
@@ -239,6 +254,55 @@ struct MacSettingsView: View {
         }
         .buttonStyle(.plain)
     }
+
+    // MARK: - Locked Section
+
+    private func lockedSection(title: String, description: String) -> some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text(title)
+                .font(AppFonts.caption2)
+                .foregroundStyle(AppColors.textSecondary)
+                .textCase(.uppercase)
+
+            HStack(spacing: 12) {
+                Image(systemName: "lock.fill")
+                    .font(.title3)
+                    .foregroundStyle(AppColors.textSecondary)
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(title)
+                        .font(AppFonts.headline)
+                        .foregroundStyle(AppColors.textPrimary)
+                    Text(description)
+                        .font(AppFonts.caption)
+                        .foregroundStyle(AppColors.textSecondary)
+                }
+                Spacer()
+                Button("Unlock") { showingUpgrade = true }
+                    .buttonStyle(.borderedProminent)
+                    .controlSize(.small)
+            }
+            .padding(16)
+            .cardStyle()
+        }
+    }
+
+    // MARK: - Upgrade Section
+
+    private var upgradeSection: some View {
+        Group {
+            if !purchaseManager.isPro {
+                Button("Upgrade to Pro →") { showingUpgrade = true }
+                    .buttonStyle(.borderedProminent)
+                    .controlSize(.large)
+                    .frame(maxWidth: .infinity)
+            } else if !purchaseManager.isSync {
+                Button("Add Cross-Device Sync →") { showingUpgrade = true }
+                    .buttonStyle(.bordered)
+                    .controlSize(.large)
+                    .frame(maxWidth: .infinity)
+            }
+        }
+    }
 }
 
 private extension Int {
@@ -249,4 +313,5 @@ private extension Int {
 
 #Preview {
     MacSettingsView()
+        .environment(PurchaseManager.shared)
 }

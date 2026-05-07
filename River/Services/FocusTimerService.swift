@@ -79,10 +79,8 @@ final class FocusTimerService {
         stopCountdownTimer()
         cancelNotifications()
         state = nil
-        SharedDataManager.shared.saveTimerState(nil)
+        persistState()
         liveActivityService.endActivity()
-
-        // Disable app blocking when focus ends
         appBlockingService.stopBlocking()
     }
 
@@ -250,6 +248,9 @@ final class FocusTimerService {
 
     private func persistState() {
         SharedDataManager.shared.saveTimerState(state)
+        #if os(iOS)
+        WatchConnectivityService.shared.sendTimerState(state)
+        #endif
     }
 
     private func restoreState() {
@@ -392,6 +393,20 @@ final class FocusTimerService {
 
         updateLiveActivity()
     }
+
+    // MARK: - Remote State (watchOS only)
+
+    #if os(watchOS)
+    func applyRemoteState(_ remoteState: TimerState?) {
+        let wasRunning = state?.isTimerRunning ?? false
+        state = remoteState
+        if let s = remoteState, s.isTimerRunning, !wasRunning {
+            startCountdownTimer()
+        } else if remoteState == nil || remoteState?.isTimerRunning == false {
+            stopCountdownTimer()
+        }
+    }
+    #endif
 
     // MARK: - App Lifecycle
 

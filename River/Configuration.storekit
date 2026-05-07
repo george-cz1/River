@@ -10,13 +10,43 @@
       "internalID" : "6670787541",
       "localizations" : [
         {
-          "description" : "Unlock all Pro features including custom timer durations, unlimited tasks, session history, themes, and custom sounds & haptics.",
+          "description" : "Unlock all Pro features on this device.",
           "displayName" : "River Pro",
           "locale" : "en_US"
         }
       ],
       "productID" : "com.george.river.pro",
       "referenceName" : "River Pro",
+      "type" : "NonConsumable"
+    },
+    {
+      "displayPrice" : "4.99",
+      "familyShareable" : false,
+      "internalID" : "6670787542",
+      "localizations" : [
+        {
+          "description" : "Unlock all Pro features on your Mac.",
+          "displayName" : "River for Mac",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.george.river.mac.pro",
+      "referenceName" : "River for Mac",
+      "type" : "NonConsumable"
+    },
+    {
+      "displayPrice" : "7.99",
+      "familyShareable" : false,
+      "internalID" : "6670787543",
+      "localizations" : [
+        {
+          "description" : "Unlock Pro features on all your devices with iCloud sync.",
+          "displayName" : "River Everywhere",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.george.river.sync",
+      "referenceName" : "River Everywhere",
       "type" : "NonConsumable"
     }
   ],

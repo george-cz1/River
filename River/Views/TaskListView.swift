@@ -882,38 +882,3 @@ private struct InlineAddTaskCard: View {
     }
 }
 
-// MARK: - Cycle Dot Component
-
-private struct CycleDot: View {
-    let isFilled: Bool
-    let isInProgress: Bool
-    let color: Color
-    let size: CGFloat
-
-    var body: some View {
-        ZStack {
-            // Base empty circle
-            Circle()
-                .fill(AppColors.border)
-
-            // Half-fill for in-progress (left half)
-            if isInProgress && !isFilled {
-                Circle()
-                    .fill(color)
-                    .mask(
-                        HStack(spacing: 0) {
-                            Rectangle()
-                            Color.clear
-                        }
-                    )
-            }
-
-            // Full fill for completed
-            if isFilled {
-                Circle()
-                    .fill(color)
-            }
-        }
-        .frame(width: size, height: size)
-    }
-}
