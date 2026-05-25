@@ -10,25 +10,42 @@ import SwiftUI
 struct MacHistoryView: View {
     @State private var historyService = SessionHistoryService.shared
     @State private var selectedRange: DateRange = .thisWeek
+    @Environment(\.dismiss) private var dismiss
 
     var body: some View {
-        ScrollView {
-            VStack(spacing: 24) {
-                // Stats section
-                statsSection
-
-                // Range picker
-                rangePickerSection
-
-                // Sessions list
-                sessionsListSection
-
-                Spacer(minLength: 32)
+        VStack(spacing: 0) {
+            // Toolbar
+            HStack {
+                Spacer()
+                Text("Session History")
+                    .font(AppFonts.headline)
+                    .foregroundStyle(AppColors.textPrimary)
+                Spacer()
+                Button {
+                    dismiss()
+                } label: {
+                    Image(systemName: "xmark.circle.fill")
+                        .font(.title3)
+                        .foregroundStyle(AppColors.textSecondary)
+                }
+                .buttonStyle(.plain)
             }
-            .padding(24)
+            .padding(16)
+
+            Divider()
+
+            ScrollView {
+                VStack(spacing: 24) {
+                    statsSection
+                    rangePickerSection
+                    sessionsListSection
+                    Spacer(minLength: 32)
+                }
+                .padding(24)
+            }
         }
         .background(AppColors.background)
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .frame(width: 560, height: 600)
     }
 
     // MARK: - Stats Section

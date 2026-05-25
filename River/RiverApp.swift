@@ -1,5 +1,9 @@
 import SwiftUI
 import SwiftData
+#if DEBUG
+import DebugBridgeCore
+import DebugBridgeUI
+#endif
 
 @main
 struct RiverApp: App {
@@ -7,23 +11,23 @@ struct RiverApp: App {
     @State private var cloudSettingsManager = CloudSettingsManager.shared
 
     var sharedModelContainer: ModelContainer = {
-        let schema = Schema([FocusTask.self, DeletedTask.self, SessionRecord.self])
         do {
-            let configuration = ModelConfiguration(
-                schema: schema,
-                isStoredInMemoryOnly: false,
-                cloudKitDatabase: .private("iCloud.com.george.river")
-            )
-            let container = try ModelContainer(for: schema, configurations: [configuration])
+            let config = ModelConfiguration(cloudKitDatabase: .private("iCloud.com.george.river"))
+            let container = try ModelContainer(for: FocusTask.self, DeletedTask.self, SessionRecord.self, configurations: config)
             print("✅ RiverApp: CloudKit ModelContainer created successfully")
             return container
         } catch {
-            print("⚠️ RiverApp: CloudKit ModelContainer failed (\(error.localizedDescription)), falling back to local storage")
+            print("⚠️ RiverApp: CloudKit failed (\(error)), trying local storage")
             do {
-                let localConfig = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
-                return try ModelContainer(for: schema, configurations: [localConfig])
+                return try ModelContainer(for: FocusTask.self, DeletedTask.self, SessionRecord.self)
             } catch {
-                fatalError("Could not create ModelContainer: \(error)")
+                print("⚠️ RiverApp: Local storage failed (\(error)), using in-memory")
+                do {
+                    return try ModelContainer(for: FocusTask.self, DeletedTask.self, SessionRecord.self,
+                                              configurations: ModelConfiguration(isStoredInMemoryOnly: true))
+                } catch {
+                    fatalError("In-memory ModelContainer failed: \(error)")
+                }
             }
         }
     }()
@@ -33,9 +37,12 @@ struct RiverApp: App {
             ContentView()
                 .environment(purchaseManager)
                 .onAppear {
-                    // Configure SessionHistoryService with ModelContext
                     let context = sharedModelContainer.mainContext
                     SessionHistoryService.shared.configure(with: context)
+                    #if DEBUG
+                    DebugBridgeUIWiring.installAll()
+                    StateServer.shared.start()
+                    #endif
                 }
                 .task {
                     await requestNotificationPermission()

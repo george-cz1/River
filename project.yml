@@ -12,6 +12,10 @@ settings:
     MARKETING_VERSION: "1.0"
     CURRENT_PROJECT_VERSION: "1"
 
+packages:
+  DebugBridge:
+    path: ../DebugBridge
+
 targets:
   River:
     type: application
@@ -93,6 +97,8 @@ targets:
       - target: RiverShieldAction
         embed: true
       - sdk: WatchConnectivity.framework
+      - package: DebugBridge
+        product: DebugBridgeUI
 
   RiverWidget:
     type: app-extension
@@ -306,6 +312,10 @@ targets:
       - path: River/Shared
         excludes:
           - Components/**
+      - path: River/Services/FocusTimerService.swift
+      - path: River/Services/CloudSettingsManager.swift
+      - path: River/Services/SessionHistoryService.swift
+      - path: River/Models/SessionRecord.swift
     dependencies:
       - sdk: WatchConnectivity.framework
     info:

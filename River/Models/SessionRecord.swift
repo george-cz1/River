@@ -4,7 +4,7 @@ import SwiftData
 /// Represents a completed focus session for history tracking
 @Model
 final class SessionRecord {
-    @Attribute(.unique) var id: UUID = UUID()
+    var id: UUID = UUID()
     var date: Date = Date()
     var taskName: String?
     var workDuration: Int = 0

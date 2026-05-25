@@ -1,37 +1,26 @@
-//
-//  MacSettingsView.swift
-//  RiverMac
-//
-//  Settings view for macOS - iOS-consistent design
-//
-
 import SwiftUI
 
 struct MacSettingsView: View {
-    @Bindable private var themeManager = ThemeManager.shared
+    @AppStorage(UserDefaultsKeys.workDuration) private var workDuration: Int = TimerDefaults.workDuration
+    @AppStorage(UserDefaultsKeys.shortBreakDuration) private var shortBreakDuration: Int = TimerDefaults.shortBreakDuration
+    @AppStorage(UserDefaultsKeys.longBreakDuration) private var longBreakDuration: Int = TimerDefaults.longBreakDuration
+    @AppStorage(UserDefaultsKeys.pomodorosBeforeLongBreak) private var pomodorosBeforeLongBreak: Int = TimerDefaults.pomodorosBeforeLongBreak
+
     @Environment(PurchaseManager.self) private var purchaseManager
 
-    @State private var workDuration = UserDefaults.standard.integer(forKey: UserDefaultsKeys.workDuration).nonZero(default: TimerDefaults.workDuration)
-    @State private var shortBreakDuration = UserDefaults.standard.integer(forKey: UserDefaultsKeys.shortBreakDuration).nonZero(default: TimerDefaults.shortBreakDuration)
-    @State private var longBreakDuration = UserDefaults.standard.integer(forKey: UserDefaultsKeys.longBreakDuration).nonZero(default: TimerDefaults.longBreakDuration)
-    @State private var pomodorosBeforeLongBreak = UserDefaults.standard.integer(forKey: UserDefaultsKeys.pomodorosBeforeLongBreak).nonZero(default: TimerDefaults.pomodorosBeforeLongBreak)
     @State private var showingUpgrade = false
+    @State private var showingHistory = false
+    @State private var showingThemePicker = false
+    @State private var showingDeletedTasks = false
 
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 32) {
-                if purchaseManager.isPro {
-                    timerDurationsSection
-                } else {
-                    lockedSection(title: "Timer Durations", description: "Custom work and break lengths")
-                }
+                timerSection
                 cycleSection
-                if purchaseManager.isPro {
-                    appearanceSection
-                } else {
-                    lockedSection(title: "Appearance", description: "Color themes for your focus sessions")
-                }
-                upgradeSection
+                proFeaturesSection
+                dataSection
+                accountSection
             }
             .padding(24)
         }
@@ -41,50 +30,67 @@ struct MacSettingsView: View {
             MacProUpgradeView()
                 .environment(purchaseManager)
         }
+        .sheet(isPresented: $showingHistory) {
+            MacHistoryView()
+        }
+        .sheet(isPresented: $showingThemePicker) {
+            MacThemePickerSheet()
+        }
+        .sheet(isPresented: $showingDeletedTasks) {
+            MacDeletedTasksView()
+        }
     }
 
     // MARK: - Timer Durations Section
 
-    private var timerDurationsSection: some View {
+    private var timerSection: some View {
         VStack(alignment: .leading, spacing: 12) {
             Text("Timer Durations")
                 .font(AppFonts.caption2)
                 .foregroundStyle(AppColors.textSecondary)
                 .textCase(.uppercase)
 
-            VStack(spacing: 8) {
-                durationRow(
-                    label: "Work Duration",
-                    iconName: "timer",
-                    iconColor: AppColors.workPhase,
-                    value: $workDuration,
-                    key: UserDefaultsKeys.workDuration
-                )
+            if purchaseManager.isPro {
+                VStack(spacing: 8) {
+                    MacDurationRow(
+                        label: "Work",
+                        iconName: "timer",
+                        iconColor: AppColors.workPhase,
+                        value: $workDuration,
+                        range: 1...60,
+                        unit: "min",
+                        presets: [15, 25, 45, 50]
+                    )
 
-                Divider()
-                    .padding(.leading, 40)
+                    Divider().padding(.leading, 40)
 
-                durationRow(
-                    label: "Short Break",
-                    iconName: "cup.and.saucer",
-                    iconColor: AppColors.breakPhase,
-                    value: $shortBreakDuration,
-                    key: UserDefaultsKeys.shortBreakDuration
-                )
+                    MacDurationRow(
+                        label: "Short Break",
+                        iconName: "cup.and.saucer",
+                        iconColor: AppColors.breakPhase,
+                        value: $shortBreakDuration,
+                        range: 1...30,
+                        unit: "min",
+                        presets: [5, 10, 15]
+                    )
 
-                Divider()
-                    .padding(.leading, 40)
+                    Divider().padding(.leading, 40)
 
-                durationRow(
-                    label: "Long Break",
-                    iconName: "leaf",
-                    iconColor: AppColors.breakPhase,
-                    value: $longBreakDuration,
-                    key: UserDefaultsKeys.longBreakDuration
-                )
+                    MacDurationRow(
+                        label: "Long Break",
+                        iconName: "leaf",
+                        iconColor: AppColors.breakPhase,
+                        value: $longBreakDuration,
+                        range: 5...60,
+                        unit: "min",
+                        presets: [15, 20, 30, 45]
+                    )
+                }
+                .padding(16)
+                .cardStyle()
+            } else {
+                lockedSection(title: "Timer Durations", description: "Custom work and break lengths")
             }
-            .padding(16)
-            .cardStyle()
         }
     }
 
@@ -99,45 +105,33 @@ struct MacSettingsView: View {
 
             HStack {
                 Label {
-                    Text("Pomodoros before long break")
+                    Text("Sessions before long break")
                         .font(AppFonts.body)
-                        .foregroundStyle(AppColors.textPrimary)
+                        .foregroundStyle(purchaseManager.isPro ? AppColors.textPrimary : AppColors.textSecondary)
                 } icon: {
                     Image(systemName: "repeat")
-                        .foregroundStyle(AppColors.sage)
+                        .foregroundStyle(purchaseManager.isPro ? AppColors.sage : AppColors.completed)
                 }
 
                 Spacer()
 
-                HStack(spacing: 8) {
-                    Button {
-                        if pomodorosBeforeLongBreak > 1 {
-                            pomodorosBeforeLongBreak -= 1
-                            UserDefaults.standard.setAndSync(pomodorosBeforeLongBreak, forKey: UserDefaultsKeys.pomodorosBeforeLongBreak)
-                        }
-                    } label: {
-                        Image(systemName: "minus.circle.fill")
-                            .font(.title3)
-                            .foregroundStyle(AppColors.textSecondary)
+                if purchaseManager.isPro {
+                    Stepper(value: $pomodorosBeforeLongBreak, in: 1...10) {
+                        Text("\(pomodorosBeforeLongBreak)")
+                            .font(AppFonts.body)
+                            .foregroundStyle(AppColors.textPrimary)
+                            .frame(minWidth: 20)
                     }
-                    .buttonStyle(.plain)
+                } else {
+                    HStack(spacing: 8) {
+                        Text("4")
+                            .font(AppFonts.body)
+                            .foregroundStyle(AppColors.textSecondary)
 
-                    Text("\(pomodorosBeforeLongBreak)")
-                        .font(AppFonts.body)
-                        .foregroundStyle(AppColors.textPrimary)
-                        .frame(minWidth: 20)
-
-                    Button {
-                        if pomodorosBeforeLongBreak < 10 {
-                            pomodorosBeforeLongBreak += 1
-                            UserDefaults.standard.setAndSync(pomodorosBeforeLongBreak, forKey: UserDefaultsKeys.pomodorosBeforeLongBreak)
-                        }
-                    } label: {
-                        Image(systemName: "plus.circle.fill")
-                            .font(.title3)
+                        Image(systemName: "lock.fill")
+                            .font(.caption)
                             .foregroundStyle(AppColors.sage)
                     }
-                    .buttonStyle(.plain)
                 }
             }
             .padding(16)
@@ -145,21 +139,34 @@ struct MacSettingsView: View {
         }
     }
 
-    // MARK: - Appearance Section
+    // MARK: - Pro Features Section
 
-    private var appearanceSection: some View {
+    private var proFeaturesSection: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Appearance")
+            Text("Pro Features")
                 .font(AppFonts.caption2)
                 .foregroundStyle(AppColors.textSecondary)
                 .textCase(.uppercase)
 
-            VStack(spacing: 16) {
-                // Theme grid
-                LazyVGrid(columns: [GridItem(.adaptive(minimum: 80))], spacing: 12) {
-                    ForEach(AppTheme.allCases, id: \.self) { theme in
-                        themeCard(theme)
-                    }
+            VStack(spacing: 8) {
+                if purchaseManager.isPro {
+                    settingsRow(
+                        label: "Session History",
+                        icon: "clock.arrow.circlepath",
+                        action: { showingHistory = true }
+                    )
+
+                    Divider().padding(.leading, 40)
+
+                    settingsRow(
+                        label: "Themes",
+                        icon: "paintbrush.fill",
+                        action: { showingThemePicker = true }
+                    )
+                } else {
+                    lockedRow(label: "Session History", icon: "clock.arrow.circlepath")
+                    Divider().padding(.leading, 40)
+                    lockedRow(label: "Themes", icon: "paintbrush.fill")
                 }
             }
             .padding(16)
@@ -167,147 +174,146 @@ struct MacSettingsView: View {
         }
     }
 
-    // MARK: - Duration Row
+    // MARK: - Data Section
 
-    private func durationRow(
-        label: String,
-        iconName: String,
-        iconColor: Color,
-        value: Binding<Int>,
-        key: String
-    ) -> some View {
-        HStack {
-            Label {
-                Text(label)
-                    .font(AppFonts.body)
-                    .foregroundStyle(AppColors.textPrimary)
-            } icon: {
-                Image(systemName: iconName)
-                    .foregroundStyle(iconColor)
-            }
+    private var dataSection: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text("Data")
+                .font(AppFonts.caption2)
+                .foregroundStyle(AppColors.textSecondary)
+                .textCase(.uppercase)
 
-            Spacer()
-
-            HStack(spacing: 8) {
-                Button {
-                    if value.wrappedValue > 1 {
-                        value.wrappedValue -= 1
-                        UserDefaults.standard.setAndSync(value.wrappedValue, forKey: key)
-                    }
-                } label: {
-                    Image(systemName: "minus.circle.fill")
-                        .font(.title3)
-                        .foregroundStyle(AppColors.textSecondary)
-                }
-                .buttonStyle(.plain)
-
-                Text("\(value.wrappedValue) min")
-                    .font(AppFonts.body)
-                    .foregroundStyle(AppColors.textPrimary)
-                    .frame(minWidth: 60)
-
-                Button {
-                    if value.wrappedValue < 60 {
-                        value.wrappedValue += 1
-                        UserDefaults.standard.setAndSync(value.wrappedValue, forKey: key)
-                    }
-                } label: {
-                    Image(systemName: "plus.circle.fill")
-                        .font(.title3)
-                        .foregroundStyle(AppColors.sage)
-                }
-                .buttonStyle(.plain)
-            }
+            settingsRow(
+                label: "Deleted Tasks",
+                icon: "trash",
+                action: { showingDeletedTasks = true }
+            )
+            .padding(16)
+            .cardStyle()
         }
     }
 
-    // MARK: - Theme Card
+    // MARK: - Account Section
 
-    private func themeCard(_ theme: AppTheme) -> some View {
-        Button {
-            themeManager.currentTheme = theme
-        } label: {
+    private var accountSection: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text("Account")
+                .font(AppFonts.caption2)
+                .foregroundStyle(AppColors.textSecondary)
+                .textCase(.uppercase)
+
             VStack(spacing: 8) {
-                Image(systemName: theme.icon)
-                    .font(.title2)
-                    .foregroundStyle(theme.accentColor)
-                    .frame(height: 32)
+                if purchaseManager.isPro {
+                    HStack {
+                        Label("River Pro", systemImage: "star.fill")
+                            .font(AppFonts.body)
+                            .foregroundStyle(AppColors.textPrimary)
+                        Spacer()
+                        Text("Unlocked")
+                            .font(AppFonts.caption)
+                            .foregroundStyle(AppColors.breakPhase)
+                    }
 
-                Text(theme.displayName)
-                    .font(AppFonts.caption)
-                    .foregroundStyle(AppColors.textPrimary)
-                    .lineLimit(1)
+                    if !purchaseManager.isSync {
+                        Divider().padding(.leading, 40)
+                        Button {
+                            showingUpgrade = true
+                        } label: {
+                            HStack {
+                                Label("Add Cross-Device Sync", systemImage: "arrow.triangle.2.circlepath")
+                                    .font(AppFonts.body)
+                                    .foregroundStyle(AppColors.sage)
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .font(.caption)
+                                    .foregroundStyle(AppColors.textSecondary)
+                            }
+                        }
+                        .buttonStyle(.plain)
+                    }
+                } else {
+                    Button {
+                        showingUpgrade = true
+                    } label: {
+                        HStack {
+                            Label("Upgrade to Pro", systemImage: "star")
+                                .font(AppFonts.body)
+                                .foregroundStyle(AppColors.sage)
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .font(.caption)
+                                .foregroundStyle(AppColors.textSecondary)
+                        }
+                    }
+                    .buttonStyle(.plain)
+
+                    Divider().padding(.leading, 40)
+
+                    Button {
+                        Task { await purchaseManager.restorePurchases() }
+                    } label: {
+                        Text("Restore Purchases")
+                            .font(AppFonts.body)
+                            .foregroundStyle(AppColors.sage)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                    .buttonStyle(.plain)
+                }
             }
-            .frame(maxWidth: .infinity)
-            .padding(.vertical, 12)
-            .background(
-                RoundedRectangle(cornerRadius: 12)
-                    .fill(themeManager.currentTheme == theme ? theme.accentColor.opacity(0.15) : AppColors.surface)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 12)
-                            .strokeBorder(
-                                themeManager.currentTheme == theme ? theme.accentColor : AppColors.border,
-                                lineWidth: themeManager.currentTheme == theme ? 2 : 1
-                            )
-                    )
-            )
+            .padding(16)
+            .cardStyle()
+        }
+    }
+
+    // MARK: - Helpers
+
+    private func settingsRow(label: String, icon: String, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            HStack {
+                Label(label, systemImage: icon)
+                    .font(AppFonts.body)
+                    .foregroundStyle(AppColors.textPrimary)
+                Spacer()
+                Image(systemName: "chevron.right")
+                    .font(.caption)
+                    .foregroundStyle(AppColors.textSecondary)
+            }
         }
         .buttonStyle(.plain)
     }
 
-    // MARK: - Locked Section
+    private func lockedRow(label: String, icon: String) -> some View {
+        HStack {
+            Label(label, systemImage: icon)
+                .font(AppFonts.body)
+                .foregroundStyle(AppColors.textSecondary)
+            Spacer()
+            Image(systemName: "lock.fill")
+                .font(.caption)
+                .foregroundStyle(AppColors.sage)
+        }
+    }
 
     private func lockedSection(title: String, description: String) -> some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Text(title)
-                .font(AppFonts.caption2)
+        HStack(spacing: 12) {
+            Image(systemName: "lock.fill")
+                .font(.title3)
                 .foregroundStyle(AppColors.textSecondary)
-                .textCase(.uppercase)
-
-            HStack(spacing: 12) {
-                Image(systemName: "lock.fill")
-                    .font(.title3)
+            VStack(alignment: .leading, spacing: 4) {
+                Text(title)
+                    .font(AppFonts.headline)
+                    .foregroundStyle(AppColors.textPrimary)
+                Text(description)
+                    .font(AppFonts.caption)
                     .foregroundStyle(AppColors.textSecondary)
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(title)
-                        .font(AppFonts.headline)
-                        .foregroundStyle(AppColors.textPrimary)
-                    Text(description)
-                        .font(AppFonts.caption)
-                        .foregroundStyle(AppColors.textSecondary)
-                }
-                Spacer()
-                Button("Unlock") { showingUpgrade = true }
-                    .buttonStyle(.borderedProminent)
-                    .controlSize(.small)
             }
-            .padding(16)
-            .cardStyle()
+            Spacer()
+            Button("Unlock") { showingUpgrade = true }
+                .buttonStyle(.borderedProminent)
+                .controlSize(.small)
         }
-    }
-
-    // MARK: - Upgrade Section
-
-    private var upgradeSection: some View {
-        Group {
-            if !purchaseManager.isPro {
-                Button("Upgrade to Pro →") { showingUpgrade = true }
-                    .buttonStyle(.borderedProminent)
-                    .controlSize(.large)
-                    .frame(maxWidth: .infinity)
-            } else if !purchaseManager.isSync {
-                Button("Add Cross-Device Sync →") { showingUpgrade = true }
-                    .buttonStyle(.bordered)
-                    .controlSize(.large)
-                    .frame(maxWidth: .infinity)
-            }
-        }
-    }
-}
-
-private extension Int {
-    func nonZero(default defaultValue: Int) -> Int {
-        self == 0 ? defaultValue : self
+        .padding(16)
+        .cardStyle()
     }
 }
 

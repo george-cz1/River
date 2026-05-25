@@ -29,8 +29,7 @@ final class WatchConnectivityService: NSObject {
 
     // MARK: - Apply Received State
 
-    private func applyState(from payload: [String: Any]) {
-        guard let data = payload["timerState"] as? Data else { return }
+    private func applyState(from data: Data) {
         let state = try? JSONDecoder().decode(TimerState?.self, from: data)
         FocusTimerService.shared.applyRemoteState(state)
     }
@@ -48,20 +47,23 @@ extension WatchConnectivityService: WCSessionDelegate {
     }
 
     nonisolated func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
-        Task { @MainActor in self.applyState(from: message) }
+        guard let data = message["timerState"] as? Data else { return }
+        Task { @MainActor in self.applyState(from: data) }
     }
 
     nonisolated func session(
         _ session: WCSession,
         didReceiveApplicationContext applicationContext: [String: Any]
     ) {
-        Task { @MainActor in self.applyState(from: applicationContext) }
+        guard let data = applicationContext["timerState"] as? Data else { return }
+        Task { @MainActor in self.applyState(from: data) }
     }
 
     nonisolated func session(
         _ session: WCSession,
         didReceiveUserInfo userInfo: [String: Any] = [:]
     ) {
-        Task { @MainActor in self.applyState(from: userInfo) }
+        guard let data = userInfo["timerState"] as? Data else { return }
+        Task { @MainActor in self.applyState(from: data) }
     }
 }

@@ -31,6 +31,10 @@ xcodebuild -project River.xcodeproj -scheme RiverWatch -destination 'platform=wa
 
 **Important**: The Xcode project file (`River.xcodeproj`) is generated from `project.yml`. If you need to modify project settings, targets, or build configurations, edit `project.yml` and regenerate with `xcodegen generate`.
 
+### Tests & Lint
+
+No XCTest targets, no SwiftLint/swift-format config. Verification = `xcodebuild build` for each scheme.
+
 ## Architecture
 
 ### Core Components
@@ -44,16 +48,17 @@ xcodebuild -project River.xcodeproj -scheme RiverWatch -destination 'platform=wa
 2. **Shared State Management** (`River/Shared/`)
    - `TimerState`: Codable timer state shared between app and widget via App Group
    - `AppGroup`: Centralized App Group configuration (`group.com.george.evolve`)
-   - `SharedDataManager`: Persists/retrieves `TimerState` using `UserDefaults` in App Group
-   - Uses Darwin notifications (`CFNotificationCenter`) for cross-process state sync
+   - `SharedDataManager`: App↔widget bridge — `getTimerState()` / `saveTimerState(_:)` over App Group `UserDefaults`
+   - Darwin notifications (`CFNotificationCenter`) signal state changes cross-process; constant is `NotificationNames.timerStateChanged` (`"com.george.evolve.timerStateChanged"`) in `River/Shared/Constants.swift`
 
 3. **Live Activities** (`LiveActivityService` + `RiverWidget/FocusLiveActivity.swift`)
    - Dynamic Island and Lock Screen timer display
    - Uses ActivityKit with `FocusActivityAttributes` and content state
-   - Widget controls deep link back to app via `river://` URL scheme
+   - **Interactive buttons** (e.g., pause/resume in Dynamic Island) use `ToggleFocusTimerIntent: LiveActivityIntent` (AppIntents, `River/Shared/FocusTimerIntent.swift`) — runs in-process without opening the app
+   - **Tap-to-open** controls use `river://` deep links (`river://pomodoro/start`, `/pause`, `/skip`)
 
 4. **Data Persistence**
-   - **SwiftData**: `FocusTask` and `DeletedTask` models for task management
+   - **SwiftData + CloudKit**: `FocusTask`, `DeletedTask`, `SessionRecord` models. iOS and macOS configure `ModelContainer` with `cloudKitDatabase: .private("iCloud.com.george.river")` and fall back to local-only storage on error ([River/RiverApp.swift:9-29](River/RiverApp.swift), [RiverMac/RiverMacApp.swift:16-33](RiverMac/RiverMacApp.swift)). CloudKit requires every model property to be optional or have a default.
    - **UserDefaults**: Timer settings (work duration, break duration, etc.)
    - **App Group UserDefaults**: Shared timer state between app and widget
    - **SessionHistoryService**: JSON-encoded session records in UserDefaults
@@ -64,13 +69,15 @@ xcodebuild -project River.xcodeproj -scheme RiverWatch -destination 'platform=wa
    - `SessionHistoryService`: Tracks completed sessions, streaks, and stats (shared with macOS)
    - `CloudSettingsManager`: Syncs settings across devices via `NSUbiquitousKeyValueStore` (shared with macOS)
    - `SoundService`: Plays transition sounds with haptic feedback
-   - `PurchaseManager`: Handles StoreKit purchases for Pro features
+   - `PurchaseManager`: StoreKit + Pro tiers. `ProTier` is `.none`/`.devicePro`/`.sync`; `isPro` = any tier, `isSync` = sync only. Per-platform product IDs (`com.george.river.pro` iOS, `com.george.river.mac.pro` macOS, `com.george.river.sync` cross-platform). Debug bypass: `debugTier` at [PurchaseManager.swift:32](River/Services/PurchaseManager.swift).
+   - `WatchConnectivityService`: Real-time iPhone↔Watch sync. iPhone pushes `TimerState` on every persist cycle; watch sends control commands (`pause`/`resume`/`skip`/`stop`). Uses `sendMessage` when reachable with `updateApplicationContext` fallback. Two parallel singletons under `River/Services/` and `RiverWatch/Services/`.
    - `AppBlockingService`: Manages Screen Time app blocking using FamilyControls framework
    - `AppBlockingAuthorizationService`: Handles Family Controls authorization requests
 
 6. **Cross-Platform Abstractions** (`River/Shared/Protocols/`)
    - `LiveActivityServiceProtocol`, `AppBlockingServiceProtocol`, `FeedbackServiceProtocol`
-   - `PlatformCapabilities`: Compile-time and runtime feature detection; use this before calling platform-specific APIs (e.g., Darwin notifications are unsupported on watchOS)
+   - Each protocol has a `NoOp*Service` implementation (e.g., `NoOpAppBlockingService`) that `FocusTimerService.init` injects on non-iOS targets — add a `NoOp*` when adding a new iOS-only service
+   - `PlatformCapabilities`: Compile-time and runtime feature detection; check this before calling platform-specific APIs (e.g., `supportsDarwinNotifications` is false on watchOS)
 
 ### Targets / Extensions
 
@@ -83,9 +90,9 @@ xcodebuild -project River.xcodeproj -scheme RiverWatch -destination 'platform=wa
 - Menu bar entry point in `RiverMac/MenuBar/MenuBarView.swift`
 
 **RiverWatch** (watchOS 10.0+)
-- Sources: `RiverWatch/` + `River/Shared/`
+- Sources: `RiverWatch/` + `River/Shared/` (excludes `Components/**`)
 - Companion app — `WKCompanionAppBundleIdentifier: com.george.river`
-- Darwin notifications (`CFNotificationCenter`) are **not** available; use App Group UserDefaults for state
+- Syncs with iPhone via WatchConnectivity (not Darwin notifications, which aren't available on watchOS). No local CloudKit container — relies on `WatchConnectivityService` for live state.
 
 **Screen Time/Family Controls Extensions** (iOS Pro Feature)
 - `RiverDeviceActivityMonitor`, `RiverShieldConfiguration`, `RiverShieldAction`
@@ -98,14 +105,6 @@ xcodebuild -project River.xcodeproj -scheme RiverWatch -destination 'platform=wa
 - `AppTheme` enum: Defines color themes (River, Forest, Sunset, Ocean, Stone)
 - `AppColors`: Dynamic colors that adapt to selected theme and dark/light mode
 - Theme affects accent colors throughout the app
-
-### Deep Linking
-
-- URL Scheme: `river://`
-- Handles Dynamic Island control actions:
-  - `river://pomodoro/start`
-  - `river://pomodoro/pause`
-  - `river://pomodoro/skip`
 
 ## Project Structure
 
@@ -144,7 +143,7 @@ RiverWidget/
 
 1. **Timer Persistence**: Timer survives backgrounding/termination by storing `phaseEndDate` and computing `remainingSeconds` from current time on resume.
 
-2. **Widget/Cross-Process Sync**: State changes propagate via shared App Group UserDefaults + Darwin notifications (`CFNotificationCenter`). watchOS cannot use Darwin notifications — use App Group UserDefaults polling instead.
+2. **Cross-Process Sync**: iOS app ↔ widget uses App Group `UserDefaults` + Darwin notifications (`CFNotificationCenter`). iPhone ↔ Watch uses WatchConnectivity (`sendMessage` when reachable, `updateApplicationContext` as fallback). watchOS does not support Darwin notifications.
 
 3. **iCloud Settings Sync**: `CloudSettingsManager` syncs timer durations, theme, and sound settings across devices via `NSUbiquitousKeyValueStore`. `syncFromCloud()` only overwrites local values when no local value exists; use `forceSyncFromCloud()` to override.
 
@@ -152,41 +151,8 @@ RiverWidget/
 
 5. **Swift 6.0 Strict Concurrency**: Services are `@Observable @MainActor`. Shared code compiled into multiple targets must compile cleanly for all target platforms — use `#if os(iOS)` guards for platform-specific APIs.
 
-6. **Pro Features & Debug Mode**: `PurchaseManager` has a `debugUnlockPro` flag (currently `true`) that bypasses StoreKit for local testing. **Set to `false` before App Store submission.**
+6. **Pro Features & Debug Mode**: `PurchaseManager.debugTier` ([PurchaseManager.swift:32](River/Services/PurchaseManager.swift)) bypasses StoreKit for local testing (currently `.devicePro`). **Set to `.none` before App Store submission.** Two-tier model: device-Pro per platform vs. Sync (cross-platform). See `ProTier` enum for entitlement checks.
 
 7. **Sound Effects**: Audio files expected in `River/Resources/Sounds/`. `TransitionSound.swift` (in `River/Shared/`) defines the sound enum used across targets.
 
-## gstack
-
-Use the `/browse` skill from gstack for all web browsing. Never use `mcp__claude-in-chrome__*` tools.
-
-Available gstack skills:
-- `/office-hours` — structured thinking and decision-making sessions
-- `/plan-ceo-review` — CEO-level plan review
-- `/plan-eng-review` — engineering plan review
-- `/plan-design-review` — design plan review
-- `/design-consultation` — design consultation
-- `/design-shotgun` — rapid design exploration
-- `/review` — code review
-- `/ship` — ship a feature end-to-end
-- `/land-and-deploy` — land and deploy changes
-- `/canary` — canary deployment
-- `/benchmark` — performance benchmarking
-- `/browse` — web browsing (use this for ALL web browsing)
-- `/connect-chrome` — connect to Chrome browser
-- `/qa` — QA testing
-- `/qa-only` — QA without implementation
-- `/design-review` — design review
-- `/setup-browser-cookies` — set up browser cookies
-- `/setup-deploy` — set up deployment
-- `/retro` — retrospective
-- `/investigate` — investigate issues
-- `/document-release` — document a release
-- `/codex` — Codex integration
-- `/cso` — CSO workflow
-- `/autoplan` — automatic planning
-- `/careful` — careful/cautious mode
-- `/freeze` — freeze changes
-- `/guard` — guard against regressions
-- `/unfreeze` — unfreeze changes
-- `/gstack-upgrade` — upgrade gstack to latest
+8. **Release version bump**: To submit a new build, increment `CURRENT_PROJECT_VERSION` in `project.yml`, then run `xcodegen generate`. Increment `MARKETING_VERSION` for feature releases.

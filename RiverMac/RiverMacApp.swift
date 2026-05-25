@@ -1,12 +1,9 @@
-//
-//  RiverMacApp.swift
-//  RiverMac
-//
-//  macOS native entry point for River Pomodoro Timer
-//
-
 import SwiftUI
 import SwiftData
+
+extension Notification.Name {
+    static let riverNewTask = Notification.Name("com.george.river.newTask")
+}
 
 @main
 struct RiverMacApp: App {
@@ -40,6 +37,7 @@ struct RiverMacApp: App {
             MacMainView()
                 .frame(minWidth: 800, minHeight: 600)
                 .environment(purchaseManager)
+                .environment(cloudSettingsManager)
                 .onAppear {
                     SessionHistoryService.shared.configure(with: sharedModelContainer.mainContext)
                 }
@@ -49,15 +47,10 @@ struct RiverMacApp: App {
             RiverCommands()
         }
         .defaultSize(width: 900, height: 700)
-
-        Settings {
-            MacSettingsView()
-                .environment(purchaseManager)
-        }
     }
 }
 
-// MARK: - Menu Bar Label
+// MARK: - Menu Bar Label (defined but not wired — future menu bar feature)
 
 struct MenuBarLabel: View {
     private var timerService = FocusTimerService.shared
@@ -80,13 +73,14 @@ struct RiverCommands: Commands {
     var body: some Commands {
         CommandGroup(after: .appInfo) {
             Button("Preferences...") {
-                NSApp.sendAction(Selector(("showSettingsWindow:")), to: nil, from: nil)
+                // Settings are now accessed via the sidebar — this is a no-op on Mac
+                // since we dropped the Settings scene in favor of the sidebar tab.
             }
             .keyboardShortcut(",", modifiers: .command)
         }
         CommandGroup(replacing: .newItem) {
             Button("New Task...") {
-                // TODO: Implement new task action
+                NotificationCenter.default.post(name: .riverNewTask, object: nil)
             }
             .keyboardShortcut("n", modifiers: .command)
         }

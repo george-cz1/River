@@ -1,20 +1,12 @@
-//
-//  MacMainView.swift
-//  RiverMac
-//
-//  Main window view with navigation split view layout
-//
-
 import SwiftUI
 
 struct MacMainView: View {
-    @State private var selectedView: SidebarItem? = .focus
-    @Bindable private var themeManager = ThemeManager.shared
+    @State private var selectedView: SidebarItem? = .today
     @Environment(PurchaseManager.self) private var purchaseManager
 
     var body: some View {
         NavigationSplitView {
-            List(visibleItems, selection: $selectedView) { item in
+            List(SidebarItem.allCases, selection: $selectedView) { item in
                 Label {
                     Text(item.title)
                         .font(AppFonts.body)
@@ -45,39 +37,26 @@ struct MacMainView: View {
             }
         }
     }
-
-    private var visibleItems: [SidebarItem] {
-        SidebarItem.allCases.filter { item in
-            if item == .history { return purchaseManager.isPro }
-            return true
-        }
-    }
 }
 
 // MARK: - Sidebar Items
 
 enum SidebarItem: String, CaseIterable, Identifiable {
-    case focus
-    case tasks
-    case history
+    case today
     case settings
 
     var id: String { rawValue }
 
     var title: String {
         switch self {
-        case .focus: return "Focus"
-        case .tasks: return "Tasks"
-        case .history: return "History"
+        case .today: return "Today"
         case .settings: return "Settings"
         }
     }
 
     var icon: String {
         switch self {
-        case .focus: return "timer"
-        case .tasks: return "list.bullet"
-        case .history: return "clock.arrow.circlepath"
+        case .today: return "scope"
         case .settings: return "gearshape"
         }
     }
@@ -85,12 +64,8 @@ enum SidebarItem: String, CaseIterable, Identifiable {
     @ViewBuilder
     var destination: some View {
         switch self {
-        case .focus:
-            MacFocusView()
-        case .tasks:
+        case .today:
             MacTaskListView()
-        case .history:
-            MacHistoryView()
         case .settings:
             MacSettingsView()
         }
