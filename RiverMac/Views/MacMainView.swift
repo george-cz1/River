@@ -43,6 +43,7 @@ struct MacMainView: View {
 
 enum SidebarItem: String, CaseIterable, Identifiable {
     case today
+    case plan
     case settings
 
     var id: String { rawValue }
@@ -50,6 +51,7 @@ enum SidebarItem: String, CaseIterable, Identifiable {
     var title: String {
         switch self {
         case .today: return "Today"
+        case .plan: return "Plan"
         case .settings: return "Settings"
         }
     }
@@ -57,6 +59,7 @@ enum SidebarItem: String, CaseIterable, Identifiable {
     var icon: String {
         switch self {
         case .today: return "scope"
+        case .plan: return "wand.and.sparkles"
         case .settings: return "gearshape"
         }
     }
@@ -66,6 +69,8 @@ enum SidebarItem: String, CaseIterable, Identifiable {
         switch self {
         case .today:
             MacTaskListView()
+        case .plan:
+            MacPlanView()
         case .settings:
             MacSettingsView()
         }

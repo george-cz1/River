@@ -4,7 +4,7 @@ struct ContentView: View {
     @State private var selectedTab: Tab = .today
 
     enum Tab {
-        case today, settings
+        case today, plan, settings
     }
 
     var body: some View {
@@ -14,6 +14,12 @@ struct ContentView: View {
                     Label("Today", systemImage: "scope")
                 }
                 .tag(Tab.today)
+
+            PlanView(onTasksAdded: { selectedTab = .today })
+                .tabItem {
+                    Label("Plan", systemImage: "wand.and.sparkles")
+                }
+                .tag(Tab.plan)
 
             SettingsView()
                 .tabItem {

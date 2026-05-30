@@ -53,6 +53,7 @@ targets:
           - UIInterfaceOrientationLandscapeLeft
           - UIInterfaceOrientationLandscapeRight
         NSSupportsLiveActivities: true
+        NSMicrophoneUsageDescription: "River uses your microphone to capture brain dumps for AI-powered planning. Audio is sent securely to our planning service and is never stored."
         UIAppFonts:
           - CormorantGaramond-Light.ttf
           - Nunito-Regular.ttf
@@ -259,6 +260,9 @@ targets:
       - path: River/Services/FocusTimerService.swift
       - path: River/Services/CloudSettingsManager.swift
       - path: River/Services/PurchaseManager.swift
+      - path: River/Services/AIPlanningService.swift
+      - path: River/Services/AudioRecordingService.swift
+      - path: River/Services/PlanningPromptBuilder.swift
       - path: River/Theme.swift
       - path: River/Resources/Fonts
         type: folder
@@ -285,6 +289,7 @@ targets:
       path: RiverMac/RiverMac.entitlements
       properties:
         com.apple.security.app-sandbox: true
+        com.apple.security.device.audio-input: true
         com.apple.security.application-groups:
           - group.com.george.evolve
         com.apple.developer.icloud-services:
